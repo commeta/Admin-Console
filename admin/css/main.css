@@ -1,0 +1,83 @@
+.core-messages {
+	position: fixed;
+	width: 500px;
+	top: 10px;
+	z-index: 10;
+	right: 340px;
+}
+#content {
+    z-index: 4;
+}
+.navbar {
+    z-index: 5;
+}
+.core-messages .box-content{
+    height: 110px;
+    overflow: auto;
+}
+.core-messages .box-content{
+	display: none;
+}
+.counter{
+	width: calc( 100% - 60px );
+	display: inline;
+	margin-right: 15px;
+} 
+
+label a {
+	margin-left: 10px;
+	color: #428bca !important;
+}
+
+#tabs, #tabs .box-content, .bg-tab{
+	background: #fcfcfc !important;
+	border: none !important;
+}
+#tabs-1,#tabs-2,#tabs-3{
+	border: 1px solid #ddd !important;
+	border-top: none !important;
+}
+
+
+.ajax-form .btn-danger .fa{
+	display: inline-block;
+}
+
+#datatable-main .ajax-link, #datatable-second .ajax-link, .box .ajax-link{
+	color: #428bca !important;
+}
+
+#ckfinder1 iframe{
+	top: 50px !important;
+	height: 90% !important;
+	min-height: 500px !important;
+}
+
+#images_collection a.fancybox img {
+    width: 250px;
+    padding: 2px;
+    border: 1px solid #979797;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+.row_active td {
+	background-color: #6AA6D6 !important;
+	color: #fff;
+}
+.row_active td i {
+    color: #fff !important;
+}
+.tdescr_active {
+	background-color: #6AA6D6 !important;
+    color: #fff !important;
+}
+
+#images_collection button.close {
+    float: none;
+    top: 145x;
+    position: relative;
+    right: 30px;
+    font-size: 3em;
+}
