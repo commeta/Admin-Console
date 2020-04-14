@@ -39,7 +39,40 @@ if($db->count > 0){ // Подготовка мета тегов
 ########################################################################
 
 
+function print_server_stat($id,$time_start,$memory){ // Вывод статистки сервера
+	// БД
+	$db = MysqliDb::getInstance();
+	$db_trace= $db->trace;
+	$db_time= 0;
+	$db_count= 0;
 
+	foreach($db_trace as $v){
+		$db_time= $db_time + $v[1];
+		$db_count++;
+	}
+
+	// Время выполнения
+	$time_end = microtime(1);
+	$time = $time_end - $time_start; 
+
+	// Использование памяти
+	$memory = memory_get_usage() - $memory;
+	// Конвертация результата в килобайты и мегабайты 
+	$i = 0;
+	while (floor($memory / 1024) > 0) {
+		$i++;
+		$memory /= 1024;
+	}
+	$name = array('байт', 'КБ', 'МБ');
+
+	printf('<script>document.getElementById("%s").innerHTML= "Страница была сгенерирована за: %s сек. Выполнено: %s запросов к БД за %s сек. Использовано: %s памяти";</script>',
+		$id,
+		round($time,5),
+		$db_count,
+		round($db_time,5),
+		round($memory, 2) . ' ' . $name[$i]
+	);
+}
 
 
 
