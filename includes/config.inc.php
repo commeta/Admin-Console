@@ -26,7 +26,6 @@ const expires			= 3600;
 const siteUrl			= "https://admin.seo-marketing.spb.ru";
 const pages_dir			= 'templates/';
 const email			= 'dcs-spb@ya.ru';
-const googleFont		= 'https://fonts.googleapis.com/css?family=Roboto:400,700,900&display=swap&subset=cyrillic,cyrillic-ext';
 
 
 $request_url= parse_url($_SERVER['REQUEST_URI']);
