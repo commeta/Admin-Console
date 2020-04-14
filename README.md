@@ -19,3 +19,14 @@ Admin Console содержит только базовый набор модул
 
 ### Документация:
 В разработке
+
+
+
+
+This is free open-source CMS based on bootstrap 3 theme for you.
+Licensed under GPL v3 or MIT.
+
+webdevops (info@webdevops.ru)
+
+GIT- https://github.com/commeta/admin-console
+
