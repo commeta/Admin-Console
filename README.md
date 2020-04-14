@@ -37,7 +37,7 @@ Admin Console содержит только базовый набор модул
 + 1 ядро: Intel(R) Xeon(R) CPU E5645 @ 2.40GHz
 + 1024MB RAM
 
-#### ab -kc 10 -t 60 https://admin.seo-marketing.spb.ru/
+##### $ ab -kc 10 -t 60 https://admin.seo-marketing.spb.ru/
 ```
 This is ApacheBench, Version 2.3 <$Revision: 1430300 $>
 Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
