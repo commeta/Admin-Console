@@ -24,8 +24,54 @@ Admin Console содержит только базовый набор модул
 + 1 ядро: Intel(R) Xeon(R) CPU E5645 @ 2.40GHz
 + 1024MB RAM
 
+#### ab -kc 10 -t 60 https://admin.seo-marketing.spb.ru/
+```
+This is ApacheBench, Version 2.3 <$Revision: 1430300 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
 
+Benchmarking admin.seo-marketing.spb.ru (be patient)
 
+Finished 3253 requests
+Server Software:        nginx/1.16.1
+Server Hostname:        admin.seo-marketing.spb.ru
+Server Port:            443
+SSL/TLS Protocol:       TLSv1.2,ECDHE-RSA-AES128-GCM-SHA256,2048,128
+
+Document Path:          /
+Document Length:        10043 bytes
+
+Concurrency Level:      10
+Time taken for tests:   60.044 seconds
+Complete requests:      3253
+Failed requests:        0
+Write errors:           0
+Keep-Alive requests:    0
+Total transferred:      33688068 bytes
+HTML transferred:       32669879 bytes
+Requests per second:    54.18 [#/sec] (mean)
+Time per request:       184.580 [ms] (mean)
+Time per request:       18.458 [ms] (mean, across all concurrent requests)
+Transfer rate:          547.91 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        5   53  21.2     51     290
+Processing:     9  131  36.1    125     510
+Waiting:        6  129  33.7    124     424
+Total:         16  184  44.7    176     571
+
+Percentage of the requests served within a certain time (ms)
+  50%    176
+  66%    188
+  75%    196
+  80%    202
+  90%    222
+  95%    251
+  98%    307
+  99%    396
+ 100%    571 (longest request)
+```
 
 ### Пресс-релиз:
 [https://webdevops.ru/admin-console.html](https://webdevops.ru/admin-console.html)
