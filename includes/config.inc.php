@@ -10,7 +10,7 @@ ini_set('short_open_tag', 'On');
 
 
 // IfModified Since check, true -on (recommended); false -off (debug);
-if($_SERVER['REMOTE_ADDR'] == '178.130.37.64'){ 
+if($_SERVER['REMOTE_ADDR'] == 'your ip for debug'){ 
 	define ("metrics", true);
 	define ("cachePageAndDB", false);
 	define ("ifmsCheck", false);
