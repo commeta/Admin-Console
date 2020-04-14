@@ -12,7 +12,7 @@ Admin Console содержит только базовый набор модул
 ### Пресс-релиз:
 [https://webdevops.ru/admin-console.html](https://webdevops.ru/admin-console.html)
 
-### Демо версия:
+### Демо версия Admin Console CMS ver.5.10.1:
 + [https://admin.seo-marketing.spb.ru/](https://admin.seo-marketing.spb.ru/) - Демо сайт
 + [https://admin.seo-marketing.spb.ru/admin/](https://admin.seo-marketing.spb.ru/admin/) - Админка, логин:admin пароль:password
 + В качестве Web UI интерфейса - использован форк: open-source bootstrap 3 theme [Devops v1.0](https://github.com/devoopsme/devoops)
