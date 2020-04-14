@@ -9,7 +9,7 @@ Admin Console содержит только базовый набор модул
 
 Система управления сайтом CMS Admin Console специально разрабатывалась для высоко - нагруженных проектов, с учетом максимальной поддержки протокола HTTP/S.
 
-В качестве Web UI интерфейса использован форк open-source bootstrap 3 theme [Devops v1.0](https://github.com/devoopsme/devoops)
+В качестве Web UI интерфейса - использован форк: open-source bootstrap 3 theme [Devops v1.0](https://github.com/devoopsme/devoops)
 
 ### Пресс-релиз:
 [https://webdevops.ru/admin-console.html](https://webdevops.ru/admin-console.html)
