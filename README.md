@@ -13,8 +13,8 @@ Admin Console содержит только базовый набор модул
 [https://webdevops.ru/admin-console.html](https://webdevops.ru/admin-console.html)
 
 ### Демо версия:
-[https://admin.seo-marketing.spb.ru/](https://admin.seo-marketing.spb.ru/)
-
++ [https://admin.seo-marketing.spb.ru/](https://admin.seo-marketing.spb.ru/) - Демо сайт
++ [https://admin.seo-marketing.spb.ru/admin/](https://admin.seo-marketing.spb.ru/admin/) - Админка, логин:admin пароль:password
 + В качестве Web UI интерфейса - использован форк: open-source bootstrap 3 theme [Devops v1.0](https://github.com/devoopsme/devoops)
 + Шаблоны для демо версии сайта: [Bootstrap v4.4.1 Examples](https://getbootstrap.com/docs/4.1/examples/)
 
