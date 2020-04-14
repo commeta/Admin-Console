@@ -51,8 +51,8 @@ foreach($menu as $v){
 					<li class="nav-item"> <a class="nav-link disabled" href="/404.html">404</a> </li>
 				</ul>
 				<form class="form-inline mt-2 mt-md-0" action="/admin/login.php" method="post" >
-					<input class="form-control mr-sm-2" type="text" placeholder="admin" value="admin" >
-					<input class="form-control mr-sm-2" type="text" placeholder="password" value="password" >
+					<input class="form-control mr-sm-2" type="text" name="username" placeholder="admin" value="admin" >
+					<input class="form-control mr-sm-2" type="text" name="password" placeholder="password" value="password" >
 					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">войти</button>
 				</form>
 			</div>
