@@ -31,9 +31,9 @@ Admin Console содержит только базовый набор модул
 
 ### Результаты тестирования:
 Тестовый стенд: 
-+ centos 8, 
-+ фронтэнд nginx, 
-+ бэкэнд apache2, 
++ Centos 8
++ Фронтэнд nginx
++ Бэкэнд apache2
 + 1 ядро: Intel(R) Xeon(R) CPU E5645 @ 2.40GHz
 + 1024MB RAM
 
