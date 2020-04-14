@@ -22,7 +22,7 @@ Admin Console содержит только базовый набор модул
 
 
 
-
+____
 This is free open-source CMS based on bootstrap 3 theme for you.
 Licensed under GPL v3 or MIT.
 
