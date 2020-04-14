@@ -7,6 +7,8 @@ if( strpos($_SERVER['REQUEST_URI'],'index') !== false && $mod == 'index'){ // Р
 
 // Запрос URL из базы данных
 $db = MysqliDb::getInstance();
+$db->setTrace(true);
+
 $request_url['path']= $db->escape($request_url['path']);
 if($mod == 'index') $request_url['path']= '/index.html';
 

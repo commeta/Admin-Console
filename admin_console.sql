@@ -1,6 +1,6 @@
 -- MySQL dump 10.14  Distrib 5.5.64-MariaDB, for Linux (x86_64)
 --
--- Host: localhost    Database: admin_console
+-- Host: localhost    Database: dev_admin_console
 -- ------------------------------------------------------
 -- Server version	5.5.64-MariaDB
 
@@ -34,7 +34,7 @@ CREATE TABLE `md_meta` (
   `image` varchar(255) NOT NULL,
   PRIMARY KEY (`meta_id`),
   KEY `friendly_url` (`friendly_url`)
-) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -99,7 +99,7 @@ CREATE TABLE `md_users_login` (
   PRIMARY KEY (`user_login_id`),
   KEY `user_id` (`user_id`),
   KEY `key` (`key`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -108,7 +108,7 @@ CREATE TABLE `md_users_login` (
 
 LOCK TABLES `md_users_login` WRITE;
 /*!40000 ALTER TABLE `md_users_login` DISABLE KEYS */;
-INSERT INTO `md_users_login` VALUES (5,1,'','178.130.37.64','2020-04-14 01:27:34','4bfe15be794c74e657adaf0bdddf3c1f44da90b1ace558a363bc688fe7cc8df2'),(6,1,'','178.130.37.64','2020-04-14 06:23:53','d74ad54fd3d0af5964de4a35da165c4b66d4aa389cf7856890bb9a3745367ef3'),(7,1,'','178.130.37.64','2020-04-14 12:53:57','4a141f1d0446fef14f48d30f3849a2ef9a724eeb7ad29c34b28b2c76bc73c756');
+INSERT INTO `md_users_login` VALUES (5,1,'','178.130.37.64','2020-04-14 01:27:34','4bfe15be794c74e657adaf0bdddf3c1f44da90b1ace558a363bc688fe7cc8df2'),(9,1,'','178.130.37.64','2020-04-14 13:37:12','4403e3fa5465929ca38ff4011acb75188cb9988d3adf8cad42e5e5d592c374f6'),(7,1,'','178.130.37.64','2020-04-14 12:53:57','4a141f1d0446fef14f48d30f3849a2ef9a724eeb7ad29c34b28b2c76bc73c756'),(10,1,'','178.130.37.64','2020-04-14 14:28:11','74caf7d8e1a0113e06841aeec7e58f0a561d797677f33af1c40bc79b4b1b560e'),(11,1,'','178.130.37.64','2020-04-14 14:29:00','8b6e88b8110491f40adc02f41582af77ba24f59ecdd7a3074bb47b2a631a0e30');
 /*!40000 ALTER TABLE `md_users_login` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -121,4 +121,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-04-14 15:54:24
+-- Dump completed on 2020-04-14 18:43:46

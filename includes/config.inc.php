@@ -10,7 +10,7 @@ ini_set('short_open_tag', 'On');
 
 
 // IfModified Since check, true -on (recommended); false -off (debug);
-if($_SERVER['REMOTE_ADDR'] == 'your ip for debug'){ 
+if($_SERVER['REMOTE_ADDR'] == 'enter your ip for debugging'){ 
 	define ("metrics", true);
 	define ("cachePageAndDB", false);
 	define ("ifmsCheck", false);
@@ -25,7 +25,7 @@ if($_SERVER['REMOTE_ADDR'] == 'your ip for debug'){
 const expires			= 3600;
 const siteUrl			= "https://admin.seo-marketing.spb.ru";
 const pages_dir			= 'templates/';
-const email				= 'dcs-spb@ya.ru';
+const email			= 'dcs-spb@ya.ru';
 const googleFont		= 'https://fonts.googleapis.com/css?family=Roboto:400,700,900&display=swap&subset=cyrillic,cyrillic-ext';
 
 
