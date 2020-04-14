@@ -22,9 +22,7 @@ if(isset($_POST['oper']) && $_POST['oper'] == 'send_message'):
 	$theme = sanitize($_POST['section']);
 	
 	$to = email;
-	//$to= 'dcs-spb@ya.ru';
-	
-	$subject = 'Сообщение с сайта buydebt.ru';
+	$subject = 'Сообщение с сайта: '.siteUrl;
 	
 	if(isset($_POST['email']) && $_POST['email'] != '' ) $email= sanitize($_POST['email']);
 	else $email=  $to;
@@ -54,8 +52,7 @@ if(isset($_POST['oper']) && $_POST['oper'] == 'send_message'):
 			'ip'			=> $_SERVER['REMOTE_ADDR']
 		]);
 		
-		$root_path = (preg_match('/\/$/',$_SERVER['DOCUMENT_ROOT']))?$_SERVER['DOCUMENT_ROOT']:$_SERVER['DOCUMENT_ROOT'].'/';
-		$path= $root_path.'temp/'.$_SESSION['xauthtoken'];
+		$path= root_path.'temp/'.$_SESSION['xauthtoken'];
 		
 		if( file_exists( $path ) && is_dir( $path ) ) { // Если есть файлы для отправки
 			$path.='/';
@@ -82,13 +79,11 @@ endif;
 
 
 if(isset($_POST['oper']) && $_POST['oper'] == 'send_files'):
-	$root_path = (preg_match('/\/$/',$_SERVER['DOCUMENT_ROOT']))?$_SERVER['DOCUMENT_ROOT']:$_SERVER['DOCUMENT_ROOT'].'/';
-
 	session_start();
 	if( !isset($_SESSION['xauthtoken']) ) $_SESSION['xauthtoken']= strval(bin2hex(openssl_random_pseudo_bytes(32)));
 	
 	if(isset($_SESSION['xauthtoken'])){
-		$path= $root_path.'temp/'.$_SESSION['xauthtoken'];
+		$path= root_path.'temp/'.$_SESSION['xauthtoken'];
 		
 		if ( !file_exists( $path ) && !is_dir( $path ) ) {
 			mkdir( $path );       
@@ -117,9 +112,9 @@ if(isset($_POST['oper']) && $_POST['oper'] == 'send_files'):
 endif;
 
 
+
 if(isset($_POST['oper']) && $_POST['oper'] == 'send_error'):
-	$root_path = (preg_match('/\/$/',$_SERVER['DOCUMENT_ROOT']))?$_SERVER['DOCUMENT_ROOT']:$_SERVER['DOCUMENT_ROOT'].'/';
-	file_put_contents($root_path . '/temp/front-error.log', date("H:i:s d.m.Y") . ' ' . $_POST['baseURI']." - ".$_POST['src']."\n", FILE_APPEND );
+	file_put_contents(root_path . '/temp/front-error.log', date("H:i:s d.m.Y") . ' ' . $_POST['baseURI']." - ".$_POST['src']."\n", FILE_APPEND );
 
 	die(json_encode([]));
 endif;
@@ -127,15 +122,5 @@ endif;
 
 
 
-if(isset($_GET['oper']) && $_GET['oper'] == 'send_client_id'):
-	session_start();
-	if(isset($_SESSION['xauthtoken'])){
-		$db->where('xauthtoken', $db->escape($_SESSION['xauthtoken']) );
-		$db->update('md_utm', [
-			'client_id'	=> $db->escape($_GET['client_id'])
-		]);
-	}
-	die(json_encode([]));
-endif;
 
 ?>

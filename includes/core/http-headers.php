@@ -96,6 +96,7 @@ function getUrl($url){
 	return @file_get_contents($url, 0, stream_context_create( $options ));
 }
 
+
 function getFont($url){
 	$response = preg_replace_callback("#(?<=\()(https://\S+)(?=\))#i", function ($matches) {
 		return ($response = @file_get_contents(end($matches)))? 'data:application/x-font-'.substr(strrchr(end($matches), '.'), 1).';charset=utf-8;base64,' . base64_encode($response) : '';

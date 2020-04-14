@@ -47,10 +47,6 @@ foreach($md_meta as $v){
 }
 
 
-
-
-
-
 $smp.= "\n</urlset>";
 header('Content-type: text/xml');
 print($smp);

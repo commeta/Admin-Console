@@ -1,0 +1,27 @@
+DirectoryIndex index.php
+AddDefaultCharset UTF-8
+Errordocument 404 /404.html
+Options -Indexes
+php_flag magic_quotes_gpc 0
+php_flag magic_quotes_runtime 0
+php_flag display_errors 1
+php_value short_open_tag 1
+
+RewriteEngine on
+RewriteBase /
+
+RewriteCond %{HTTP_HOST} ^www\.(.*) [NC]
+RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+
+RewriteRule ^([a-zA-Z_0-9-]+)\.html$ /index.php\?mod=$1 [QSA]
+RewriteRule ^([a-zA-Z_0-9-]+)/([a-zA-Z_0-9-]+)\.html$ /index.php\?mod=$1\&page=$2 [QSA]
+RewriteRule ^([a-zA-Z_0-9-]+)/([a-zA-Z_0-9-]+)/([a-zA-Z_0-9-]+)\.html$ /index.php\?mod=$1\&page=$2\&submod=$3 [QSA]
+RewriteRule ^([a-zA-Z_0-9-]+)/([a-zA-Z_0-9-]+)/([a-zA-Z_0-9-]+)/([a-zA-Z_0-9-]+)\.html$ /index.php\?mod=$1\&page=$2\&submod=$3\&subpage=$4 [QSA]
+
+RewriteRule ^([a-zA-Z_0-9-]+)/$ /index.php\?mod=$1 [QSA]
+RewriteRule ^([a-zA-Z_0-9-]+)/([a-zA-Z_0-9-]+)/$ /index.php\?mod=$1\&page=$2 [QSA]
+RewriteRule ^([a-zA-Z_0-9-]+)/([a-zA-Z_0-9-]+)/([a-zA-Z_0-9-]+)/$ /index.php\?mod=$1\&page=$2\&submod=$3 [QSA]
+RewriteRule ^([a-zA-Z_0-9-]+)/([a-zA-Z_0-9-]+)/([a-zA-Z_0-9-]+)/([a-zA-Z_0-9-]+)/$ /index.php\?mod=$1\&page=$2\&submod=$3\&subpage=$4 [QSA]
+
+RewriteRule ^([a-zA-Z_0-9-]+)\.xml$ /index.php\?mod=$1
+

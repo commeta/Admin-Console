@@ -14,27 +14,8 @@ if(isset($_POST['oper']) && $_POST['oper'] == 'multi-loader'):
 			$chunks= explode(',',rtrim($_POST['chunks'],','));
 			
 			foreach($chunks as $chunk){
-				/*
-				if(cachePageAndDB && file_exists($root_path."cache/db/loader/".$chunk) ){
-					$response[$chunk]= file_get_contents($root_path."cache/db/loader/".$chunk);
-				}
-				*/
-				
 				if(file_exists("sliders/".$chunk.".html")){
 					$chunk_content= file_get_contents("sliders/".$chunk.".html");
-					
-					/*
-					if(cachePageAndDB){
-						$chunk_content= strip_comments($chunk_content);
-						
-						$pattern = array("/\>[^\S ]+/s", "/[^\S ]+\</s", "/(\s)+/s", "/<!--(?![^<]*noindex)(.*?)-->/"); 
-						$replace = array(">", "<", "\\1", ""); 
-						$chunk_content = preg_replace($pattern, $replace, $chunk_content);						
-						
-						set_cached("loader",$chunk, $chunk_content);
-					}
-					*/
-					
 					$response[$chunk]= $chunk_content;
 				}
 			}

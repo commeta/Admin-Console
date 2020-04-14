@@ -8,17 +8,6 @@
  */
 
 
-
-/*
-
-function example(){
- 
-}
-
-
-*/
-
-
 function sanitize($str){
 	if ($str){
 		$output = strip_tags($str);

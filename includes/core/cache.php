@@ -19,18 +19,6 @@ function folder_exist($folder){
 
 
 
-########################################################################
-
-/**
- * Validate international link.
- *
- * @param string $link Link to validate.
- *
- * @return array
- */
-
-// Очистка кэша, ревалидатор в отдельном потоке
-
 
 ########################################################################
 
@@ -43,16 +31,14 @@ function folder_exist($folder){
  */
 
 function get_cached($sub_dir,$file = false){
-	global $root_path;
-	
 	if(cachePageAndDB){
 		if($file){
-			if(file_exists($root_path."cache/db/".$sub_dir."/".$file)){
-				return(unserialize(file_get_contents($root_path."cache/db/".$sub_dir."/".$file)));
+			if(file_exists(root_path."cache/db/".$sub_dir."/".$file)){
+				return(unserialize(file_get_contents(root_path."cache/db/".$sub_dir."/".$file)));
 			}
 		} else {
 			if(file_exists("cache/db/".$sub_dir)){
-				return(unserialize(file_get_contents($root_path."cache/db/".$sub_dir)));
+				return(unserialize(file_get_contents(root_path."cache/db/".$sub_dir)));
 			}
 		}
 	}
@@ -71,16 +57,14 @@ function get_cached($sub_dir,$file = false){
  */
 
 function set_cached($sub_dir,$file = false,$data){ // dir!
-	global $root_path;
-	
 	if(cachePageAndDB){
-		if(folder_exist($root_path."cache/db") === false) @mkdir($root_path."cache/db");
+		if(folder_exist(root_path."cache/db") === false) @mkdir(root_path."cache/db");
 		
 		if($file){
-			if(folder_exist($root_path."cache/db/".$sub_dir) === false) @mkdir($root_path."cache/db/".$sub_dir);
-			file_put_contents($root_path."cache/db/".$sub_dir."/".$file, $data);
+			if(folder_exist(root_path."cache/db/".$sub_dir) === false) @mkdir(root_path."cache/db/".$sub_dir);
+			file_put_contents(root_path."cache/db/".$sub_dir."/".$file, $data);
 		} else {
-			file_put_contents($root_path."cache/db/".$sub_dir, $data);
+			file_put_contents(root_path."cache/db/".$sub_dir, $data);
 		}
 	}
 }
@@ -96,11 +80,9 @@ function set_cached($sub_dir,$file = false,$data){ // dir!
  */
 
 function get_cached_page($file){
-	global $root_path;
-	
 	if(cachePageAndDB){
-		if(file_exists($root_path."cache/pages/".$file)){
-			return(file_get_contents($root_path."cache/pages/".$file));
+		if(file_exists(root_path."cache/pages/".$file)){
+			return(file_get_contents(root_path."cache/pages/".$file));
 		} else {
 			ob_start();
 			return(false);
@@ -121,12 +103,10 @@ function get_cached_page($file){
  */
 
 function set_cached_page($file){
-	global $root_path;
-	
 	if(cachePageAndDB){
-		if(folder_exist($root_path."cache/pages") === false) @mkdir($root_path."cache/pages");
+		if(folder_exist(root_path."cache/pages") === false) @mkdir(root_path."cache/pages");
 		
-		file_put_contents($root_path."cache/pages/".$file, strip_comments(ob_get_contents()));
+		file_put_contents(root_path."cache/pages/".$file, strip_comments(ob_get_contents()));
 		ob_end_flush();
 	}
 }
@@ -142,10 +122,9 @@ function set_cached_page($file){
  */
 
 function clean_cache(){
-	global $root_path;
 	if(cachePageAndDB){
-		if(folder_exist($root_path."cache/db")) recursiveRemoveDir($root_path."cache/db");
-		if(folder_exist($root_path."cache/pages")) recursiveRemoveDir($root_path."cache/pages");
+		if(folder_exist(root_path."cache/db")) recursiveRemoveDir(root_path."cache/db");
+		if(folder_exist(root_path."cache/pages")) recursiveRemoveDir(root_path."cache/pages");
 	}
 	return true;
 }
