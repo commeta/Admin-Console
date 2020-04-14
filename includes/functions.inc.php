@@ -5,6 +5,7 @@ if( strpos($_SERVER['REQUEST_URI'],'index') !== false && $mod == 'index'){ // Р
 	exit();
 }
 
+// Запрос URL из базы данных
 $db = MysqliDb::getInstance();
 $request_url['path']= $db->escape($request_url['path']);
 if($mod == 'index') $request_url['path']= '/index.html';
@@ -12,7 +13,7 @@ if($mod == 'index') $request_url['path']= '/index.html';
 $db->where('friendly_url', $request_url['path'] );
 $md_meta= $db->getOne('md_meta');
 
-if($db->count > 0){
+if($db->count > 0){ // Подготовка мета тегов
 	$meta_title			= $md_meta['meta_title'];
 	$meta_h1			= $md_meta['meta_h1'];
 	$meta_description	= $md_meta['meta_description'];

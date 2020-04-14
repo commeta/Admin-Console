@@ -10,7 +10,7 @@ ini_set('short_open_tag', 'On');
 
 
 // IfModified Since check, true -on (recommended); false -off (debug);
-if($_SERVER['REMOTE_ADDR'] == '00.00.00.00'){ 
+if($_SERVER['REMOTE_ADDR'] == '178.130.37.64'){ 
 	define ("metrics", true);
 	define ("cachePageAndDB", false);
 	define ("ifmsCheck", false);
@@ -21,8 +21,6 @@ if($_SERVER['REMOTE_ADDR'] == '00.00.00.00'){
 	define ("ifmsCheck", true);
 	$display_error = 'no';
 }
-
-
 
 const expires			= 3600;
 const siteUrl			= "https://admin.seo-marketing.spb.ru";

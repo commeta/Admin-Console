@@ -1,5 +1,6 @@
 <?php
 
+// Ajax подгрузка html секций
 if(isset($_POST['oper']) && $_POST['oper'] == 'multi-loader'):
 	header('Content-type: application/json');
 	
@@ -26,7 +27,7 @@ if(isset($_POST['oper']) && $_POST['oper'] == 'multi-loader'):
 endif;
 
 
-
+// Ajax подгрузка шрифтов
 if(isset($_POST['oper']) && $_POST['oper'] == 'get_font'):
 	$userAgent= $_SERVER['HTTP_USER_AGENT'] ?? 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:73.0) Gecko/20100101 Firefox/73.0';
 	header("Content-type: text/css");

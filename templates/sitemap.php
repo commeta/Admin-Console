@@ -8,7 +8,6 @@ if($cached_page = get_cached_page( $urlMd5 )){
 }
 
 // Добавить категории и дружественные урл
-
 function sitemap_url_gen($url, $lastmod = '', $changefreq = '', $priority = ''){
 //$lastmod - дата последней модификации страницы в формате YYYY-MM-DD (date('Y-m-d') - 2012-02-06)
 //$changefreq - как часто обновляется страница. Допустимые значения: always, hourly, daily, weekly, monthly, yearly, never.
@@ -29,13 +28,11 @@ function sitemap_url_gen($url, $lastmod = '', $changefreq = '', $priority = ''){
 	return $res;
 }
 
-	$smp= '<?xml version="1.0" encoding="UTF-8"?>
+$smp= '<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">';
 
 $smp.= sitemap_url_gen(sprintf("%s/",siteUrl));
 	
-$db = MysqliDb::getInstance();
-
 $md_meta = $db->getValue("md_meta","friendly_url", null); // Дружественные URL
 foreach($md_meta as $v){
 	if($v == '') continue;

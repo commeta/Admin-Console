@@ -9,6 +9,7 @@
 	<title><?php echo $meta_title; ?></title>
 	<link href="<?php echo $canonical; ?>" rel="canonical" />
 	<meta name="robots" content="<?php echo $robots; ?>" />
+	
 <?php
 // массив с путями до css файлов
 $css_array = array(
@@ -19,6 +20,7 @@ $css_array = array(
 // вызываем функцию сжатия
 compression_css_files($css_array, "css/dyn/header-dynamic-modules.css", "css/dyn/header-fonts.css", true);
 ?>
+
   </head>
   <body>
 	<header>

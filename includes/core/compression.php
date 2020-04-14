@@ -30,7 +30,6 @@ function strip_comments($html){
     return $html;
 }
 
-// wget -r -l 7 -p -nc -nd --spider -q --reject=png,jpg,jpeg,ico,xml,txt,ttf,woff,woff2,pdf,eot,eot?,eot%3F,gif,svg,mp3,ogg,mpeg,avi,zip,gz,bz2,rar,swf,otf https://webdevops.ru/
 
 ########################################################################
 /**
