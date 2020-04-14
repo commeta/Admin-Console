@@ -10,6 +10,11 @@ Admin Console содержит только базовый набор модул
 Система управления сайтом CMS Admin Console специально разрабатывалась для высоко - нагруженных проектов, с учетом максимальной поддержки протокола HTTP/S.
 
 В качестве Web UI интерфейса использован форк open-source bootstrap 3 theme [Devops v1.0](https://github.com/devoopsme/devoops)
+### Минимальные системные требования:
++ PHP 7.0+
++ mysqli
++ От 1MB свободной памяти
++ От 55MB места на диске
 
 ### Пресс-релиз:
 [https://webdevops.ru/admin-console.html](https://webdevops.ru/admin-console.html)
