@@ -9,4 +9,5 @@ Admin Console содержит только базовый набор модул
 
 
 Система управления сайтом CMS Admin Console специально разрабатывалась для высоко - нагруженных проектов, с учетом максимальной поддержки протокола HTTP/S.
-[admin-console](https://webdevops.ru/admin-console.html)
+
+[https://webdevops.ru/admin-console.html](https://webdevops.ru/admin-console.html)
