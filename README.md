@@ -18,7 +18,7 @@ Admin Console содержит только базовый набор модул
 [https://admin.seo-marketing.spb.ru/](https://admin.seo-marketing.spb.ru/)
 
 ### Документация:
-В разработке
+[Установка](https://github.com/commeta/admin-console/wiki/%D0%A3%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0)
 
 
 
