@@ -4,7 +4,7 @@
     <footer class="footer">
       <div class="container">
 		  <p class="float-right"><a href="#">Вверх</a></p>
-		  <p>&copy; 2019-2020 <a href="https://webdevops.ru/admin-console.html">WebDevOps</a> &middot; </p>
+		  <p>&copy; 2019-2020 <a href="https://github.com/commeta/admin-console">Admin Console</a> &middot; </p>
 		  <div id="trace"></div>
       </div>
     </footer>
@@ -20,7 +20,6 @@ $js_array = array(
 );
 // вызываем функцию сжатия
 compression_js_files($js_array, "js/dyn/dynamic-footer.js", true);
-
 
 print_server_stat("trace",$time_start,$memory); // Вывод статистки сервера
 

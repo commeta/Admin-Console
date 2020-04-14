@@ -2523,3 +2523,4 @@ function initMysqli() { // db staying private here
 	$db= new MysqliDb (db_host, db_login, db_pass, db_dbname);
 }
 initMysqli();
+

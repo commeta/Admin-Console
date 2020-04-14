@@ -29,6 +29,11 @@
 			}
 		});
 	}
+	
+	$('input[name="username"]').val("username");
+	$('input[name="password"]').val("password");
+	
+	
 })(jQuery);
 
 

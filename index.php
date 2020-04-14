@@ -1,4 +1,8 @@
 <?php
+// Замер статистки сервера, вывод в /templates/chanks/footer.php
+$time_start = microtime(1);
+$memory = memory_get_usage();
+
 // Конфигурация
 require_once('includes/config.inc.php');
 
@@ -22,5 +26,6 @@ if(file_exists(pages_dir.$mod.".php")){
 		require_once(pages_dir."404.php");	
 	}
 }
+
 
 ?>

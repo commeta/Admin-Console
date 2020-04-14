@@ -1,5 +1,5 @@
 <?php
-// Если есть то отдаем из кэша страницу, и обработаем заголовое if modified since
+// Если есть то отдаем из кэша страницу, и обработаем заголовок if modified since
 if($cached_page = get_cached_page( $urlMd5 )){
 	ifMofifiedSince( $urlMd5 );
 	die($cached_page);
