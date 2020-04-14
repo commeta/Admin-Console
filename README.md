@@ -23,7 +23,6 @@ Admin Console содержит только базовый набор модул
 + [Подключение шаблона](https://github.com/commeta/admin-console/wiki/%D0%9F%D0%BE%D0%B4%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5-%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD%D0%B0)
 + [Разработка модулей](https://github.com/commeta/admin-console/wiki/%D0%A0%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D0%B5%D0%B9)
 
-
 ### Минимальные системные требования:
 + PHP 7.0+
 + mysqli
@@ -37,6 +36,10 @@ Admin Console содержит только базовый набор модул
 + Бэкэнд: apache2
 + 1 ядро: Intel(R) Xeon(R) CPU E5645 @ 2.40GHz
 + 1024MB RAM
+
+```html
+Страница была сгенерирована за: 0.00397 сек. Выполнено: 2 запросов к БД за 0.00044 сек. Использовано: 70.73 КБ памяти.
+```
 
 ```bash
 $ ab -kc 10 -t 60 https://admin.seo-marketing.spb.ru/
