@@ -16,6 +16,17 @@ Admin Console содержит только базовый набор модул
 + От 1MB свободной памяти
 + От 55MB места на диске
 
+### Результаты тестирования:
+Тестовый стенд: 
++ centos 8, 
++ фронтэнд nginx, 
++ бэкэнд apache2, 
++ 1 ядро: Intel(R) Xeon(R) CPU E5645 @ 2.40GHz
++ 1024MB RAM
+
+
+
+
 ### Пресс-релиз:
 [https://webdevops.ru/admin-console.html](https://webdevops.ru/admin-console.html)
 
