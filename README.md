@@ -10,6 +10,19 @@ Admin Console содержит только базовый набор модул
 Система управления сайтом CMS Admin Console специально разрабатывалась для высоко - нагруженных проектов, с учетом максимальной поддержки протокола HTTP/S.
 
 В качестве Web UI интерфейса использован форк open-source bootstrap 3 theme [Devops v1.0](https://github.com/devoopsme/devoops)
+
+### Пресс-релиз:
+[https://webdevops.ru/admin-console.html](https://webdevops.ru/admin-console.html)
+
+### Демо версия:
+[https://admin.seo-marketing.spb.ru/](https://admin.seo-marketing.spb.ru/)
+
+### Документация:
++ [Установка](https://github.com/commeta/admin-console/wiki/%D0%A3%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0)
++ [Подключение шаблона](https://github.com/commeta/admin-console/wiki/%D0%9F%D0%BE%D0%B4%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5-%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD%D0%B0)
++ [Разработка модулей](https://github.com/commeta/admin-console/wiki/%D0%A0%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D0%B5%D0%B9)
+
+
 ### Минимальные системные требования:
 + PHP 7.0+
 + mysqli
@@ -72,19 +85,6 @@ Percentage of the requests served within a certain time (ms)
   99%    396
  100%    571 (longest request)
 ```
-
-### Пресс-релиз:
-[https://webdevops.ru/admin-console.html](https://webdevops.ru/admin-console.html)
-
-### Демо версия:
-[https://admin.seo-marketing.spb.ru/](https://admin.seo-marketing.spb.ru/)
-
-### Документация:
-+ [Установка](https://github.com/commeta/admin-console/wiki/%D0%A3%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0)
-+ [Подключение шаблона](https://github.com/commeta/admin-console/wiki/%D0%9F%D0%BE%D0%B4%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5-%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD%D0%B0)
-+ [Разработка модулей](https://github.com/commeta/admin-console/wiki/%D0%A0%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D0%B5%D0%B9)
-
-
 
 ____
 This is free open-source CMS based on bootstrap 3 theme for you.
