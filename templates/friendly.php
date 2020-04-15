@@ -9,9 +9,10 @@ require_once('chanks/header.php');
 ?>
 
 
-<div class="starter-template">
-	<h1><?=$meta_h1?></h1>
-	<p class="lead"><?=$md_meta['content']?></p>
+<div class="container marketing">
+	<h1 class="mt-5"><?=$meta_h1?></h1>
+
+	<?=$md_meta['content']?>
 </div>
 
 	

@@ -13,34 +13,20 @@ require_once('chanks/header.php');
 		<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
 		<li data-target="#myCarousel" data-slide-to="1"></li>
 		<li data-target="#myCarousel" data-slide-to="2"></li>
+		<li data-target="#myCarousel" data-slide-to="3"></li>
 	</ol>
 	<div class="carousel-inner">
-		<div class="carousel-item active"> <img class="first-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="First slide">
-			<div class="container">
-				<div class="carousel-caption text-left">
-					<h1>Пример заголовка.</h1>
-					<p>Безусловно, понимание сути ресурсосберегающих технологий однозначно определяет каждого участника как способного принимать собственные решения касаемо приоритизации разума над эмоциями.</p>
-					<p><a class="btn btn-lg btn-primary" href="#" role="button">Подписка</a></p>
-				</div>
-			</div>
+		<div class="carousel-item active"> 
+			<img class="first-slide" src="/img/uploads/Chto_dolzhen_delat_razrabotchik_a_chto_zakazchik.jpg" alt="First slide">
 		</div>
-		<div class="carousel-item"> <img class="second-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Second slide">
-			<div class="container">
-				<div class="carousel-caption">
-					<h1>Другой пример заголовка.</h1>
-					<p>Безусловно, понимание сути ресурсосберегающих технологий однозначно определяет каждого участника как способного принимать собственные решения касаемо приоритизации разума над эмоциями.</p>
-					<p><a class="btn btn-lg btn-primary" href="#" role="button">Далее</a></p>
-				</div>
-			</div>
+		<div class="carousel-item"> 
+			<img class="second-slide" src="/img/uploads/jQuery_CheatSheet.jpg" alt="Second slide">
 		</div>
-		<div class="carousel-item"> <img class="third-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Third slide">
-			<div class="container">
-				<div class="carousel-caption text-right">
-					<h1>Один из примеров заголовка.</h1>
-					<p>Безусловно, понимание сути ресурсосберегающих технологий однозначно определяет каждого участника как способного принимать собственные решения касаемо приоритизации разума над эмоциями.</p>
-					<p><a class="btn btn-lg btn-primary" href="#" role="button">Галерея</a></p>
-				</div>
-			</div>
+		<div class="carousel-item"> 
+			<img class="third-slide" src="/img/uploads/linux_perfomance_tools.jpg" alt="Second slide">
+		</div>
+		<div class="carousel-item"> 
+			<img class="fourth-slide" src="/img/uploads/The_Physical_Internet.jpg" alt="Second slide">
 		</div>
 	</div>
 	<a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Предыдущий</span> </a>
@@ -79,7 +65,9 @@ require_once('chanks/header.php');
 			<h2 class="featurette-heading">Первый заголовок.</h2>
 			<p class="lead">Являясь всего лишь частью общей картины, сделанные на базе интернет-аналитики выводы являются только методом политического участия и ограничены исключительно образом мышления.</p>
 		</div>
-		<div class="col-md-5"> <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="Generic placeholder image"> </div>
+		<div class="col-md-5"> 
+			<a data-fancybox="gallery" href="/img/uploads/seo_vse_napravlenia_rabot_nad_proektom.jpg"><img class="featurette-image img-fluid mx-auto" src="/img/uploads/seo_vse_napravlenia_rabot_nad_proektom.jpg" alt="Generic placeholder image"> </a>
+		</div>
 	</div>
 	<hr class="featurette-divider">
 	<div class="row featurette">
@@ -87,9 +75,22 @@ require_once('chanks/header.php');
 			<h2 class="featurette-heading">Второй заголовок.</h2>
 			<p class="lead">Высокий уровень вовлечения представителей целевой аудитории является четким доказательством простого факта: постоянное информационно-пропагандистское обеспечение нашей деятельности обеспечивает широкому кругу (специалистов) участие в формировании инновационных методов управления процессами.</p>
 		</div>
-		<div class="col-md-5 order-md-1"> <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="Generic placeholder image"> </div>
+		<div class="col-md-5 order-md-1"> 
+			<a data-fancybox="gallery" href="/img/uploads/CSS_Shorthand_Cheat_Sheet.jpg"><img class="featurette-image img-fluid mx-auto" src="/img/uploads/CSS_Shorthand_Cheat_Sheet.jpg" alt="Generic placeholder image"> </a>
+		</div>
 	</div>
 	<hr class="featurette-divider">
+	<div class="row featurette">
+		<div class="col-md-7">
+			<h2 class="featurette-heading">Последний заголовок.</h2>
+			<p class="lead">Мы вынуждены отталкиваться от того, что постоянный количественный рост и сфера нашей активности однозначно определяет каждого участника как способного принимать собственные решения касаемо направлений прогрессивного развития.</p>
+		</div>
+		<div class="col-md-5"> 
+			<a data-fancybox="gallery" href="/img/uploads/JatuTLPbK7w.jpg"><img class="featurette-image img-fluid mx-auto" src="/img/uploads/JatuTLPbK7w.jpg" alt="Generic placeholder image"> </a>
+		</div>
+	</div>
+	<hr class="featurette-divider">
+	<!--
 	<div class="row featurette">
 		<div class="col-md-7">
 			<h2 class="featurette-heading">Последний заголовок.</h2>
@@ -98,6 +99,7 @@ require_once('chanks/header.php');
 		<div class="col-md-5"> <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="Generic placeholder image"> </div>
 	</div>
 	<hr class="featurette-divider">
+	-->
 	<!-- /END THE FEATURETTES -->
 </div>
 <!-- /.container -->

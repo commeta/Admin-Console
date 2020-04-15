@@ -146,8 +146,13 @@ function setUpEditor(data){ // Загрузка в  редактор полей 
 		onInit: function( finder ) {
 			finder.on( 'files:choose', function( evt ) {
 				var file = evt.data.files.first();
-				$('#images_collection').html('');
-				$('#images_collection').append('<a class="fancybox" rel="gallery1" href="' + file.getUrl() + '" title=""><img src="' + file.getUrl() + '" width="250px" alt=""></a>');
+				//$('#images_collection').html('');
+				$('#images_collection').append('<a class="fancybox" rel="gallery1" href="' + file.getUrl() + '" title=""><img src="' + file.getUrl() + '" width="25px" alt=""></a>');
+				
+
+tinymce.activeEditor.execCommand('mceInsertContent', false, '<img src="' + file.getUrl() + '" width="250px" alt="">');
+		
+				
 			});
 			finder.on( 'file:choose:resizedImage', function( evt ) {
 				//document.getElementById( 'url' ).value = evt.data.resizedUrl;

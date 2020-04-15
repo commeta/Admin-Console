@@ -24,7 +24,7 @@ body {
 
 /* Declare heights because of positioning of img element */
 .carousel-item {
-  height: 32rem;
+  height: 35rem;
   background-color: #777;
 }
 .carousel-item > img {
@@ -35,6 +35,15 @@ body {
   height: 32rem;
 }
 
+@media screen and (min-width:769px){ 
+	.carousel-item {
+	  height: calc( 100vh - 40px )
+	}
+	.carousel-item > img {
+	  height: calc( 100vh - 90px )
+	}
+
+}
 
 /* MARKETING CONTENT
 -------------------------------------------------- */

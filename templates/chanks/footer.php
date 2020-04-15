@@ -16,6 +16,7 @@ $js_array = array(
 	'js/popper.min.js',
 	'js/holder.min.js',
 	'js/bootstrap.min.js',
+	'js/jquery.fancybox.min.js',
 	'js/init.js'
 );
 // вызываем функцию сжатия

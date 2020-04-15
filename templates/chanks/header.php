@@ -16,6 +16,7 @@ $css_array = array(
     'css/bootstrap.min.css',
     'css/carousel.css',
     'css/style.css',
+    'css/jquery.fancybox.min.css',
 );
 // вызываем функцию сжатия
 compression_css_files($css_array, "css/dyn/header-dynamic-modules.css", "css/dyn/header-fonts.css", true);
@@ -58,4 +59,4 @@ foreach($menu as $v){
 			</div>
 		</nav>
 	</header>
-    <main role="main" class="container">
+    <main role="main" class="">
