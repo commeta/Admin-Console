@@ -36,7 +36,7 @@ Admin Console содержит только базовый набор модул
 + Бэкэнд: apache2
 + 1 ядро: Intel(R) Xeon(R) CPU E5645 @ 2.40GHz
 + 1024MB RAM
-+ PHP 7.4.4 with Zend OPcache v7.4.4
++ PHP 7.4.4 with Zend OPcache
 
 ```html
 Страница была сгенерирована за: 0.00397 сек. 
