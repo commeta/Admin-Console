@@ -32,13 +32,12 @@ Admin Console содержит только базовый набор модул
 ### Результаты тестирования:
 Тестовый стенд: 
 + Centos 8
-+ Фронтэнд: nginx
-+ Бэкэнд: apache2
++ Фронтэнд NGINX: gzip = Off
++ Бэкэнд: Apache2
 + 1 ядро: Intel(R) Xeon(R) CPU E5645 @ 2.40GHz
 + 1024MB RAM
 + PHP 7.4.4 with Zend OPcache
 + Admin Console: кэширование сгенерированных страниц в подкаталоге /cache/pages/
-+ NGINX: gzip = Off
 
 Генерация одной страницы, до попадания в кэш:
 ```html
