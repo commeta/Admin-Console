@@ -37,6 +37,8 @@ Admin Console содержит только базовый набор модул
 + 1 ядро: Intel(R) Xeon(R) CPU E5645 @ 2.40GHz
 + 1024MB RAM
 + PHP 7.4.4 with Zend OPcache
++ Admin Console: кэширование сгенерированных страниц в подкаталоге /cache/pages/
++ NGINX: gzip = Off
 
 Генерация одной страницы, до попадания в кэш:
 ```html
@@ -45,7 +47,7 @@ Admin Console содержит только базовый набор модул
 Использовано: 70.73 КБ памяти.
 ```
 
-Нагрузочное тестирование, 10 потоков, 60 секунд, nginx gzip=off, php cachePageAndDB=on:
+Нагрузочное тестирование, 10 потоков, 60 секунд:
 ```bash
 $ ab -kc 10 -t 60 https://admin.seo-marketing.spb.ru/
 ```
