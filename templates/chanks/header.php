@@ -3,18 +3,19 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="keywords" content="<?php echo $meta_keywords; ?>" />
-	<meta name="description" content="<?php echo $meta_description; ?>" />
-    <link rel="shortcut icon" href="<? echo siteUrl;?>/favicon.ico" type="image/x-icon" />
-	<title><?php echo $meta_title; ?></title>
-	<link href="<?php echo $canonical; ?>" rel="canonical" />
-	<meta name="robots" content="<?php echo $robots; ?>" />
+	<meta name="keywords" content="<?=$meta_keywords?>" />
+	<meta name="description" content="<?=$meta_description?>" />
+    <link rel="shortcut icon" href="<?=siteUrl?>/favicon.ico" type="image/x-icon" />
+	<title><?=$meta_title?></title>
+	<link href="<?=$canonical?>" rel="canonical" />
+	<meta name="robots" content="<?=$robots?>" />
 	
 <?php
 // массив с путями до css файлов
 $css_array = array(
     'css/bootstrap.min.css',
     'css/carousel.css',
+    'css/blog.css',
     'css/style.css',
     'css/jquery.fancybox.min.css',
 );

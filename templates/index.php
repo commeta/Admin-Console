@@ -16,7 +16,7 @@ require_once('chanks/header.php');
 		<li data-target="#myCarousel" data-slide-to="3"></li>
 	</ol>
 	<div class="carousel-inner">
-		<div class="carousel-item active"> 
+		<div class="carousel-item active">
 			<img class="first-slide" src="/img/uploads/Chto_dolzhen_delat_razrabotchik_a_chto_zakazchik.jpg" alt="First slide">
 		</div>
 		<div class="carousel-item"> 
@@ -66,7 +66,9 @@ require_once('chanks/header.php');
 			<p class="lead">Являясь всего лишь частью общей картины, сделанные на базе интернет-аналитики выводы являются только методом политического участия и ограничены исключительно образом мышления.</p>
 		</div>
 		<div class="col-md-5"> 
-			<a data-fancybox="gallery" href="/img/uploads/seo_vse_napravlenia_rabot_nad_proektom.jpg"><img class="featurette-image img-fluid mx-auto" src="/img/uploads/seo_vse_napravlenia_rabot_nad_proektom.jpg" alt="Generic placeholder image"> </a>
+			<a data-fancybox="gallery" href="/img/uploads/seo_vse_napravlenia_rabot_nad_proektom.jpg">
+				<img class="featurette-image img-fluid mx-auto" src="/img/uploads/seo_vse_napravlenia_rabot_nad_proektom.jpg" alt="Generic placeholder image">
+			</a>
 		</div>
 	</div>
 	<hr class="featurette-divider">
@@ -76,7 +78,9 @@ require_once('chanks/header.php');
 			<p class="lead">Высокий уровень вовлечения представителей целевой аудитории является четким доказательством простого факта: постоянное информационно-пропагандистское обеспечение нашей деятельности обеспечивает широкому кругу (специалистов) участие в формировании инновационных методов управления процессами.</p>
 		</div>
 		<div class="col-md-5 order-md-1"> 
-			<a data-fancybox="gallery" href="/img/uploads/CSS_Shorthand_Cheat_Sheet.jpg"><img class="featurette-image img-fluid mx-auto" src="/img/uploads/CSS_Shorthand_Cheat_Sheet.jpg" alt="Generic placeholder image"> </a>
+			<a data-fancybox="gallery" href="/img/uploads/CSS_Shorthand_Cheat_Sheet.jpg">
+				<img class="featurette-image img-fluid mx-auto" src="/img/uploads/CSS_Shorthand_Cheat_Sheet.jpg" alt="Generic placeholder image">
+			</a>
 		</div>
 	</div>
 	<hr class="featurette-divider">
@@ -86,7 +90,9 @@ require_once('chanks/header.php');
 			<p class="lead">Мы вынуждены отталкиваться от того, что постоянный количественный рост и сфера нашей активности однозначно определяет каждого участника как способного принимать собственные решения касаемо направлений прогрессивного развития.</p>
 		</div>
 		<div class="col-md-5"> 
-			<a data-fancybox="gallery" href="/img/uploads/JatuTLPbK7w.jpg"><img class="featurette-image img-fluid mx-auto" src="/img/uploads/JatuTLPbK7w.jpg" alt="Generic placeholder image"> </a>
+			<a data-fancybox="gallery" href="/img/uploads/JatuTLPbK7w.jpg">
+				<img class="featurette-image img-fluid mx-auto" src="/img/uploads/JatuTLPbK7w.jpg" alt="Generic placeholder image">
+			</a>
 		</div>
 	</div>
 	<hr class="featurette-divider">
