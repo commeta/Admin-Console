@@ -33,7 +33,7 @@ Admin Console содержит только базовый набор модул
 Тестовый стенд: 
 + Centos 8
 + Фронтэнд NGINX: gzip = Off
-+ Бэкэнд: Apache2
++ Бэкэнд: Apache2, PHP установлен как модуль Apache
 + 1 ядро: Intel(R) Xeon(R) CPU E5645 @ 2.40GHz
 + 1024MB RAM
 + PHP 7.4.4 with Zend OPcache
