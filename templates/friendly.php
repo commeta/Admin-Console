@@ -4,6 +4,7 @@ if($cached_page = get_cached_page( $urlMd5 )){
 	ifMofifiedSince( $urlMd5 );
 	die($cached_page);
 }
+
 require_once('chanks/header.php');
 ?>
 

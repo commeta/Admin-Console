@@ -12,13 +12,14 @@
 	
 <?php
 // массив с путями до css файлов
-$css_array = array(
+$css_array = [
     'css/bootstrap.min.css',
     'css/carousel.css',
     'css/blog.css',
     'css/style.css',
     'css/jquery.fancybox.min.css',
-);
+    'css/isotope.css'
+];
 // вызываем функцию сжатия
 compression_css_files($css_array, "css/dyn/header-dynamic-modules.css", "css/dyn/header-fonts.css", true);
 ?>
@@ -30,15 +31,12 @@ compression_css_files($css_array, "css/dyn/header-dynamic-modules.css", "css/dyn
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
 			<div class="collapse navbar-collapse" id="navbarCollapse">
 				<ul class="navbar-nav mr-auto">
-					
 <?php
-
 if( $md_meta['friendly_url'] == '/index.html' )
 	printf('<li class="nav-item active"> <a class="nav-link" href="/">Главная <span class="sr-only">(current)</span></a> </li>');
 else
 	printf('<li class="nav-item"> <a class="nav-link" href="/">Главная</a> </li>');
 
-			
 $menu = $db->get("md_meta", null, ["friendly_url","meta_h1"]); // Дружественные URL
 foreach($menu as $v){
 	if($v['friendly_url'] == '' && $v['meta_h1']) continue;
@@ -48,8 +46,8 @@ foreach($menu as $v){
 	else
 		printf('<li class="nav-item"> <a class="nav-link" href="%s">%s <span class="sr-only">(current)</span></a> </li>',$v['friendly_url'],$v['meta_h1']);
 }
-?>				
-					<li class="nav-item"> <a class="nav-link" href="/sitemap.xml">sitemap</a> </li>
+?>
+					<li class="nav-item"> <a class="nav-link" href="/sitemap.xml">sitemap</a></li>
 					<li class="nav-item"> <a class="nav-link disabled" href="/404.html">404</a> </li>
 				</ul>
 				<form class="form-inline mt-2 mt-md-0" action="/admin/login.php" method="post" >

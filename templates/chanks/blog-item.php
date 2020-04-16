@@ -28,13 +28,7 @@ foreach($blog as $v){
       </div>
 
     
-
-
-
 <div class="container">
-	
-	
-	
       <div class="row mb-2">
         <div class="col-md-6">
           <div class="card flex-md-row mb-4 shadow-sm h-md-250">
@@ -67,10 +61,7 @@ foreach($blog as $v){
       </div>
 	
 	
-	
-	
-	
-	
+		
 	
 	
 	

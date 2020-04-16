@@ -17,6 +17,7 @@ $js_array = array(
 	'js/holder.min.js',
 	'js/bootstrap.min.js',
 	'js/jquery.fancybox.min.js',
+	'js/isotope.pkgd.min.js',
 	'js/init.js'
 );
 // вызываем функцию сжатия

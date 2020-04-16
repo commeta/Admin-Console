@@ -16,6 +16,9 @@ OPEN_GRAPH;
 
 
 if($page){ // Если это страница
+	$db->where('friendly_url', '/blog/' );
+	$md_meta= $db->getOne('md_meta');
+	
 	$db->where('friendly_url', $request_url['path'] );
 	$md_blog= $db->getOne('md_blog');
 	
@@ -24,9 +27,6 @@ if($page){ // Если это страница
 		require_once(pages_dir."404.php");
 		die();
 	}
-	
-	$db->where('friendly_url', '/blog/' );
-	$md_meta= $db->getOne('md_meta');
 	
 	$meta_title			= $md_blog['meta_title'];
 	$meta_h1			= $md_blog['meta_h1'];
@@ -45,6 +45,7 @@ if($cached_page = get_cached_page( $urlMd5 )){
 	ifMofifiedSince( $urlMd5 );
 	die($cached_page);
 }
+
 
 if($request_url['path'] == '/blog/') { // Если это раздел
 	require_once(pages_dir.'chanks/header.php');
