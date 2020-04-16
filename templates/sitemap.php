@@ -43,6 +43,24 @@ foreach($md_meta as $v){
 	);
 }
 
+$md_meta = $db->getValue("md_blog","friendly_url", null); // Блог URL
+foreach($md_meta as $v){
+	if($v == '') continue;
+	
+	$smp.= sitemap_url_gen(
+		sprintf("%s%s",siteUrl,$v)
+	);
+}
+
+$md_meta = $db->getValue("md_portfolio","friendly_url", null); // Портфолио URL
+foreach($md_meta as $v){
+	if($v == '') continue;
+	
+	$smp.= sitemap_url_gen(
+		sprintf("%s%s",siteUrl,$v)
+	);
+}
+
 
 $smp.= "\n</urlset>";
 header('Content-type: text/xml');
