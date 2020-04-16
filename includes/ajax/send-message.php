@@ -5,18 +5,8 @@
 
 
 ########################################################################
-/**
- * Validate international link.
- *
- * @param string $link Link to validate.
- *
- * @return array
-				(
-				)
- */
-
-
 if(isset($_POST['oper']) && $_POST['oper'] == 'send_message'):
+	// Отправка почты, с файлами
 	$name = sanitize($_POST['your-name']);
 	$phone = sanitize($_POST['phone']);
 	$theme = sanitize($_POST['section']);
@@ -77,8 +67,9 @@ endif;
 
 
 
-
+########################################################################
 if(isset($_POST['oper']) && $_POST['oper'] == 'send_files'):
+	// Загрузка файлов для отправки по почте
 	session_start();
 	if( !isset($_SESSION['xauthtoken']) ) $_SESSION['xauthtoken']= strval(bin2hex(openssl_random_pseudo_bytes(32)));
 	
@@ -113,7 +104,9 @@ endif;
 
 
 
+########################################################################
 if(isset($_POST['oper']) && $_POST['oper'] == 'send_error'):
+	// Отлов ошибок из JS frontEnd, log файл: /temp/front-error.log
 	file_put_contents(root_path . '/temp/front-error.log', date("H:i:s d.m.Y") . ' ' . $_POST['baseURI']." - ".$_POST['src']."\n", FILE_APPEND );
 
 	die(json_encode([]));
@@ -121,6 +114,18 @@ endif;
 
 
 
+
+########################################################################
+if(isset($_POST['oper']) && $_POST['oper'] == 'checkout'):
+	// Пример обработчика корзины, заглушка!
+	session_start(); // Работа с сессиями
+	if( !isset($_SESSION['xauthtoken']) ) { // Уникальный xauthtoken
+		$_SESSION['xauthtoken'] = strval(bin2hex(openssl_random_pseudo_bytes(32)));
+	}
+	
+
+	die(json_encode($_POST));
+endif;
 
 
 ?>

@@ -5,9 +5,9 @@ if($cached_page = get_cached_page( $urlMd5 )){
 	die($cached_page);
 }
 
-
 require_once('chanks/header.php');
 ?>
+<main role="main" class="">
 
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
 	<ol class="carousel-indicators">
@@ -111,6 +111,7 @@ require_once('chanks/header.php');
 </div>
 <!-- /.container -->
 
+</main>
 
 <?php
 require_once('chanks/footer.php');

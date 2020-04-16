@@ -34,6 +34,10 @@ $next_img= array_search($portfolio[$next]['id'], array_column($md_portfolio_img,
 // Дата
 $public_time= strftime('%B, %Y',strtotime($md_portfolio['public_time']));
 ?>
+<main role="main" class="">
+
+
+
 
 
 		
@@ -50,7 +54,6 @@ foreach($screenshot_mobile as $v){
 	);
 }
 ?>			
-
 
 
 <!--						
@@ -77,3 +80,5 @@ foreach($screenshot_mobile as $v){
 <?php echo $portfolio[$next]['friendly_url'];?>
 <?php echo $portfolio[$next]['meta_h1'];?>
 -->
+
+</main>

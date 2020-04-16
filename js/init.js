@@ -1,6 +1,27 @@
-"use strict";
+
+// Пример отлова ошибок, log файл: /temp/front-error.log
+(function($) { 
+	'use strict';
+	window.onerror = function(message, url, lineNumber) { // Поймана ошибка, выпавшая в глобальную область!
+		var data = Object();
+		data['oper']= 'send_error';
+		data['baseURI']= window.location.pathname;
+		data['src']= url + ' ' + message + ' ' + lineNumber;
+
+		$.ajax({ // Обработчик /includes/ajax/send-message.php
+			url:'/ajax.php',
+			data: data,
+			type:'post'
+		});
+	};	
+})(jQuery);
+
+
+
+
 
 (function($) {	// Загрузка шрифта
+	'use strict';
 	function createStyle(txt) {
 		var style = document.createElement('style');
 		style.textContent = txt;
@@ -38,9 +59,6 @@
 
 
 
-
-
-
 (function($) {// external js: isotope.pkgd.js
 	$(document).ready(function() {
 			$('.works').isotope({ // /portfolio/
@@ -64,5 +82,66 @@
 			});
 	});
 })(jQuery);
+
+
+
+
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function($) {
+	'use strict';
+
+	window.addEventListener('load', function() {
+		// Fetch all the forms we want to apply custom Bootstrap validation styles to
+		var forms = document.getElementsByClassName('needs-validation');
+
+		// Loop over them and prevent submission
+		var validation = Array.prototype.filter.call(forms, function(form) {
+			form.addEventListener('submit', function(event) {
+				event.preventDefault();
+				event.stopPropagation();
+				
+				let validity = true;
+				if (form.checkValidity() === false) {
+					validity = false;
+				}
+				
+				form.classList.add('was-validated');
+				
+				if( validity ) {
+					var $data = {};
+					$(form).find ('input[type=text], textearea, select').each(function() {
+						let id= $(this).attr('id');
+						$data[id] = $(this).val();
+					});
+					$(form).find ('input[type=checkbox], input[type=radio]').each(function() {
+						if ($(this).is(':checked')){
+							let id= $(this).attr('id');
+							$data[id] = $(this).val();
+						}
+					});
+					
+					$data['oper']= $(form).attr('id');
+					
+					$.ajax({ // Обработчик /includes/ajax/send-message.php
+						url:'/ajax.php',
+						data: $data,
+						type:'post',
+						success:function(data){
+							console.log(data);
+							alert( `
+								Запрос отправлен,
+									JS обработчик /js/init.js
+									PHP обработчик /includes/ajax/send-message.php
+									Данные форм:
+								` + JSON.stringify(data) 
+							);
+						}
+					});
+				}
+			}, false);
+		});
+	}, false);
+})(jQuery);
+
 
 
