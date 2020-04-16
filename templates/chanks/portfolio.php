@@ -37,14 +37,6 @@ foreach($md_portfolio as $v){
         <div class="container">
           <h1 class="jumbotron-heading"><?=$meta_h1?></h1>
           <p class="lead text-muted"><?=$md_meta['meta_text']?></p>
-			<ul id="filter" class="clearfix">
-				<li><a href="" class="current btn" data-filter="*">Все</a></li>
-<?php
-foreach($category as $v){
-	printf('<li><a href="" class="btn" data-filter=".filter%s">%s</a></li>',array_search($v,$category),$v);
-}
-?>														
-			</ul>              
         </div>
       </section>
       
@@ -52,15 +44,25 @@ foreach($category as $v){
 
 <div class="album py-5">
 <div class="container">
+	<ul id="filter" class="clearfix pb-5">
+		<li><a href="" class="current btn" data-filter="*">Все</a></li>
+<?php
+foreach($category as $v){
+	printf('<li><a href="" class="btn" data-filter=".filter%s">%s</a></li>',array_search($v,$category),$v);
+}
+?>														
+	</ul>              
 	<div class="row works clearfix">
 <?php
 foreach($md_portfolio as $v){
 	$idFilter= array_search($v['project'],$category);
+
+	if($img_screenshot[$v['id']]['img_url'] == '') $img_screenshot[$v['id']]['img_url'] = "holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text={$v['meta_h1']}";
 	
 	echo <<<PORTFOLIO
 		<div class="col-md-4 work filter$idFilter">
 			<div class="card mb-4 shadow-sm">
-				<img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text={$v['meta_h1']}" alt="{$v['meta_h1']}" width="100" height="225">
+				<img class="card-img-top" data-src="{$img_screenshot[$v['id']]['img_url']}" alt="{$img_screenshot[$v['id']]['img_alt']}" width="100" height="225">
 				<div class="card-body">
 					<p class="card-text">{$v['short']}</p>
 					<div class="d-flex justify-content-between align-items-center">

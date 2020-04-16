@@ -16,9 +16,9 @@ $css_array = [
     'css/bootstrap.min.css',
     'css/carousel.css',
     'css/blog.css',
-    'css/style.css',
     'css/jquery.fancybox.min.css',
-    'css/isotope.css'
+    'css/isotope.css',
+    'css/style.css',
 ];
 // вызываем функцию сжатия
 compression_css_files($css_array, "css/dyn/header-dynamic-modules.css", "css/dyn/header-fonts.css", true);
