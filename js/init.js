@@ -30,6 +30,7 @@
 		});
 	}
 	
+	// Логин\пароль для входа в админку
 	$('input[name="username"]').val("username");
 	$('input[name="password"]').val("password");
 	
@@ -43,7 +44,7 @@
 
 (function($) {// external js: isotope.pkgd.js
 	$(document).ready(function() {
-			$('.works').isotope({
+			$('.works').isotope({ // /portfolio/
 				itemSelector: '.work'	
 			});
 			

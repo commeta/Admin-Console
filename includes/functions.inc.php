@@ -5,6 +5,9 @@ if( strpos($_SERVER['REQUEST_URI'],'index') !== false && $mod == 'index'){ // Р
 	exit();
 }
 
+// Класс: по работе с базой данных
+// https://github.com/ThingEngineer/PHP-MySQLi-Database-Class#error-helpers
+
 // Запрос URL из базы данных
 $db = MysqliDb::getInstance();
 $db->setTrace(true);

@@ -1,5 +1,5 @@
 <?php
-// Навигация Влево - Вправо
+// Запрос списка страниц
 $db->orderBy("public_time","Desc");
 $blog= $db->get('md_blog', null, ['id','friendly_url','meta_title','meta_h1','image','public_time','category','meta_text']);
 
