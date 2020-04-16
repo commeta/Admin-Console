@@ -122,7 +122,7 @@
 					
 					$data['oper']= $(form).attr('id');
 					
-					$.ajax({ // Обработчик /includes/ajax/send-message.php
+					$.ajax({ // Обработчик: /includes/ajax/send-message.php
 						url:'/ajax.php',
 						data: $data,
 						type:'post',
@@ -130,8 +130,8 @@
 							console.log(data);
 							alert( `
 								Запрос отправлен,
-									JS обработчик /js/init.js
-									PHP обработчик /includes/ajax/send-message.php
+									JS обработчик: /js/init.js
+									PHP обработчик: /includes/ajax/send-message.php
 									Данные форм:
 								` + JSON.stringify(data) 
 							);

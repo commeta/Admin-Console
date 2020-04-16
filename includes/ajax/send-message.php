@@ -25,7 +25,7 @@ if(isset($_POST['oper']) && $_POST['oper'] == 'send_message'):
 	if($email == $to) $email= false;
 	
 	$message = '<html><body>';
-	$message .= '<center><h1>Сообщение с сайта buydebt.ru</h1></center>';
+	$message .= '<center><h1>Сообщение с сайта '.siteUrl.'</h1></center>';
 	$message .= $theme ? 'Тема сообщения: ' . $theme . '<br>' : '';
 	$message .= $name ? 'Имя: ' .  $name . '<br>' : '';
 	$message .= $email ? 'Почта: ' .  $email . '<br>' : '';

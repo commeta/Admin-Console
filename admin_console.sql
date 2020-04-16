@@ -144,6 +144,32 @@ INSERT INTO `md_portfolio_img` VALUES (1,1,'','Нет звука приятне�
 UNLOCK TABLES;
 
 --
+-- Table structure for table `md_send`
+--
+
+DROP TABLE IF EXISTS `md_send`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `md_send` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `xauthtoken` varchar(128) NOT NULL,
+  `event_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `event_name` varchar(255) NOT NULL,
+  `ip` varchar(128) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `md_send`
+--
+
+LOCK TABLES `md_send` WRITE;
+/*!40000 ALTER TABLE `md_send` DISABLE KEYS */;
+/*!40000 ALTER TABLE `md_send` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `md_users`
 --
 
@@ -217,4 +243,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-04-17  2:29:16
+-- Dump completed on 2020-04-17  2:53:50
