@@ -24,7 +24,6 @@ $js_array = array(
 compression_js_files($js_array, "js/dyn/dynamic-footer.js", true);
 
 print_server_stat("trace",$time_start,$memory); // Вывод статистки сервера
-
 ?>
   </body>
 </html>
