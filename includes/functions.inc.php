@@ -49,7 +49,7 @@ if( !isset($_SESSION['xauthtoken']) ) { // Уникальный xauthtoken
 
 
 ########################################################################
-
+// Функции шаблонов
 
 function print_server_stat($id,$time_start,$memory){ // Вывод статистки сервера
 	// БД

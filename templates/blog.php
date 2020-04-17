@@ -13,9 +13,9 @@ $o_g=<<<OPEN_GRAPH
 <meta property="og:image:height" content="630">
 OPEN_GRAPH;
 
+$pageLimit = 2; // Постов на странице, для пагинации
 
-
-if($page){ // Если это страница
+if( !ctype_digit($page) && $page !== false ){ // Если это страница блога
 	$db->where('friendly_url', '/blog/' );
 	$md_meta= $db->getOne('md_meta');
 	
@@ -28,6 +28,7 @@ if($page){ // Если это страница
 		die();
 	}
 	
+	// Установка мета тегов
 	$meta_title			= $md_blog['meta_title'];
 	$meta_h1			= $md_blog['meta_h1'];
 	$meta_description	= $md_blog['meta_description'];
@@ -47,11 +48,46 @@ if($cached_page = get_cached_page( $urlMd5 )){
 }
 
 
-if($request_url['path'] == '/blog/') { // Если это раздел
+if($request_url['path'] == '/blog/' || ctype_digit($page) ) { // Если это раздел блога
+	// Запрос 10 страниц
+	if( ctype_digit($page) && $page !== false ) { // С пагинацией
+		$db->where('friendly_url', '/blog/' );
+		$md_meta= $db->getOne('md_meta');
+		
+		// Установка мета тегов
+		$meta_title			= $md_meta['meta_title'];
+		$meta_h1			= $md_meta['meta_h1'];
+		$meta_description	= $md_meta['meta_description'];
+		$meta_keywords		= $md_meta['meta_keywords'];
+		$canonical			= siteUrl."/blog/";
+		$robots				= "noindex, follow";
+		$friendly			= false;
+
+		// set page limit to count results per page. 20 by default
+		$db->pageLimit = $pageLimit;
+		$blog = $db->arraybuilder()->paginate("md_blog", $page, ['id','friendly_url','meta_title','meta_h1','image','public_time','category','meta_text']);
+		
+		$totalPages= $db->totalPages;
+		
+		if( $page > $totalPages){
+			header("HTTP/1.0 404 Not Found");
+			require_once(pages_dir."404.php");
+			die();
+		}
+	} else { // Без пагинации
+		$db->orderBy("public_time","Desc");
+		$blog= $db->get('md_blog', $pageLimit, ['id','friendly_url','meta_title','meta_h1','image','public_time','category','meta_text']);
+		
+		$countItems = $db->getValue("md_blog", "count(*)");
+		$totalPages = ceil($countItems / $pageLimit);
+		
+		$page= 1;
+	}
+	
 	require_once(pages_dir.'chanks/header.php');
 	require_once(pages_dir.'chanks/blog.php');
 } else {
-	if($page){ // Если это страница
+	if($page){ // Если это страница блога
 		require_once(pages_dir.'chanks/header.php');
 		require_once(pages_dir.'chanks/blog-item.php');
 	} else {

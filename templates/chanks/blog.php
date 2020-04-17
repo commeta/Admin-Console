@@ -1,11 +1,10 @@
 <?php
-// Запрос списка страниц
-$db->orderBy("public_time","Desc");
-$blog= $db->get('md_blog', null, ['id','friendly_url','meta_title','meta_h1','image','public_time','category','meta_text']);
+$db->orderBy("public_time","Desc"); // Список постов для меню в сайдбаре
+$blog_posts= $db->get('md_blog', null, ['friendly_url','meta_h1','category']);
 
 // Категории
 $category= [];
-foreach($blog as $v){
+foreach($blog_posts as $v){
 	if( !in_array($v['category'],$category) ) $category[]= $v['category'];
 }
 ?>
@@ -34,12 +33,27 @@ foreach($blog as $post){ // Вывод анонсов постов блога
 			</div><!-- /.blog-post -->
 ARTICLE;
 }
-?>		
 
-				<nav class="blog-pagination">
-					<a class="btn btn-outline-primary" href="#">Старее</a>
-					<a class="btn btn-outline-secondary disabled" href="#">Новее</a>
-				</nav>
+
+// Вывод пагинации
+echo '<nav aria-label="Блог">';
+echo '<ul class="pagination justify-content-center">';
+
+if( $page <= 1 ) echo '<li class="page-item disabled"><span class="page-link">Предыдущая</span></li>';
+else printf('<li class="page-item"><a class="page-link" href="/blog/%d/">Предыдущая</a></li>',$page - 1);
+
+for( $i=1; $i<=$totalPages; $i++){
+	if($i == $page) printf('<li class="page-item active"><span class="page-link">%d<span class="sr-only">(текущая)</span></span></li>',$i);
+	else printf('<li class="page-item"><a class="page-link" href="/blog/%d/">%d</a></li>',$i,$i);
+}
+
+if( $totalPages < $page + 1 ) echo '<li class="page-item disabled"><span class="page-link">Следующая</span></li>';
+else printf('<li class="page-item"><a class="page-link" href="/blog/%d/">Следующая</a></li>',$page + 1);
+
+echo '</ul>';
+echo '</nav>';
+?>
+
 			</div><!-- /.blog-main -->
 			<aside class="col-md-4 blog-sidebar">
 				<div class="p-3 mb-3 bg-light rounded">
@@ -55,7 +69,7 @@ foreach($category as $cat){ // Вывод ссылок постов блога, 
 	$sub_cat= '';
 	$current= false;
 	
-	foreach($blog as $post){
+	foreach($blog_posts as $post){
 		if($post['category'] == $cat){
 			if($request_url['path'] == $post['friendly_url']){
 				$current= true;
