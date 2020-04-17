@@ -1,4 +1,8 @@
 <?php
+// Реализация логики блога
+// Чанк списка постов с пагинацией - /templates/chanks/blog.php
+// Чанк поста - /templates/chanks/blog-item.php
+
 
 $o_g=<<<OPEN_GRAPH
 <meta property="og:type" content="website">
@@ -104,6 +108,7 @@ set_cached_page($urlMd5); // Сохраним страницу в кэше
 
 
 #######################################################################
+// Библиотека функций блога
 
 function print_post_category_menu($blog_posts, $request_url){ // Вывод меню категорий в сайдбаре
 	// Категории

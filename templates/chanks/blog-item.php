@@ -19,8 +19,6 @@ $blog= $db->get('md_blog', null, ['id','friendly_url','meta_title','meta_h1','im
 
 $prev= 0;
 $next= 1;
-
-
 ?>
 <main role="main" class="">
 	
