@@ -63,6 +63,10 @@ if($request_url['path'] == '/blog/' || ctype_digit($page) ) { // Если это
 		$page= 1;
 	}
 	
+	$db->orderBy("public_time","Desc"); // Список постов для меню в сайдбаре
+	$blog_posts= $db->get('md_blog', null, ['friendly_url','meta_h1','category']);
+	if($db->count < 1) goto die404;
+	
 	require_once(pages_dir.'chanks/header.php');
 	require_once(pages_dir.'chanks/blog.php');
 } else {
@@ -87,6 +91,28 @@ if($request_url['path'] == '/blog/' || ctype_digit($page) ) { // Если это
 		if($md_blog['open_graph'] != ''){ // Если есть изображение подключаем Open Graph
 			$open_graph= sprintf($o_g, $md_blog['meta_title'], $md_blog['meta_description'], siteUrl.$md_blog['friendly_url'], siteUrl.$md_blog['open_graph'] );
 		}
+				
+		// Запрос списка страниц
+		$db->orderBy("public_time","Desc");
+		$blog_posts= $db->get('md_blog', null, ['id','friendly_url','meta_h1','category']);
+		if($db->count < 1) goto die404;
+
+		// Предыдущая/Следующая
+		$current= array_search($md_blog['id'], array_column($blog_posts, 'id'));
+		$count_blog= count($blog_posts);
+
+		if($current > 0) $prev= $current - 1;
+		else $prev= $count_blog - 1;
+
+		if($current < $count_blog - 1) $next= $current + 1;
+		else $next= 0;
+
+		// Запрос страниц Предыдущая\Следующая
+		$db->where('id', [$blog_posts[$prev]['id'],$blog_posts[$next]['id']], 'in');
+		$blog= $db->get('md_blog', null, ['id','friendly_url','meta_title','meta_h1','image','public_time','category','meta_text']);
+
+		$prev= 0;
+		$next= 1;
 		
 		require_once(pages_dir.'chanks/header.php');
 		require_once(pages_dir.'chanks/blog-item.php');

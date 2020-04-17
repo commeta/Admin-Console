@@ -1,8 +1,3 @@
-<?php
-$db->orderBy("public_time","Desc"); // Список постов для меню в сайдбаре
-$blog_posts= $db->get('md_blog', null, ['friendly_url','meta_h1','category']);
-
-?>
 <main role="main" class="">
 	
 	<div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">

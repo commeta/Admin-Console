@@ -1,25 +1,3 @@
-<?php
-// Запрос списка страниц
-$db->orderBy("public_time","Desc");
-$blog_posts= $db->get('md_blog', null, ['id','friendly_url','meta_h1','category']);
-
-// Предыдущая/Следующая
-$current= array_search($md_blog['id'], array_column($blog_posts, 'id'));
-$count_blog= count($blog_posts);
-
-if($current > 0) $prev= $current - 1;
-else $prev= $count_blog - 1;
-
-if($current < $count_blog - 1) $next= $current + 1;
-else $next= 0;
-
-// Запрос страниц Предыдущая\Следующая
-$db->where('id', [$blog_posts[$prev]['id'],$blog_posts[$next]['id']], 'in');
-$blog= $db->get('md_blog', null, ['id','friendly_url','meta_title','meta_h1','image','public_time','category','meta_text']);
-
-$prev= 0;
-$next= 1;
-?>
 <main role="main" class="">
 	
 	<div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
