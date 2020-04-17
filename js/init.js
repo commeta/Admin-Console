@@ -110,35 +110,26 @@
 				processData : false,
 				contentType : false, 
 				success     : function( respond, status, jqXHR ){
-					if( typeof respond.error === 'undefined' ){
-						//console.log( respond.files );
-						var preview = document.querySelector('.preview');
-						while(preview.firstChild) {
-							preview.removeChild(preview.firstChild);
-						}
-						
-						if(respond.files.length === 0) {
-							var para = document.createElement('p');
-							para.textContent = 'Не загружено не одного файла.';
-							preview.appendChild(para);
-						} else {
-							var list = document.createElement('ol');
-							preview.appendChild(list);
-							
-							for(var i = 0; i < respond.files.length; i++) {
-								var listItem = document.createElement('li');
-								listItem.textContent = 'Файл загружен: ' + respond.files[i];
-								list.appendChild(listItem);
-							}
-						}
-					} else {
-						console.log('ОШИБКА: ' + respond.error );
+					var preview = document.querySelector('.preview');
+					while(preview.firstChild) {
+						preview.removeChild(preview.firstChild);
 					}
-				},
-				error: function( jqXHR, status, errorThrown ){
-					console.log( 'ОШИБКА AJAX запроса: ' + status, jqXHR );
+						
+					if(respond.files.length === 0) {
+						var para = document.createElement('p');
+						para.textContent = 'Не загружено не одного файла.';
+						preview.appendChild(para);
+					} else {
+						var list = document.createElement('ol');
+						preview.appendChild(list);
+							
+						for(var i = 0; i < respond.files.length; i++) {
+							var listItem = document.createElement('li');
+							listItem.textContent = 'Файл загружен: ' + respond.files[i];
+							list.appendChild(listItem);
+						}
+					}
 				}
-
 			});
 		});
 
