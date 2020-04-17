@@ -3,30 +3,30 @@
 // Чанк списка постов с пагинацией - /templates/chanks/blog.php
 // Чанк поста - /templates/chanks/blog-item.php
 
-$pageLimit = 2; // Постов на странице, для пагинации
+$pageLimit = 2; // Постов на странице раздела, для пагинации
 
 $o_g=<<<OPEN_GRAPH
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Admin Console">
-<meta property="og:title" content="%s">
-<meta property="og:description" content="%s">
-<meta property="og:url" content="%s">
-<meta property="og:locale" content="ru_RU">
-<meta property="og:image" content="%s">
-<meta property="og:image:type" content="image/jpeg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
+	<meta property="og:type" content="website">
+	<meta property="og:site_name" content="Admin Console">
+	<meta property="og:title" content="%s">
+	<meta property="og:description" content="%s">
+	<meta property="og:url" content="%s">
+	<meta property="og:locale" content="ru_RU">
+	<meta property="og:image" content="%s">
+	<meta property="og:image:type" content="image/jpeg">
+	<meta property="og:image:width" content="1200">
+	<meta property="og:image:height" content="630">
 OPEN_GRAPH;
 
-// Если есть то отдаем из кэша страницу, и обработаем заголовое if modified since
+// Если есть то отдаем из кэша страницу, и обработаем заголовок if modified since
 if($cached_page = get_cached_page( $urlMd5 )){
 	ifMofifiedSince( $urlMd5 );
 	die($cached_page);
 }
 
-
+############################
 if($request_url['path'] == '/blog/' || ctype_digit($page) ) { // Если это раздел блога
-	// Запрос 10 страниц
+	// Запрос страниц
 	if( ctype_digit($page) && $page !== false ) { // С пагинацией
 		$db->where('friendly_url', '/blog/' );
 		$md_meta= $db->getOne('md_meta');
@@ -64,6 +64,7 @@ if($request_url['path'] == '/blog/' || ctype_digit($page) ) { // Если это
 	require_once(pages_dir.'chanks/header.php');
 	require_once(pages_dir.'chanks/blog.php');
 } else {
+############################
 	if($page){ // Если это страница блога
 		$db->where('friendly_url', '/blog/' );
 		$md_meta= $db->getOne('md_meta');
