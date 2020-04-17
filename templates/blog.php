@@ -104,6 +104,7 @@ set_cached_page($urlMd5); // Сохраним страницу в кэше
 
 
 #######################################################################
+
 function print_post_category_menu($blog_posts, $request_url){ // Вывод меню категорий в сайдбаре
 	// Категории
 	$category= [];
@@ -138,10 +139,27 @@ function print_post_category_menu($blog_posts, $request_url){ // Вывод ме
 				);
 		}
 	}
-	
-	
 }
 
+
+function print_pagination_navi($page, $totalPages){ // Вывод пагинации
+	echo '<nav aria-label="Блог">';
+	echo '<ul class="pagination justify-content-center">';
+
+	if( $page <= 1 ) echo '<li class="page-item disabled"><span class="page-link">Предыдущая</span></li>';
+	else printf('<li class="page-item"><a class="page-link" href="/blog/%d/">Предыдущая</a></li>',$page - 1);
+
+	for( $i=1; $i<=$totalPages; $i++){
+		if($i == $page) printf('<li class="page-item active"><span class="page-link">%d<span class="sr-only">(текущая)</span></span></li>',$i);
+		else printf('<li class="page-item"><a class="page-link" href="/blog/%d/">%d</a></li>',$i,$i);
+	}
+
+	if( $totalPages < $page + 1 ) echo '<li class="page-item disabled"><span class="page-link">Следующая</span></li>';
+	else printf('<li class="page-item"><a class="page-link" href="/blog/%d/">Следующая</a></li>',$page + 1);
+
+	echo '</ul>';
+	echo '</nav>';
+}
 
 
 ?>

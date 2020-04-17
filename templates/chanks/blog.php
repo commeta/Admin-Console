@@ -29,24 +29,8 @@ foreach($blog as $post){ // Вывод анонсов постов блога
 ARTICLE;
 }
 
-
 // Вывод пагинации
-echo '<nav aria-label="Блог">';
-echo '<ul class="pagination justify-content-center">';
-
-if( $page <= 1 ) echo '<li class="page-item disabled"><span class="page-link">Предыдущая</span></li>';
-else printf('<li class="page-item"><a class="page-link" href="/blog/%d/">Предыдущая</a></li>',$page - 1);
-
-for( $i=1; $i<=$totalPages; $i++){
-	if($i == $page) printf('<li class="page-item active"><span class="page-link">%d<span class="sr-only">(текущая)</span></span></li>',$i);
-	else printf('<li class="page-item"><a class="page-link" href="/blog/%d/">%d</a></li>',$i,$i);
-}
-
-if( $totalPages < $page + 1 ) echo '<li class="page-item disabled"><span class="page-link">Следующая</span></li>';
-else printf('<li class="page-item"><a class="page-link" href="/blog/%d/">Следующая</a></li>',$page + 1);
-
-echo '</ul>';
-echo '</nav>';
+print_pagination_navi($page, $totalPages)
 ?>
 
 			</div><!-- /.blog-main -->
@@ -62,7 +46,6 @@ echo '</nav>';
 <?php
 // Вывод ссылок постов блога, по категориям
 print_post_category_menu($blog_posts, $request_url);
-
 ?>
 					</ol>
 				</div>
