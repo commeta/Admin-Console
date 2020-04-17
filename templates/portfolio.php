@@ -17,15 +17,11 @@ if($request_url['path'] == '/portfolio/') { // Если это раздел
 	if($page){ // Если это страница
 		$db->where('friendly_url', '/portfolio/' );
 		$md_meta= $db->getOne('md_meta');
+		if($db->count < 1) goto die404;
 		
 		$db->where('friendly_url', $request_url['path'] );
 		$md_portfolio= $db->getOne('md_portfolio');
-		
-		if($db->count < 1){
-			header("HTTP/1.0 404 Not Found");
-			require_once(pages_dir."404.php");
-			die();
-		}
+		if($db->count < 1) goto die404;
 		
 		$meta_title			= $md_portfolio['meta_title'];
 		$meta_h1			= $md_portfolio['meta_h1'];
@@ -37,6 +33,7 @@ if($request_url['path'] == '/portfolio/') { // Если это раздел
 		require_once(pages_dir.'chanks/header.php');
 		require_once(pages_dir.'chanks/portfolio-item.php');
 	} else {
+die404:
 		header("HTTP/1.0 404 Not Found");
 		require_once(pages_dir."404.php");
 		die();

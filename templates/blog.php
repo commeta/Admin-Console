@@ -32,6 +32,7 @@ if($request_url['path'] == '/blog/' || ctype_digit($page) ) { // Если это
 
 		$db->where('friendly_url', '/blog/' );
 		$md_meta= $db->getOne('md_meta');
+		if($db->count < 1) goto die404;
 		
 		// Установка мета тегов
 		$meta_title			= $md_meta['meta_title'];
@@ -45,14 +46,15 @@ if($request_url['path'] == '/blog/' || ctype_digit($page) ) { // Если это
 		// set page limit to count results per page. 20 by default
 		$db->pageLimit = $pageLimit;
 		$blog = $db->arraybuilder()->paginate("md_blog", $page, ['id','friendly_url','meta_title','meta_h1','image','public_time','category','meta_text']);
+		if($db->count < 1) goto die404;
 		
 		$totalPages= $db->totalPages;
-		
 		if( $page > $totalPages) goto die404;
 		
 	} else { // Без пагинации
 		$db->orderBy("public_time","Desc");
 		$blog= $db->get('md_blog', $pageLimit, ['id','friendly_url','meta_title','meta_h1','image','public_time','category','meta_text']);
+		if($db->count < 1) goto die404;
 		
 		$countItems = $db->getValue("md_blog", "count(*)");
 		$totalPages = ceil($countItems / $pageLimit);
@@ -67,10 +69,10 @@ if($request_url['path'] == '/blog/' || ctype_digit($page) ) { // Если это
 	if($page){ // Если это страница блога
 		$db->where('friendly_url', '/blog/' );
 		$md_meta= $db->getOne('md_meta');
+		if($db->count < 1) goto die404;
 		
 		$db->where('friendly_url', $request_url['path'] );
 		$md_blog= $db->getOne('md_blog');
-		
 		if($db->count < 1) goto die404;
 		
 		// Установка мета тегов
@@ -110,7 +112,6 @@ function print_post_category_menu($blog_posts, $request_url){ // Вывод ме
 	foreach($blog_posts as $v){
 		if( !in_array($v['category'],$category) ) $category[]= $v['category'];
 	}
-	
 	
 	foreach($category as $cat){ // Вывод ссылок постов блога, по категориям
 		$sub_cat= '';
