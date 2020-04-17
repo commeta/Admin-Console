@@ -50,8 +50,15 @@ foreach($menu as $v){
 		printf('<li class="nav-item"> <a class="nav-link" href="%s">%s <span class="sr-only">(current)</span></a> </li>',$v['friendly_url'],$v['meta_h1']);
 }
 ?>
-						<li class="nav-item"> <a class="nav-link disabled" href="/sitemap.xml">sitemap</a></li>
-						<li class="nav-item"> <a class="nav-link disabled" href="/404.html">404</a> </li>
+
+
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Системные</a>
+							<div class="dropdown-menu" aria-labelledby="dropdown01">
+								<a class="dropdown-item" href="/sitemap.xml">sitemap</a>
+								<a class="dropdown-item" href="/404.html">404</a>
+							</div>
+						</li>
 					</ul>
 					<form class="form-inline mt-2 mt-md-0" action="/admin/login.php" method="post" >
 						<input class="form-control mr-sm-2" type="text" name="username" value="" >

@@ -60,7 +60,7 @@ require_once('chanks/header.php');
 					<div class="input-group">
 						<input type="text" class="form-control" placeholder="Promo code">
 						<div class="input-group-append">
-							<button type="submit" class="btn btn-secondary">Отправить</button>
+							<button type="submit" class="btn btn-secondary ">Отправить</button>
 						</div>
 					</div>
 				</form>
@@ -78,6 +78,14 @@ require_once('chanks/header.php');
 						</div>
 					</div>
 					<div class="input-group">
+						<input type="text" class="form-control" placeholder="Email" id="email" required>
+						<div class="invalid-feedback">
+							Требуется Ваш Email.
+						</div>
+					</div>
+					
+					
+					<div class="input-group">
 						<input type="text" class="form-control" placeholder="Телефон" id="phone">
 					</div>
 					<div class="input-group">
@@ -88,6 +96,10 @@ require_once('chanks/header.php');
 					</div>
 					
 					<div class="input-group">
+						<input type="file" id="files_uploads" class="files_uploads" name="files_uploads" multiple accept=".doc,.docx,.xml,.xls,.xlsx,.txt,.jpg,.jpeg,.png,.gif,.bmp,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,image/*">
+					</div>
+					<div class="preview"></div>
+					<div class="input-group p-2">
 						<input type="hidden" id="section" value="Тестовое сообщение">
 						<button type="submit" class="btn btn-secondary btn-block">Отправить</button>
 					</div>

@@ -90,6 +90,59 @@
 	'use strict';
 
 	window.addEventListener('load', function() {
+
+		var files; // Сборщик файлов
+		$('input[type=file]').change(function(){
+			files = this.files;
+			
+			var data = new FormData();
+			$.each( files, function( key, value ){
+				data.append( key, value );
+			});
+			
+			data.append( 'oper', 'send_files' );
+			$.ajax({
+				url         : '/ajax.php',
+				type        : 'POST',
+				data        : data,
+				cache       : false,
+				dataType    : 'json',
+				processData : false,
+				contentType : false, 
+				success     : function( respond, status, jqXHR ){
+					if( typeof respond.error === 'undefined' ){
+						//console.log( respond.files );
+						var preview = document.querySelector('.preview');
+						while(preview.firstChild) {
+							preview.removeChild(preview.firstChild);
+						}
+						
+						if(respond.files.length === 0) {
+							var para = document.createElement('p');
+							para.textContent = 'Не загружено не одного файла.';
+							preview.appendChild(para);
+						} else {
+							var list = document.createElement('ol');
+							preview.appendChild(list);
+							
+							for(var i = 0; i < respond.files.length; i++) {
+								var listItem = document.createElement('li');
+								listItem.textContent = 'Файл загружен: ' + respond.files[i];
+								list.appendChild(listItem);
+							}
+						}
+					} else {
+						console.log('ОШИБКА: ' + respond.error );
+					}
+				},
+				error: function( jqXHR, status, errorThrown ){
+					console.log( 'ОШИБКА AJAX запроса: ' + status, jqXHR );
+				}
+
+			});
+		});
+
+
 		// Fetch all the forms we want to apply custom Bootstrap validation styles to
 		var forms = document.getElementsByClassName('needs-validation');
 
