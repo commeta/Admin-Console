@@ -1,11 +1,11 @@
 <?php
 // Запрос списка страниц
 $db->orderBy("public_time","Desc");
-$blog= $db->get('md_blog', null, ['id','friendly_url','meta_title','meta_h1','image','public_time','category','meta_text']);
+$blog_posts= $db->get('md_blog', null, ['id','friendly_url','meta_h1','category']);
 
 // Предыдущая/Следующая
-$current= array_search($md_blog['id'], array_column($blog, 'id'));
-$count_blog= count($blog);
+$current= array_search($md_blog['id'], array_column($blog_posts, 'id'));
+$count_blog= count($blog_posts);
 
 if($current > 0) $prev= $current - 1;
 else $prev= $count_blog - 1;
@@ -13,11 +13,19 @@ else $prev= $count_blog - 1;
 if($current < $count_blog - 1) $next= $current + 1;
 else $next= 0;
 
+// Запрос страниц Предыдущая\Следующая
+$db->where('id', [$blog_posts[$prev]['id'],$blog_posts[$next]['id']], 'in');
+$blog= $db->get('md_blog', null, ['id','friendly_url','meta_title','meta_h1','image','public_time','category','meta_text']);
+
+$prev= 0;
+$next= 1;
+
 // Категории
 $category= [];
-foreach($blog as $v){
+foreach($blog_posts as $v){
 	if( !in_array($v['category'],$category) ) $category[]= $v['category'];
 }
+
 ?>
 <main role="main" class="">
 	
@@ -78,7 +86,7 @@ foreach($category as $cat){ // Вывод ссылок постов блога, 
 	$sub_cat= '';
 	$current= false;
 	
-	foreach($blog as $post){
+	foreach($blog_posts as $post){
 		if($post['category'] == $cat){
 			if($request_url['path'] == $post['friendly_url']){
 				$current= true;
