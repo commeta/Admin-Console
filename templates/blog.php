@@ -92,7 +92,7 @@ if($request_url['path'] == '/blog/' || ctype_digit($page) ) { // Если это
 			$open_graph= sprintf($o_g, $md_blog['meta_title'], $md_blog['meta_description'], siteUrl.$md_blog['friendly_url'], siteUrl.$md_blog['open_graph'] );
 		}
 				
-		// Запрос списка страниц
+		// Список постов для меню в сайдбаре
 		$db->orderBy("public_time","Desc");
 		$blog_posts= $db->get('md_blog', null, ['id','friendly_url','meta_h1','category']);
 		if($db->count < 1) goto die404;
