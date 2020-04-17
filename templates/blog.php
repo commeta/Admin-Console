@@ -100,4 +100,48 @@ if($request_url['path'] == '/blog/' || ctype_digit($page) ) { // Если это
 require_once(pages_dir.'chanks/footer.php');
 set_cached_page($urlMd5); // Сохраним страницу в кэше
 
+
+
+
+#######################################################################
+function print_post_category_menu($blog_posts, $request_url){ // Вывод меню категорий в сайдбаре
+	// Категории
+	$category= [];
+	foreach($blog_posts as $v){
+		if( !in_array($v['category'],$category) ) $category[]= $v['category'];
+	}
+	
+	
+	foreach($category as $cat){ // Вывод ссылок постов блога, по категориям
+		$sub_cat= '';
+		$current= false;
+		
+		foreach($blog_posts as $post){
+			if($post['category'] == $cat){
+				if($request_url['path'] == $post['friendly_url']){
+					$current= true;
+					$sub_cat .= sprintf('<li class="current-menu"><a href="%s">%s</a></li>',$post['friendly_url'],$post['meta_h1']);
+				} else {
+					$sub_cat .= sprintf('<li><a href="%s">%s</a></li>',$post['friendly_url'],$post['meta_h1']);
+				}
+			}
+		}
+		
+		if( $sub_cat != '' ){
+			if($current) 
+				printf('<li class="children"><a href="#">%s</a><ul class="sub-menu">%s</ul></li>',
+					$cat,$sub_cat
+				);
+			else 
+				printf('<li class="children"><a href="#">%s</a><ul class="sub-menu">%s</ul></li>',
+					$cat,$sub_cat
+				);
+		}
+	}
+	
+	
+}
+
+
+
 ?>

@@ -20,11 +20,6 @@ $blog= $db->get('md_blog', null, ['id','friendly_url','meta_title','meta_h1','im
 $prev= 0;
 $next= 1;
 
-// Категории
-$category= [];
-foreach($blog_posts as $v){
-	if( !in_array($v['category'],$category) ) $category[]= $v['category'];
-}
 
 ?>
 <main role="main" class="">
@@ -82,32 +77,8 @@ foreach($blog_posts as $v){
 					<h4 class="font-italic">Категории</h4>
 					<ol class="list-unstyled mb-0">
 <?php
-foreach($category as $cat){ // Вывод ссылок постов блога, по категориям
-	$sub_cat= '';
-	$current= false;
-	
-	foreach($blog_posts as $post){
-		if($post['category'] == $cat){
-			if($request_url['path'] == $post['friendly_url']){
-				$current= true;
-				$sub_cat .= sprintf('<li class="current-menu"><a href="%s">%s</a></li>',$post['friendly_url'],$post['meta_h1']);
-			} else {
-				$sub_cat .= sprintf('<li><a href="%s">%s</a></li>',$post['friendly_url'],$post['meta_h1']);
-			}
-		}
-	}
-	
-	if( $sub_cat != '' ){
-		if($current) 
-			printf('<li class="children"><a href="#">%s</a><ul class="sub-menu">%s</ul></li>',
-				$cat,$sub_cat
-			);
-		else 
-			printf('<li class="children"><a href="#">%s</a><ul class="sub-menu">%s</ul></li>',
-				$cat,$sub_cat
-			);
-	}
-}
+// Вывод ссылок постов блога, по категориям
+print_post_category_menu($blog_posts, $request_url);
 ?>
 					</ol>
 				</div>
