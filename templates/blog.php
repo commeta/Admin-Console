@@ -28,6 +28,8 @@ if($cached_page = get_cached_page( $urlMd5 )){
 if($request_url['path'] == '/blog/' || ctype_digit($page) ) { // Если это раздел блога
 	// Запрос страниц
 	if( ctype_digit($page) && $page !== false ) { // С пагинацией
+		if($page < 1) goto die404;
+
 		$db->where('friendly_url', '/blog/' );
 		$md_meta= $db->getOne('md_meta');
 		
@@ -46,11 +48,8 @@ if($request_url['path'] == '/blog/' || ctype_digit($page) ) { // Если это
 		
 		$totalPages= $db->totalPages;
 		
-		if( $page > $totalPages){
-			header("HTTP/1.0 404 Not Found");
-			require_once(pages_dir."404.php");
-			die();
-		}
+		if( $page > $totalPages) goto die404;
+		
 	} else { // Без пагинации
 		$db->orderBy("public_time","Desc");
 		$blog= $db->get('md_blog', $pageLimit, ['id','friendly_url','meta_title','meta_h1','image','public_time','category','meta_text']);
@@ -72,11 +71,7 @@ if($request_url['path'] == '/blog/' || ctype_digit($page) ) { // Если это
 		$db->where('friendly_url', $request_url['path'] );
 		$md_blog= $db->getOne('md_blog');
 		
-		if($db->count < 1){
-			header("HTTP/1.0 404 Not Found");
-			require_once(pages_dir."404.php");
-			die();
-		}
+		if($db->count < 1) goto die404;
 		
 		// Установка мета тегов
 		$meta_title			= $md_blog['meta_title'];
@@ -93,6 +88,7 @@ if($request_url['path'] == '/blog/' || ctype_digit($page) ) { // Если это
 		require_once(pages_dir.'chanks/header.php');
 		require_once(pages_dir.'chanks/blog-item.php');
 	} else {
+die404:
 		header("HTTP/1.0 404 Not Found");
 		require_once(pages_dir."404.php");
 		die();
