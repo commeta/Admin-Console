@@ -16,28 +16,28 @@ foreach($screenshot_mobile as $v){
 
 
 <!--						
-<?php echo $md_portfolio['meta_h1'];?>
-<?php echo $md_portfolio['project'];?>
-<?php echo $md_portfolio['content'];?>
-<?php echo $md_portfolio['public_time'];?>
-<?php echo $public_time;?> 
+<?=$md_portfolio['meta_h1']?>
+<?=$md_portfolio['project']?>
+<?=$md_portfolio['content']?>
+<?=$md_portfolio['public_time']?>
+<?=$public_time?> 
 											
 					
-<?php echo $portfolio[$prev]['friendly_url'];?>
-<?php echo $md_portfolio_img[$prev_img]['img_url'];?>
-<?php echo $md_portfolio_img[$prev_img]['img_alt'];?>
+<?=$portfolio[$prev]['friendly_url']?>
+<?=$md_portfolio_img[$prev_img]['img_url']?>
+<?=$md_portfolio_img[$prev_img]['img_alt']?>
 
-<?php echo $portfolio[$prev]['friendly_url'];?>
-<?php echo $portfolio[$prev]['meta_h1'];?>
-<?php echo $portfolio[$prev]['friendly_url'];?>
-<?php echo $portfolio[$prev]['meta_h1'];?>
-<?php echo $portfolio[$next]['friendly_url'];?>
-<?php echo $md_portfolio_img[$next_img]['img_url'];?>
-<?php echo $md_portfolio_img[$next_img]['img_alt'];?>
-<?php echo $portfolio[$next]['friendly_url'];?>
-<?php echo $portfolio[$next]['meta_h1'];?>
-<?php echo $portfolio[$next]['friendly_url'];?>
-<?php echo $portfolio[$next]['meta_h1'];?>
+<?=$portfolio[$prev]['friendly_url']?>
+<?=$portfolio[$prev]['meta_h1']?>
+<?=$portfolio[$prev]['friendly_url']?>
+<?=$portfolio[$prev]['meta_h1']?>
+<?=$portfolio[$next]['friendly_url']?>
+<?=$md_portfolio_img[$next_img]['img_url']?>
+<?=$md_portfolio_img[$next_img]['img_alt']?>
+<?=$portfolio[$next]['friendly_url']?>
+<?=$portfolio[$next]['meta_h1']?>
+<?=$portfolio[$next]['friendly_url']?>
+<?=$portfolio[$next]['meta_h1']?>
 -->
 
 </main>
