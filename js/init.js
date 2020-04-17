@@ -128,10 +128,10 @@
 						success:function(data){
 							console.log(data);
 							alert( `
-								Запрос отправлен,
-									JS обработчик: /js/init.js
-									PHP обработчик: /includes/ajax/send-message.php
-									Данные форм:
+								Запрос отправлен.
+								JS обработчик: /js/init.js
+								PHP обработчик: /includes/ajax/send-message.php
+								Данные форм:
 								` + JSON.stringify(data) 
 							);
 						}
