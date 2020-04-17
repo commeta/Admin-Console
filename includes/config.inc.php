@@ -6,11 +6,13 @@ date_default_timezone_set('Europe/Moscow'); //or change to whatever timezone you
 ini_set("memory_limit", "32M");
 set_time_limit(10);
 ini_set('short_open_tag', 'On');
+setlocale (LC_ALL, "ru_RU.UTF-8");
+setlocale (LC_NUMERIC, "C");
 
 
 
 // IfModified Since check, true -on (recommended); false -off (debug);
-if($_SERVER['REMOTE_ADDR'] == 'enter your ip for debugging'){ 
+if($_SERVER['REMOTE_ADDR'] == '178.130.37.64'){ 
 	define ("metrics", true);
 	define ("cachePageAndDB", false);
 	define ("ifmsCheck", false);
@@ -23,9 +25,9 @@ if($_SERVER['REMOTE_ADDR'] == 'enter your ip for debugging'){
 }
 
 const expires			= 3600;
-const siteUrl			= "https://admin.seo-marketing.spb.ru";
+const siteUrl			= "https://admin.webdevops.ru";
 const pages_dir			= 'templates/';
-const email			= 'dcs-spb@ya.ru';
+const email				= 'dcs-spb@ya.ru';
 
 
 $request_url= parse_url($_SERVER['REQUEST_URI']);
@@ -33,9 +35,9 @@ $urlMd5= md5( $_SERVER['SERVER_NAME'].$request_url['path'] );
 
 #######################################################################
 const db_host		= "localhost";
-const db_login		= "admin_console";
-const db_pass		= "2V0o8A6s";
-const db_dbname		= "admin_console";
+const db_login		= "dev_admin_console";
+const db_pass		= "G4u5W8x1";
+const db_dbname		= "dev_admin_console";
 
 #######################################################################
 

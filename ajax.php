@@ -11,8 +11,9 @@ foreach (glob("includes/core/*.php") as $filename){
     include $filename;
 } 
 
+$db = MysqliDb::getInstance();
 // Подключение пользовательских функций
-require_once('includes/functions.inc.php');
+//require_once('includes/functions.inc.php');
 
 // Подключение библиотеки обработчиков ajax запросов
 foreach (glob("includes/ajax/*.php") as $filename){
