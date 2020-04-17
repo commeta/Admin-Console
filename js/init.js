@@ -108,7 +108,7 @@
 				
 				if( validity ) {
 					var $data = {};
-					$(form).find ('input[type=text], textearea, select').each(function() {
+					$(form).find ('input[type=text], input[type=hidden], textearea, select').each(function() {
 						let id= $(this).attr('id');
 						$data[id] = $(this).val();
 					});

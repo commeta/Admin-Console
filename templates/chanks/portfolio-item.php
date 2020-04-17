@@ -15,35 +15,27 @@ foreach($screenshot as $v){
 
 
 
-<div class="container text-center my-3">
-    <h3><?=$md_portfolio['meta_title']?></h3>
-    <div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel">
-        <div class="carousel-inner w-100" role="listbox">
-            <div class="carousel-item row no-gutters active">
-                <div class="col-3 float-left"><img class="img-fluid" src="holder.js/350x280?theme=thumb&bg=222&fg=fff&text=1"></div>
-                <div class="col-3 float-left"><img class="img-fluid" src="holder.js/350x280?theme=thumb&bg=444&fg=eceeef&text=2"></div>
-                <div class="col-3 float-left"><img class="img-fluid" src="holder.js/350x280?theme=thumb&bg=888&fg=eceeef&text=3"></div>
-                <div class="col-3 float-left"><img class="img-fluid" src="holder.js/350x280?theme=thumb&bg=111&fg=fff&text=4"></div>
-            </div>
-            <div class="carousel-item row no-gutters">
-                <div class="col-3 float-left"><img class="img-fluid" src="holder.js/350x280?theme=thumb&text=5"></div>
-                <div class="col-3 float-left"><img class="img-fluid" src="holder.js/350x280?theme=thumb&bg=555&text=6"></div>
-                <div class="col-3 float-left"><img class="img-fluid" src="holder.js/350x280?theme=thumb&bg=333&fg=fff&text=7"></div>
-                <div class="col-3 float-left"><img class="img-fluid" src="holder.js/350x280?theme=thumb&bg=bbb&text=8"></div>
-            </div>
-        </div>
-        <a class="carousel-control-prev" href="#recipeCarousel" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Предыдущий</span>
-        </a>
-        <a class="carousel-control-next" href="#recipeCarousel" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Следующий</span>
-        </a>
-    </div>
-
-</div>
-
+	<div class="container text-center my-3">
+		<h3><?=$md_portfolio['meta_title']?></h3>
+		<div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel">
+			<div class="carousel-inner w-100" role="listbox">
+				<div class="carousel-item row no-gutters active">
+					<div class="col-3 float-left"><img class="img-fluid" src="holder.js/350x280?theme=thumb&bg=222&fg=fff&text=1"></div>
+					<div class="col-3 float-left"><img class="img-fluid" src="holder.js/350x280?theme=thumb&bg=444&fg=eceeef&text=2"></div>
+					<div class="col-3 float-left"><img class="img-fluid" src="holder.js/350x280?theme=thumb&bg=888&fg=eceeef&text=3"></div>
+					<div class="col-3 float-left"><img class="img-fluid" src="holder.js/350x280?theme=thumb&bg=111&fg=fff&text=4"></div>
+				</div>
+				<div class="carousel-item row no-gutters">
+					<div class="col-3 float-left"><img class="img-fluid" src="holder.js/350x280?theme=thumb&text=5"></div>
+					<div class="col-3 float-left"><img class="img-fluid" src="holder.js/350x280?theme=thumb&bg=555&text=6"></div>
+					<div class="col-3 float-left"><img class="img-fluid" src="holder.js/350x280?theme=thumb&bg=333&fg=fff&text=7"></div>
+					<div class="col-3 float-left"><img class="img-fluid" src="holder.js/350x280?theme=thumb&bg=bbb&text=8"></div>
+				</div>
+			</div>
+			<a class="carousel-control-prev" href="#recipeCarousel" role="button" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Предыдущий</span> </a>
+			<a class="carousel-control-next" href="#recipeCarousel" role="button" data-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Следующий</span> </a>
+		</div>
+	</div>
 
 <!--						
 <?=$md_portfolio['meta_h1']?>

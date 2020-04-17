@@ -157,7 +157,7 @@ CREATE TABLE `md_send` (
   `event_name` varchar(255) NOT NULL,
   `ip` varchar(128) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -166,6 +166,7 @@ CREATE TABLE `md_send` (
 
 LOCK TABLES `md_send` WRITE;
 /*!40000 ALTER TABLE `md_send` DISABLE KEYS */;
+INSERT INTO `md_send` VALUES (1,'76315dcd664694fcb8fa66d8ddbd17febdaa73bf466c9a7e10a670c4c19dc59a','2020-04-17 09:18:33','','178.130.37.64'),(2,'76315dcd664694fcb8fa66d8ddbd17febdaa73bf466c9a7e10a670c4c19dc59a','2020-04-17 09:22:25','','178.130.37.64'),(3,'76315dcd664694fcb8fa66d8ddbd17febdaa73bf466c9a7e10a670c4c19dc59a','2020-04-17 09:23:59','Тестовое сообщение','178.130.37.64');
 /*!40000 ALTER TABLE `md_send` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -243,4 +244,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-04-17 11:41:52
+-- Dump completed on 2020-04-17 12:31:39
