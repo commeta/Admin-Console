@@ -188,7 +188,7 @@ function compression_css_files($files_css, $new_file, $font_file, $compress= fal
 		}
 		
 		if( filesize($font_file) > 0 ) printf("\n<link rel='stylesheet' href='%s/%s' type='text/css' media='all' />\n",siteUrl,$font_file);
-		printf("<link rel='stylesheet' href='%s/%s' type='text/css' media='all' />\n",siteUrl,$new_file);
+		printf("<link rel='stylesheet' href='%s/%s?mtime=%s' type='text/css' media='all' />\n",siteUrl,$new_file,filemtime( $new_file ));
 	} else {
 		foreach($files_css as $one_file){
 			printf("<link rel='stylesheet' href='%s/%s' type='text/css' media='all' />\n",siteUrl,$one_file);
@@ -258,7 +258,7 @@ function compression_js_files($files_js, $new_file, $compress= false) {
 			$result_save = fclose($js_file); 
 		}
 		
-		printf("<script src='%s/%s'></script>",siteUrl,$new_file);
+		printf("<script src='%s/%s?mtime=%s'></script>",siteUrl,$new_file,filemtime($new_file));
 	} else {
 		foreach($files_js as $one_file){
 			printf("<script src='%s/%s'></script>\n",siteUrl,$one_file);
