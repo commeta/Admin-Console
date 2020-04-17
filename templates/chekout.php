@@ -217,9 +217,6 @@ require_once('chanks/header.php');
 
 </main>
 
-
-   
-
 <?php
 require_once('chanks/footer.php');
 set_cached_page($urlMd5); // Сохраним страницу в кэше

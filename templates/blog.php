@@ -45,6 +45,7 @@ if($request_url['path'] == '/blog/' || ctype_digit($page) ) { // Если это
 
 		// set page limit to count results per page. 20 by default
 		$db->pageLimit = $pageLimit;
+		$db->orderBy("public_time","Desc");
 		$blog = $db->arraybuilder()->paginate("md_blog", $page, ['id','friendly_url','meta_title','meta_h1','image','public_time','category','meta_text']);
 		if($db->count < 1) goto die404;
 		
