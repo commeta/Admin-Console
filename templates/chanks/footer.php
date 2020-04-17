@@ -1,11 +1,11 @@
-		<!-- FOOTER -->
-		<footer class="footer">
-			<div class="container">
-				<p class="float-right"><a href="#">Вверх</a></p>
-				<p>&copy; 2019-2020 <a href="https://github.com/commeta/admin-console">Admin Console</a> &middot; </p>
-				<div id="trace"></div>
-			</div>
-		</footer>
+<!-- FOOTER -->
+<footer class="footer">
+	<div class="container">
+		<p class="float-right"><a href="#">Вверх</a></p>
+		<p>&copy; 2019-2020 <a href="https://github.com/commeta/admin-console">Admin Console</a> &middot; </p>
+		<div id="trace"></div>
+	</div>
+</footer>
 
 <?php
 // массив с путями до js файлов
@@ -23,5 +23,6 @@ compression_js_files($js_array, "js/dyn/dynamic-footer.js", true);
 
 print_server_stat("trace",$time_start,$memory); // Вывод статистки сервера
 ?>
+
 	</body>
 </html>

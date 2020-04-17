@@ -1,7 +1,7 @@
 <?php
-// Реализация логики портфолио
-// Чанк списка постов - /templates/chanks/portfolio.php
-// Чанк поста - /templates/chanks/portfolio-item.php
+# Реализация логики портфолио
+# Чанк списка постов - /templates/chanks/portfolio.php
+# Чанк поста - /templates/chanks/portfolio-item.php
 
 
 // Если есть то отдаем из кэша страницу, и обработаем заголовое if modified since
@@ -18,17 +18,6 @@ if($request_url['path'] == '/portfolio/') { // Если это раздел
 	
 	// Массив родителей
 	$parents = array_column($md_portfolio, 'id');
-
-	/*
-	$db->where('parent_id', $parents, 'in');
-	$db->where('img_size', '348x225');
-	$img_preview= $db->map('parent_id')->ArrayBuilder()->get('md_portfolio_img', null, ['parent_id','img_url','img_alt']);
-
-	$db->where('parent_id', $parents, 'in');
-	$db->where('img_size', 'gallery');
-	$db->orderBy("img_url","DESC");
-	$img_screenshot= $db->map('parent_id')->ArrayBuilder()->get('md_portfolio_img', null, ['parent_id','img_url','img_alt']);
-	*/
 
 	// Запрос изображений нужного формата, из списка родителей
 	$db->where('parent_id', $parents, 'in');
@@ -77,10 +66,6 @@ if($request_url['path'] == '/portfolio/') { // Если это раздел
 		$screenshot = array_filter($md_portfolio_img, function($k) {
 			return $k['img_size'] == 'screenshot';
 		});
-		$screenshot_mobile = array_filter($md_portfolio_img, function($k) {
-			return $k['img_size'] == 'screenshot-mobile';
-		});
-
 
 		// Навигация Влево - Вправо
 		$db->orderBy("public_time","Desc");
@@ -96,15 +81,15 @@ if($request_url['path'] == '/portfolio/') { // Если это раздел
 		else $next= 0;
 
 		$db->where("(parent_id = ? or parent_id = ?)", Array($portfolio[$prev]['id'],$portfolio[$next]['id']));
-		$db->where("img_size","150x150");
+		$db->where("img_size","gallery");
 		$md_portfolio_img= $db->get("md_portfolio_img");
-
+		
 		$prev_img= array_search($portfolio[$prev]['id'], array_column($md_portfolio_img, 'parent_id'));
 		$next_img= array_search($portfolio[$next]['id'], array_column($md_portfolio_img, 'parent_id'));
 
 		// Дата
 		$public_time= strftime('%B, %Y',strtotime($md_portfolio['public_time']));		
-				
+		
 		require_once(pages_dir.'chanks/header.php');
 		require_once(pages_dir.'chanks/portfolio-item.php');
 	} else {

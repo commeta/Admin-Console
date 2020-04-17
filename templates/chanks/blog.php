@@ -16,11 +16,13 @@
 foreach($blog as $post){ // Вывод анонсов постов блога
 	$post_public_time= strftime('%e %B %Y',strtotime($post['public_time']));
 	echo <<<ARTICLE
+	
 			<div class="blog-post">
 				<h2 class="blog-post-title">{$post['meta_h1']}</h2>
 				<p class="blog-post-meta">$post_public_time от <a href="#">Автор</a></p>
 				{$post['meta_text']}
 			</div><!-- /.blog-post -->
+			
 ARTICLE;
 }
 
@@ -42,6 +44,7 @@ print_pagination_navi($page, $totalPages)
 // Вывод ссылок постов блога, по категориям
 print_post_category_menu($blog_posts, $request_url);
 ?>
+
 					</ol>
 				</div>
 			</aside><!-- /.blog-sidebar -->

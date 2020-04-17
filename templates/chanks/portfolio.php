@@ -26,6 +26,7 @@ foreach($md_portfolio as $v){ // Вывод карточек
 	if($img_screenshot[$v['id']]['img_url'] == '') $img_screenshot[$v['id']]['img_url'] = "holder.js/348x225?theme=thumb&bg=55595c&fg=eceeef&text={$v['meta_h1']}";
 		
 	echo <<<PORTFOLIO
+	
 				<div class="col-md-4 work filter$idFilter">
 					<div class="card mb-4 shadow-sm">
 						<img class="card-img-top" data-src="{$img_screenshot[$v['id']]['img_url']}" alt="{$img_screenshot[$v['id']]['img_alt']}" width="348" height="225">
@@ -40,9 +41,11 @@ foreach($md_portfolio as $v){ // Вывод карточек
 						</div>
 					</div>
 				</div>
+				
 PORTFOLIO;
 }
 ?>
+
 			</div>
 		</div>
 	</div>

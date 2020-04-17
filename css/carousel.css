@@ -23,11 +23,11 @@ body {
 }
 
 /* Declare heights because of positioning of img element */
-.carousel-item {
+#myCarousel .carousel-item {
   height: 35rem;
   background-color: #777;
 }
-.carousel-item > img {
+#myCarousel .carousel-item > img {
   position: absolute;
   top: 0;
   left: 0;
@@ -36,10 +36,10 @@ body {
 }
 
 @media screen and (min-width:769px){ 
-	.carousel-item {
+	#myCarousel .carousel-item {
 	  height: calc( 100vh - 40px )
 	}
-	.carousel-item > img {
+	#myCarousel .carousel-item > img {
 	  height: calc( 100vh - 90px )
 	}
 

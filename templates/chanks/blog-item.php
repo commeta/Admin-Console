@@ -41,6 +41,7 @@
 			<div class="col-md-8 blog-main">
 				<h3 class="pb-3 mb-4 font-italic border-bottom"><?=$md_blog['meta_h1']?></h3>
 				<?=$md_blog['content']?>
+				
 			</div><!-- /.blog-main -->
 
 			<aside class="col-md-4 blog-sidebar">
@@ -56,6 +57,7 @@
 // Вывод ссылок постов блога, по категориям
 print_post_category_menu($blog_posts, $request_url);
 ?>
+
 					</ol>
 				</div>
 			</aside><!-- /.blog-sidebar -->
