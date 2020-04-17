@@ -89,7 +89,7 @@
 (function($) {
 	'use strict';
 
-	window.addEventListener('load', function() {
+	$(document).ready(function() {
 
 		var files; // Сборщик файлов
 		$('input[type=file]').change(function(){
@@ -183,7 +183,7 @@
 				}
 			}, false);
 		});
-	}, false);
+	});
 })(jQuery);
 
 
