@@ -18,6 +18,7 @@ $(document).ready(function() {
         side: "right",
         pushBody: false,
         remember: false,
+        autoClose: true,
 		width: '270px'
 	
 	});
