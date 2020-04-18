@@ -46,7 +46,7 @@
 				</fieldset>
 				<div class="box">
 					<div class="box-header">
-						<div class="box-name"> <i class="fa fa-picture-o"></i> <span>Изображения:</span> </div>
+						<div class="box-name"> <i class="fa fa-picture-o"></i> <span>Буфер обмена изображениями:</span> </div>
 						<div class="no-move"></div>
 					</div>
 					<div id="images_collection" class="box-content"></div>

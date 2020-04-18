@@ -84,6 +84,32 @@ INSERT INTO `md_meta` VALUES (1,'/index.html','Главная','Главная',
 UNLOCK TABLES;
 
 --
+-- Table structure for table `md_meta_img`
+--
+
+DROP TABLE IF EXISTS `md_meta_img`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `md_meta_img` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `parent_id` int(11) NOT NULL,
+  `img_url` varchar(255) NOT NULL,
+  `img_alt` varchar(255) NOT NULL,
+  `img_size` varchar(32) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `md_meta_img`
+--
+
+LOCK TABLES `md_meta_img` WRITE;
+/*!40000 ALTER TABLE `md_meta_img` DISABLE KEYS */;
+/*!40000 ALTER TABLE `md_meta_img` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `md_portfolio`
 --
 
@@ -244,4 +270,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-04-17 21:58:20
+-- Dump completed on 2020-04-18  4:40:40

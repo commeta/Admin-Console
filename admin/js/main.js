@@ -2,6 +2,7 @@
 var additional_fields = new Object();
 var this_path= window.location.href.split('#').join(''); // Путь для аякс
 var root_path_url= '/';
+var imagesTable= [];
 
 
 $(document).ready(function() {
@@ -123,6 +124,59 @@ function tinymce_init(selector){
 }
 
 
+
+function putEditor(src){ // Вставка в редактор из буфера обмена
+	tinymce.activeEditor.execCommand('mceInsertContent', false, '<img src="' + src + '" width="100%" alt="">');
+	CloseModalBox();
+}
+
+function delFromClipboard(id){ // Удаление из буфера обмена
+	$("#" + id).remove();
+	CloseModalBox();
+}
+
+function addToImages(src){ // Добавление из буфера обмена, в таблицу и изображений (слайдер, галерея, и т.д.)
+	imagesTable[src]= ['alt','size'];
+	
+	console.log( imagesTable );
+	
+	CloseModalBox();
+}
+
+function clipboard(el){ // Работа с буфером обмена изображениями, в модальном окне
+	let src= $(el).find('img').attr('src');
+	
+	let imageNaturalWidth = $(el).find('img').prop('naturalWidth');
+	let imageNaturalHeight = $(el).find('img').prop('naturalHeight');
+	let id = $(el).parent().attr('id');
+	
+	let buttons= `
+		<a href="#" onclick="putEditor('${src}'); return false">Вставить в редактор</a><br />
+		<a href="#" onclick="addToImages('${src}');return false">Вставить в слайдер</a><br />
+		<a href="#" onclick="delFromClipboard('${id}');return false">Удалить из буфера обмена</a><br />
+	`;
+	
+	let container= `
+		<table>
+			<tr>
+				<td><img src="${src}" width="250"></td>
+				<td>&nbsp;</td>
+				<td>${buttons}</td>
+			</tr>
+			<tr>
+				<td align="center">Ширина: ${imageNaturalWidth}px, Высота:${imageNaturalHeight}px</td>
+				<td></td>
+				<td></td>
+			</tr>
+		</table>
+	`;
+	
+	
+	
+	OpenModalBox('Буфер обмена изображениями', container);
+}
+
+
 function setUpEditor(data){ // Загрузка в  редактор полей из базы
 	$("#tabs").tabs('enable',1);
 	$('#tabs').tabs("option", "active", 1);
@@ -140,17 +194,57 @@ function setUpEditor(data){ // Загрузка в  редактор полей 
 	$('#images_collection').html('');
 	if(data.image != '' && data.image != 'undefined') $('#images_collection').append('<a class="fancybox" rel="gallery1" href="' + data.image + '" title=""><img src="' + data.image + '" width="250px" alt=""></a>');
 	
+	var clip= 0;
 	CKFinder.widget( 'ckfinder1', { // Загрузим фотки филиала в редактор изображений ckfinder
 		height: 600,
 		chooseFiles: true,
 		onInit: function( finder ) {
-			finder.on( 'files:choose', function( evt ) {
+			finder.on( 'files:choose', function( evt ) { // Буфер обмена изображениями
 				var file = evt.data.files.first();
 				//$('#images_collection').html('');
-				$('#images_collection').append('<a class="fancybox" rel="gallery1" href="' + file.getUrl() + '" title=""><img src="' + file.getUrl() + '" width="25px" alt=""></a>');
 				
+				//$('#images_collection').append('<a class="fancybox" rel="gallery1" href="' + file.getUrl() + '" title=""><img src="' + file.getUrl() + '" width="25px" alt=""></a>');
+				
+				// Iterate over the files collection.
+				evt.data.files.forEach( function( file ) {
+					// Send command to the server.
+					finder.request( 'command:send', {
+						name: 'ImageInfo',
+						folder: file.get( 'folder' ),
+						params: { fileName: file.get( 'name' ) }
+					} ).done( function( response ) {
+						// Process server response.
+						if ( response.error ) {
+							// Some error handling.
+							return;
+						}
 
-tinymce.activeEditor.execCommand('mceInsertContent', false, '<img src="' + file.getUrl() + '" width="250px" alt="">');
+						
+						$('#images_collection').append(
+							`
+							<div id="clip-${clip}">
+								<a href="#" onclick="clipboard(this);return false" title="">
+									<img src="${file.getUrl()}" alt=""><br />
+									<b>Имя файла:</b> ${file.get( 'name' )}<br />
+									<b>URL:</b> ${file.getUrl()}<br />
+									<b>Размеры:</b> ${response.width}x${response.height}<br />
+									<b>Размер:</b> ${response.size} Байт<br />
+								</a>
+							</div>
+							`
+						);
+						
+						clip++;
+						
+						// Log image data:
+						console.log( '-------------------' );
+						console.log( 'Name:', file.get( 'name' ) );
+						console.log( 'URL:', file.getUrl() );
+						console.log( 'Dimensions:', response.width + 'x' + response.height );
+						console.log( 'Size:', response.size + 'B' );
+					} );
+				} );
+    
 		
 				
 			});

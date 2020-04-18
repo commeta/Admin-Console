@@ -73,33 +73,29 @@ if(isset($_POST['oper']) && $_POST['oper'] == 'send_files'):
 	session_start();
 	if( !isset($_SESSION['xauthtoken']) ) $_SESSION['xauthtoken']= strval(bin2hex(openssl_random_pseudo_bytes(32)));
 	
-	if(isset($_SESSION['xauthtoken'])){
-		$path= root_path.'temp/'.$_SESSION['xauthtoken'];
+	$path= root_path.'temp/'.$_SESSION['xauthtoken'];
 		
-		if ( !file_exists( $path ) && !is_dir( $path ) ) {
-			mkdir( $path );       
-		}
+	if ( !file_exists( $path ) && !is_dir( $path ) ) {
+		mkdir( $path );       
+	}
 		
-		$path.='/';
-		$files      = $_FILES; // полученные файлы
-		$done_files = array();
+	$path.='/';
+	$files      = $_FILES; // полученные файлы
+	$done_files = array();
 
-		// переместим файлы из временной директории в указанную
-		foreach( $files as $file ){
-			$file_name = $file['name'];
-			if( move_uploaded_file( $file['tmp_name'], $path.$file_name ) ){
-				$done_files[] = $file_name;
-			}
+	// переместим файлы из временной директории в указанную
+	foreach( $files as $file ){
+		$file_name = $file['name'];
+		if( move_uploaded_file( $file['tmp_name'], $path.$file_name ) ){
+			$done_files[] = $file_name;
 		}
-
-		$done_files= scandir($path,1);
-		unset($done_files[count($done_files)-1]);
-		unset($done_files[count($done_files)-1]);
-
-		die( json_encode( ['files'=>$done_files]) );		
 	}
 
-	die(json_encode([]));
+	$done_files= scandir($path,1);
+	unset($done_files[count($done_files)-1]);
+	unset($done_files[count($done_files)-1]);
+
+	die( json_encode( ['files'=>$done_files]) );		
 endif;
 
 
@@ -107,7 +103,7 @@ endif;
 ########################################################################
 if(isset($_POST['oper']) && $_POST['oper'] == 'send_error'):
 	// Отлов ошибок из JS frontEnd, log файл: /temp/front-error.log
-	file_put_contents(root_path . '/temp/front-error.log', date("H:i:s d.m.Y") . ' ' . $_POST['baseURI']." - ".$_POST['src']."\n", FILE_APPEND );
+	file_put_contents(root_path . 'temp/front-error.log', date("H:i:s d.m.Y") . ' ' . $_POST['baseURI']." - ".$_POST['src']."\n", FILE_APPEND );
 
 	die(json_encode([]));
 endif;

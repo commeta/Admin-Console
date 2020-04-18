@@ -81,3 +81,20 @@ label a {
     right: 30px;
     font-size: 3em;
 }
+
+#images_collection div{
+	font-size: 10px;
+	display: inline-block;
+	margin: 5px;
+	padding: 5px;
+	border: 1px solid #ccc;
+	width: 260px;
+}
+
+#images_collection div img{
+	width: 250px;
+	margin-bottom: 5px;
+	
+	
+
+}
