@@ -14,7 +14,7 @@
 				<h3 class="pb-3 mb-4 font-italic border-bottom"><?=$md_meta['meta_title']?></h3>
 <?php
 foreach($blog as $post){ // Вывод анонсов постов блога
-	$post_public_time= strftime('%e %B %Y',strtotime($post['public_time']));
+	$post_public_time= strftime_rus('%e %B2 %Y', strtotime($post['public_time']));
 	echo <<<ARTICLE
 	
 			<div class="blog-post">

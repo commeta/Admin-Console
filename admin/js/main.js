@@ -137,9 +137,7 @@ function delFromClipboard(id){ // Удаление из буфера обмен�
 
 function addToImages(src){ // Добавление из буфера обмена, в таблицу и изображений (слайдер, галерея, и т.д.)
 	imagesTable[src]= ['alt','size'];
-	
 	console.log( imagesTable );
-	
 	CloseModalBox();
 }
 
@@ -171,14 +169,13 @@ function clipboard(el){ // Работа с буфером обмена изоб�
 		</table>
 	`;
 	
-	
-	
 	OpenModalBox('Буфер обмена изображениями', container);
 }
 
 
 function setUpEditor(data){ // Загрузка в  редактор полей из базы
 	$("#tabs").tabs('enable',1);
+	$("#tabs").tabs('enable',2);
 	$('#tabs').tabs("option", "active", 1);
 	$('form[name="friendly_url"]').attr( 'meta_id', data.meta_id );
 	$('form[name="friendly_url"] input[name="friendly_url"]').val( data.friendly_url );
@@ -202,7 +199,6 @@ function setUpEditor(data){ // Загрузка в  редактор полей 
 			finder.on( 'files:choose', function( evt ) { // Буфер обмена изображениями
 				var file = evt.data.files.first();
 				//$('#images_collection').html('');
-				
 				//$('#images_collection').append('<a class="fancybox" rel="gallery1" href="' + file.getUrl() + '" title=""><img src="' + file.getUrl() + '" width="25px" alt=""></a>');
 				
 				// Iterate over the files collection.
@@ -219,7 +215,6 @@ function setUpEditor(data){ // Загрузка в  редактор полей 
 							return;
 						}
 
-						
 						$('#images_collection').append(
 							`
 							<div id="clip-${clip}">
@@ -234,6 +229,8 @@ function setUpEditor(data){ // Загрузка в  редактор полей 
 							`
 						);
 						
+						$('#images_collection_additional').html( $('#images_collection').html() );
+						
 						clip++;
 						
 						// Log image data:
@@ -244,8 +241,6 @@ function setUpEditor(data){ // Загрузка в  редактор полей 
 						console.log( 'Size:', response.size + 'B' );
 					} );
 				} );
-    
-		
 				
 			});
 			finder.on( 'file:choose:resizedImage', function( evt ) {
@@ -322,7 +317,7 @@ function del_url(id){ // Клик из таблицы, удаление
 				
 			var table = $('#datatable-main').DataTable(); // Обновить таблицу
 			table.draw(); 
-			$("#tabs").tabs({disabled:[1]});
+			$("#tabs").tabs({disabled:[1,2]});
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
 			alert(errorThrown);

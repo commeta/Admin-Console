@@ -63,9 +63,7 @@ if($request_url['path'] == '/portfolio/') { // Если это раздел
 		$md_portfolio_img= $db->get('md_portfolio_img');
 		if($db->count < 1) goto die404;
 		
-		$screenshot = array_filter($md_portfolio_img, function($k) {
-			return $k['img_size'] == 'screenshot';
-		});
+		$screenshot = array_filter($md_portfolio_img, fn($k) => $k['img_size'] == 'screenshot'); // Изображения для слайдера
 
 		// Навигация Влево - Вправо
 		$db->orderBy("public_time","Desc");
