@@ -74,7 +74,7 @@ label a {
     color: #fff !important;
 }
 
-#images_collection button.close, #images_collection_additional button.close {
+#clipboard button.close {
     float: none;
     top: 145x;
     position: relative;
@@ -82,7 +82,7 @@ label a {
     font-size: 3em;
 }
 
-#images_collection div, #images_collection_additional div{
+#clipboard div{
 	font-size: 10px;
 	display: inline-block;
 	margin: 5px;
@@ -91,7 +91,7 @@ label a {
 	width: 260px;
 }
 
-#images_collection div img, #images_collection_additional div img{
+#clipboard div img{
 	width: 250px;
 	margin-bottom: 5px;
 }

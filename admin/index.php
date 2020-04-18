@@ -28,6 +28,8 @@ $profile = $db->getOne('md_users');
 		<link href="css/style_v1.css" rel="stylesheet">
 		<link href="css/main.css" rel="stylesheet">
 		<link href="plugins/chartist/chartist.min.css" rel="stylesheet">
+		<link href="css/BootSideMenu.css" rel="stylesheet">
+		
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
 				<script src="http://getbootstrap.com/docs-assets/js/html5shiv.js"></script>
@@ -527,6 +529,7 @@ $profile = $db->getOne('md_users');
 		</div>
 	</section>
 	<!-- /Журнал -->
+	<div id="clipboard"></div>
 </div>
 <!--End Container-->
 
@@ -549,6 +552,7 @@ $profile = $db->getOne('md_users');
 
 <!-- All functions for this theme + document.ready processing -->
 <script src="js/jquery.cookie.js"></script>
+<script src="js/BootSideMenu.js"></script>
 <script src="js/devoops.js"></script>
 <script src="js/main.js"></script>
 

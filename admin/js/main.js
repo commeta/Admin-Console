@@ -14,6 +14,13 @@ $(document).ready(function() {
 	});
 		
 	$('.core-messages').show();
+	$('#clipboard').BootSideMenu({  
+        side: "right",
+        pushBody: false,
+        remember: false,
+		width: '270px'
+	
+	});
 
 });
 
@@ -132,7 +139,7 @@ function putEditor(src){ // Вставка в редактор из буфера
 
 function delFromClipboard(id){ // Удаление из буфера обмена
 	$("#" + id).remove();
-	$('#images_collection_additional').html( $('#images_collection').html() );
+	//$('#images_collection_additional').html( $('#images_collection').html() );
 	CloseModalBox();
 }
 
@@ -189,7 +196,7 @@ function setUpEditor(data){ // Загрузка в  редактор полей 
 	$('form[name="friendly_url"] #page_content').val( data.content );
 	tinymce_init('#page_content');
 	
-	$('#images_collection').html('');
+	//$('#clipboard').html('');
 	if(data.image != '' && data.image != 'undefined') $('#images_collection').append('<a class="fancybox" rel="gallery1" href="' + data.image + '" title=""><img src="' + data.image + '" width="250px" alt=""></a>');
 	
 	var clip= 0;
@@ -216,7 +223,7 @@ function setUpEditor(data){ // Загрузка в  редактор полей 
 							return;
 						}
 
-						$('#images_collection').append(
+						$('#clipboard').append(
 							`
 							<div id="clip-${clip}">
 								<a href="#" onclick="clipboard(this);return false" title="">
@@ -230,8 +237,7 @@ function setUpEditor(data){ // Загрузка в  редактор полей 
 							`
 						);
 						
-						$('#images_collection_additional').html( $('#images_collection').html() );
-						
+						$('#clipboard').BootSideMenu.open();
 						clip++;
 						
 						// Log image data:
