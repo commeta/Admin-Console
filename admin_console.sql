@@ -97,7 +97,7 @@ CREATE TABLE `md_meta_img` (
   `img_alt` varchar(255) NOT NULL,
   `img_size` varchar(32) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -106,6 +106,7 @@ CREATE TABLE `md_meta_img` (
 
 LOCK TABLES `md_meta_img` WRITE;
 /*!40000 ALTER TABLE `md_meta_img` DISABLE KEYS */;
+INSERT INTO `md_meta_img` VALUES (1,1,'/img/uploads/Chto_dolzhen_delat_razrabotchik_a_chto_zakazchik.jpg','First slide','slider'),(2,1,'/img/uploads/jQuery_CheatSheet.jpg','Second slide','slider'),(3,1,'/img/uploads/linux_perfomance_tools.jpg','Third slide','slider'),(4,1,'/img/uploads/The_Physical_Internet.jpg','Fifth slide','slider');
 /*!40000 ALTER TABLE `md_meta_img` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -270,4 +271,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-04-18  4:40:40
+-- Dump completed on 2020-04-18  5:34:57

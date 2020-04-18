@@ -5,6 +5,13 @@ if($cached_page = get_cached_page( $urlMd5 )){
 	die($cached_page);
 }
 
+$db->where("parent_id",$md_meta['meta_id']); // Запрос изображений из БД
+$md_meta_img= $db->get("md_meta_img", null, ['id','img_url','img_alt','img_size']);
+
+$slider = array_filter($md_meta_img, function($k) { // Изображения для слайдера
+	return $k['img_size'] == 'slider';
+});
+
 require_once('chanks/header.php');
 ?>
 <main role="main" class="">
@@ -17,18 +24,18 @@ require_once('chanks/header.php');
 			<li data-target="#myCarousel" data-slide-to="3"></li>
 		</ol>
 		<div class="carousel-inner">
-			<div class="carousel-item active">
-				<img class="first-slide" src="/img/uploads/Chto_dolzhen_delat_razrabotchik_a_chto_zakazchik.jpg" alt="First slide">
+<?php
+foreach($slider as $k=>$slide){
+	$active= $k == 0 ? 'active' : '';
+	echo <<<SLIDE
+			<div class="carousel-item {$active}">
+				<img class="slide" src="{$slide['img_url']}" alt="{$slide['img_alt']}">
 			</div>
-			<div class="carousel-item">
-				<img class="second-slide" src="/img/uploads/jQuery_CheatSheet.jpg" alt="Second slide">
-			</div>
-			<div class="carousel-item">
-				<img class="third-slide" src="/img/uploads/linux_perfomance_tools.jpg" alt="Second slide">
-			</div>
-			<div class="carousel-item">
-				<img class="fourth-slide" src="/img/uploads/The_Physical_Internet.jpg" alt="Second slide">
-			</div>
+	
+SLIDE;
+}
+?>
+
 		</div>
 		<a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Предыдущий</span> </a>
 		<a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Следующий</span> </a>
