@@ -90,12 +90,11 @@ label a {
 	padding: 5px;
 	border: 1px solid #ccc;
 	width: 260px;
+	background: #fff;
 }
 
 #clipboard div img{
 	width: 250px;
 	margin-bottom: 5px;
-	
-	
 
 }

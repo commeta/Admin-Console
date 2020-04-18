@@ -14,13 +14,14 @@ $(document).ready(function() {
 	});
 		
 	$('.core-messages').show();
+	
+// https://github.com/AndreaLombardo/BootSideMenu
 	$('#clipboard').BootSideMenu({  
         side: "right",
         pushBody: false,
         remember: false,
         autoClose: true,
 		width: '270px'
-	
 	});
 
 });
