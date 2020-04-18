@@ -132,6 +132,7 @@ function putEditor(src){ // Вставка в редактор из буфера
 
 function delFromClipboard(id){ // Удаление из буфера обмена
 	$("#" + id).remove();
+	$('#images_collection_additional').html( $('#images_collection').html() );
 	CloseModalBox();
 }
 
