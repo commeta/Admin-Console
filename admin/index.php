@@ -176,6 +176,7 @@ $profile = $db->getOne('md_users');
 					</a>
 					<ul class="dropdown-menu">
 						<li><a class="ajax-link" href="functions/friendly.php">Главные разделы</a></li>
+						<li><a class="ajax-link" href="functions/images-editor.php">Редактор изображений</a></li>
 						
 						
 						<!--

@@ -133,6 +133,11 @@ function tinymce_init(selector){
 
 
 function putEditor(src){ // Вставка в редактор из буфера обмена
+	if( !$('#page_content').length ){
+		alert('Для вставки в редактор - перейдите в раздел редактирования страницы!');
+		return;
+	}
+	
 	tinymce.activeEditor.execCommand('mceInsertContent', false, '<img src="' + src + '" width="100%" alt="">');
 	CloseModalBox();
 	$('#tabs').tabs("option", "active", 1);
@@ -148,6 +153,11 @@ function delFromClipboard(id){ // Удаление из буфера обмен�
 
 
 function addToImages(src, to){ // Добавление из буфера обмена, в таблицу и изображений (слайдер, галерея, инфоблок)
+	if( !$('#additional_fields').length ){
+		alert('Для вставки в таблицу изображений - перейдите в раздел редактирования страницы!');
+		return;
+	}	
+	
 	let index= imagesTable.length;
 	imagesTable[index]= [src, '', to];
 	let value= {
@@ -173,11 +183,11 @@ function clipboard(el){ // Работа с буфером обмена изоб�
 	let id = $(el).parent().attr('id');
 	
 	let buttons= `
-		<a href="#" onclick="putEditor('${src}'); return false" class="btn btn-primary btn-sm btn-block">Вставить в редактор</a><br />
-		<a href="#" onclick="addToImages('${src}','slider');return false" class="btn btn-primary btn-sm btn-block">Вставить в слайдер</a><br />
-		<a href="#" onclick="addToImages('${src}','gallery');return false" class="btn btn-primary btn-sm btn-block">Вставить в галерею</a><br />
-		<a href="#" onclick="addToImages('${src}','info');return false" class="btn btn-primary btn-sm btn-block">Вставить в инфоблок</a><br />
-		<a href="#" onclick="delFromClipboard('${id}');return false" class="btn btn-danger btn-sm btn-block">Удалить из буфера обмена</a><br />
+		<a href="#" onclick="putEditor('${src}'); return false" class="btn btn-primary btn-xs btn-block">Вставить в редактор</a><br />
+		<a href="#" onclick="addToImages('${src}','slider');return false" class="btn btn-primary btn-xs btn-block">Вставить в слайдер</a><br />
+		<a href="#" onclick="addToImages('${src}','gallery');return false" class="btn btn-primary btn-xs btn-block">Вставить в галерею</a><br />
+		<a href="#" onclick="addToImages('${src}','info');return false" class="btn btn-primary btn-xs btn-block">Вставить в инфоблок</a><br />
+		<a href="#" onclick="delFromClipboard('${id}');return false" class="btn btn-danger btn-xs btn-block">Удалить из буфера обмена</a><br />
 	`;
 	
 	let container= `
@@ -210,7 +220,7 @@ function delFromImages(id){ // Удаление из дополнительны�
 function setUpEditor(data){ // Загрузка в  редактор полей из базы
 	$("#tabs").tabs('enable',1);
 	$("#tabs").tabs('enable',2);
-	$('#tabs').tabs("option", "active", 2);
+	$('#tabs').tabs("option", "active", 1);
 	$('form[name="friendly_url"]').attr( 'meta_id', data.id );
 	$('form[name="friendly_url"] input[name="friendly_url"]').val( data.friendly_url );
 	$('form[name="friendly_url"] input[name="meta_h1"]').val( data.meta_h1 );
@@ -290,8 +300,9 @@ function setUpEditor(data){ // Загрузка в  редактор полей 
 			//console.log( value );
 			imagesTable[index]= [value.img_url, value.img_alt, value.img_size];
 			add_to_additional_fields(index, value);
-
 		});
+		
+		$('#tabs').tabs("option", "active", 2);
 	}
 	
 	counter();

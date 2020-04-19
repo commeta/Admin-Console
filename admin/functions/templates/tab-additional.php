@@ -11,6 +11,7 @@
 						<button class="btn btn-info" onclick="create_additional_fields('slider');return false;"> Добавить в слайдер </button>
 						<button class="btn btn-info" onclick="create_additional_fields('gallery');return false;"> Добавить в галерею </button>
 						<button class="btn btn-info" onclick="create_additional_fields('info');return false;"> Добавить в инфоблок </button>
+						<button class="btn btn-info" onclick="create_additional_fields('paragraph');return false;"> Добавить в параграф </button>
 					</div>
 				</div>
 				<p>Вставка из буфера обмена (правая панель), сортировка перемещением.</p>
