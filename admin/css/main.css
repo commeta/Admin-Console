@@ -100,5 +100,11 @@ label a {
 }
 .additional-images{
 	width: 260px;
+}
 
+#additional_fields .row{
+	background: #fff;
+	border: 1px solid #ccc;
+	margin: 5px;
+	cursor: pointer;
 }

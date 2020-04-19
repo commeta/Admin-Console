@@ -135,13 +135,17 @@ function tinymce_init(selector){
 function putEditor(src){ // Вставка в редактор из буфера обмена
 	tinymce.activeEditor.execCommand('mceInsertContent', false, '<img src="' + src + '" width="100%" alt="">');
 	CloseModalBox();
+	$('#tabs').tabs("option", "active", 1);
 }
+
+
 
 function delFromClipboard(id){ // Удаление из буфера обмена
 	$("#" + id).remove();
-	//$('#images_collection_additional').html( $('#images_collection').html() );
 	CloseModalBox();
 }
+
+
 
 function addToImages(src, to){ // Добавление из буфера обмена, в таблицу и изображений (слайдер, галерея, инфоблок)
 	let index= imagesTable.length;
@@ -153,10 +157,13 @@ function addToImages(src, to){ // Добавление из буфера обм�
 	}
 	add_to_additional_fields(index, value);
 	
+	//console.log( imagesTable );
 	
-	console.log( imagesTable );
 	CloseModalBox();
+	$('#tabs').tabs("option", "active", 1);
 }
+
+
 
 function clipboard(el){ // Работа с буфером обмена изображениями, в модальном окне
 	let src= $(el).find('img').attr('src');
@@ -191,10 +198,13 @@ function clipboard(el){ // Работа с буфером обмена изоб�
 	OpenModalBox('Буфер обмена изображениями', container);
 }
 
+
+
 function delFromImages(id){ // Удаление из дополнительных полей
 	delete imagesTable[id];
 	$("#images-" + id).remove();
 }
+
 
 
 function setUpEditor(data){ // Загрузка в  редактор полей из базы
@@ -276,9 +286,8 @@ function setUpEditor(data){ // Загрузка в  редактор полей 
 	$('#additional_fields').html('');
 	if("images" in data){
 		$.each(data.images, function (index, value) { // Дополнительные поля
-			console.log( index );
-			console.log( value );
-			
+			//console.log( index );
+			//console.log( value );
 			imagesTable[index]= [value.img_url, value.img_alt, value.img_size];
 			add_to_additional_fields(index, value);
 
@@ -288,6 +297,20 @@ function setUpEditor(data){ // Загрузка в  редактор полей 
 	counter();
 	logger(data.status, data.css_class);
 }
+
+
+
+function create_additional_fields(type){ // Рендер: Дополнительные поля, по кнопке добавить
+	let index= imagesTable.length;
+	imagesTable[index]= ['', '', type];
+	let value= {
+		img_url: '',
+		img_alt: '',
+		img_size: type
+	}
+	add_to_additional_fields(index, value);
+}
+
 
 
 function add_to_additional_fields(index= false, value= false){ // Рендер: Дополнительные поля
@@ -307,6 +330,7 @@ function add_to_additional_fields(index= false, value= false){ // Рендер: 
 				<div id="images-${index}" class="row" style="margin-bottom: 15px"> 
 					<div class="col-sm-12">
 						<legend>Изображение: ${value.img_size}, №: ${index} </legend> 
+						<input type="hidden" name="img_size-${index}" value="${value.img_size}" />
 					</div>
 					
 					<div class="col-sm-3">
@@ -314,14 +338,14 @@ function add_to_additional_fields(index= false, value= false){ // Рендер: 
 					</div>
 					<div class="col-sm-9">
 						<div class="form-group">
-							<label class="col-sm-2" for="img_alt">Описание (ALT)</label>
+							<label class="col-sm-4" for="img_alt">Описание (ALT)</label>
 							<div class="col-sm-12">
 								<input type="text" class="form-control" name="img_alt-${index}" value="${value.img_alt}" />
 							</div>
 						</div>
 
 						<div class="form-group">
-							<label class="col-sm-2" for="img_url">Адрес (URL)</label>
+							<label class="col-sm-4" for="img_url">Адрес (URL)</label>
 							<div class="col-sm-12">
 								<input type="text" class="form-control" name="img_url-${index}" value="${value.img_url}" />
 							</div>
@@ -333,6 +357,14 @@ function add_to_additional_fields(index= false, value= false){ // Рендер: 
 				</div>
 				`
 	);
+	
+	// Sortable for elements
+	$(".sort").sortable({
+		items: "div.row",
+		appendTo: 'div.sort'
+	});
+	
+	
 }
 
 
@@ -367,6 +399,8 @@ function edit_url(id, lock){ // Клик из таблицы, редактиро
 	});
 }
 
+
+
 function del_url(id){ // Клик из таблицы, удаление
 	var form_data= new FormData();
 	form_data.append("oper", 'del_url');
@@ -397,6 +431,7 @@ function del_url(id){ // Клик из таблицы, удаление
 }
 
 
+
 function create_url(){ // Добавить url
 	var form_data= new FormData();
 	form_data.append("oper", 'add_url');
@@ -423,8 +458,27 @@ function create_url(){ // Добавить url
 }
 
 
+
 function save_url(oper_name){ // Перехват отправки форм
-	$('form[name="'+oper_name+'"]').find('.btn').addClass("btn-danger");
+	// $('form[name="'+oper_name+'"]').find('.btn').addClass("btn-danger");
+	if(oper_name == 'additional_fields'){ // Сохранение из формы редактирование дополнительных полей
+	
+		var data = {};
+		$(`form[name="${oper_name}"]`).find ('input[type=text], input[type=hidden], textearea, select').each(function() {
+			let id= $(this).attr('id');
+			data[this.name] = $(this).val();
+		});
+		$(`form[name="${oper_name}"]`).find ('input[type=checkbox], input[type=radio]').each(function() {
+			if ($(this).is(':checked')){
+				let id= $(this).attr('id');
+				data[this.name] = $(this).val();
+			}
+		});
+	
+		console.log( data );
+	
+	}
+	
 	
 	if(oper_name == 'friendly_url'){ // Сохранение из формы редактирование
 		var form_data= new FormData();
@@ -481,6 +535,7 @@ function Select2_4(){ // Run Select2 plugin on elements
 }
 
 
+
 function AllTables(){ // Run Datables plugin and create of settings
 	$('#datatable-main').dataTable( {
         "processing": true,
@@ -495,6 +550,8 @@ function AllTables(){ // Run Datables plugin and create of settings
 		}
 	});
 }
+
+
 
 function counter(){ // Счетчик количества символов
 	$('.counter').on('change keyup paste', function () {
@@ -514,7 +571,6 @@ function counter(){ // Счетчик количества символов
 
 
 
-
 function urlLit(w,v) {
 	var tr='a b v g d e ["zh","j"] z i i k l m n o p r s t u f h c ch sh ["shh","shch"] ~ y ~ e yu ya ~ ["jo","e"]'.split(' ');
 	var ww=''; w=w.toLowerCase();
@@ -524,6 +580,8 @@ function urlLit(w,v) {
 	}
 	return(ww.replace(/[^a-zA-Z0-9\-]/g,'-').replace(/[-]{2,}/gim, '-').replace( /^\-+/g, '').replace( /\-+$/g, ''));
 }
+
+
 
 function insert_url(){
 	var instr= $('input[name="meta_title"]').val();

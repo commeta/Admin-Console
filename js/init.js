@@ -187,3 +187,65 @@
 })(jQuery);
 
 
+
+
+
+
+
+
+// Schedules the next memory measurement using setTimeout with
+// a randomized interval.
+function scheduleMeasurement() {
+  if (!performance.measureMemory) {
+    console.log(
+      "performance.measureMemory() is not available. " +
+        "Currently only Chrome 82+ supports it as an Origin Trial."
+    );
+    return;
+  }
+  const interval = measurementInterval();
+  console.log(
+    "Scheduling memory measurement in " +
+      Math.round(interval / 1000) +
+      " seconds."
+  );
+  setTimeout(performMeasurement, interval);
+}
+
+// Start measurements after page load on the main window.
+window.onload = function() {
+  scheduleMeasurement();
+};
+
+// Computes a random interval in milliseconds such that on
+// average there is one measurement every five minutes.
+// See https://bit.ly/3bR0hys for an explanation of the math.
+function measurementInterval() {
+  const MEAN_INTERVAL_IN_MS = 5 * 60 * 1000;
+  return -Math.log(Math.random()) * MEAN_INTERVAL_IN_MS;
+}
+
+// Invokes the API, records the result, and schedules
+// the next measurement.
+async function performMeasurement() {
+  // 1. Invoke performance.measureMemory().
+  let result;
+  try {
+    result = await performance.measureMemory();
+  } catch (error) {
+    if (error instanceof DOMException && error.name === "SecurityError") {
+      console.log("The context is not secure.");
+      console.log(
+        "Make sure that Site Isolation is enabled in Chrome " +
+          "and that the page is not embedded as an iframe."
+      );
+      return;
+    }
+    // Rethrow other errors.
+    throw error;
+  }
+  // 2. Record the result.
+  console.log("Memory usage:", result);
+  // 3. Schedule the next measurement.
+  scheduleMeasurement();
+}

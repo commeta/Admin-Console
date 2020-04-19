@@ -51,7 +51,6 @@ root_path_url= "<?php echo root_path_url;?>";
 
 $(document).ready(function() {
 	$("#tabs").tabs({disabled:[1,2]}); // Create jQuery-UI tabs
-
 	
 	LoadSelect2_4Script(Select2_4);
 	LoadDataTablesScripts(AllTables);

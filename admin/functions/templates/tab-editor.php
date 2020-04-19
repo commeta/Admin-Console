@@ -45,12 +45,15 @@
 					</div>
 				</fieldset>
 				<div id="ckfinder1"></div>
+				<p>По двойному клику добавляет в буфер обмена (правая панель)</p>
+
 
 				<div class="form-group">
 					<div class="col-sm-9 col-sm-offset-3">
-						<button type="submit" class="btn btn-primary"> Сохранить <i class="fa fa-refresh fa-spin"></i> </button>
+						<button type="submit" class="btn btn-primary btn-block"> Сохранить <i class="fa fa-refresh fa-spin"></i> </button>
 					</div>
 				</div>
+				
 			</form>
 		</div>
 	</div>
