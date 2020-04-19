@@ -1,10 +1,11 @@
 <?php
 const db_table= 'md_meta';
+const db_table_images= 'md_meta_img';
+
 const root_path_url= '/';
 require_once('includes.php');
 #######################################################################
 
-const additional_fields= [];
 ?>
 <div class="row">
 	<div id="breadcrumb" class="col-xs-12">

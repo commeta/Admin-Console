@@ -7,7 +7,7 @@ if($cached_page = get_cached_page( $urlMd5 )){
 	die($cached_page);
 }
 
-$db->where("parent_id",$md_meta['meta_id']); // Запрос изображений из БД
+$db->where("parent_id",$md_meta['id']); // Запрос изображений из БД
 $md_meta_img= $db->get("md_meta_img", null, ['id','img_url','img_alt','img_size']);
 
 $slider = array_filter($md_meta_img, fn($k) => $k['img_size'] == 'slider'); // Изображения для слайдера

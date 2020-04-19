@@ -5,7 +5,7 @@
 			<form method="post" action="" class="form-horizontal ajax-form" name="additional_fields" onsubmit="save_url('additional_fields');return false;">
 
 
-				<?php print_additional_fields();?>
+				<div id="additional_fields"></div>
 				
 				<div class="form-group">
 					<div class="col-sm-9 col-sm-offset-3">

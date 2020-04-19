@@ -1,9 +1,7 @@
 "use strict";
-var additional_fields = new Object();
 var this_path= window.location.href.split('#').join(''); // Путь для аякс
 var root_path_url= '/';
 var imagesTable= [];
-
 
 $(document).ready(function() {
 	$('.cl-link').click(function(){ // Журнал, кнопка закрыть
@@ -16,12 +14,12 @@ $(document).ready(function() {
 	$('.core-messages').show();
 	
 // https://github.com/AndreaLombardo/BootSideMenu
-	$('#clipboard').BootSideMenu({  
+	$('#clipboard-container').BootSideMenu({  
         side: "right",
         pushBody: false,
         remember: false,
         autoClose: true,
-		width: '270px'
+		width: '280px'
 	});
 
 });
@@ -145,8 +143,17 @@ function delFromClipboard(id){ // Удаление из буфера обмен�
 	CloseModalBox();
 }
 
-function addToImages(src){ // Добавление из буфера обмена, в таблицу и изображений (слайдер, галерея, и т.д.)
-	imagesTable[src]= ['alt','size'];
+function addToImages(src, to){ // Добавление из буфера обмена, в таблицу и изображений (слайдер, галерея, инфоблок)
+	let index= imagesTable.length;
+	imagesTable[index]= [src, '', to];
+	let value= {
+		img_url: src,
+		img_alt: '',
+		img_size: to
+	}
+	add_to_additional_fields(index, value);
+	
+	
 	console.log( imagesTable );
 	CloseModalBox();
 }
@@ -159,15 +166,17 @@ function clipboard(el){ // Работа с буфером обмена изоб�
 	let id = $(el).parent().attr('id');
 	
 	let buttons= `
-		<a href="#" onclick="putEditor('${src}'); return false">Вставить в редактор</a><br />
-		<a href="#" onclick="addToImages('${src}');return false">Вставить в слайдер</a><br />
-		<a href="#" onclick="delFromClipboard('${id}');return false">Удалить из буфера обмена</a><br />
+		<a href="#" onclick="putEditor('${src}'); return false" class="btn btn-primary btn-sm btn-block">Вставить в редактор</a><br />
+		<a href="#" onclick="addToImages('${src}','slider');return false" class="btn btn-primary btn-sm btn-block">Вставить в слайдер</a><br />
+		<a href="#" onclick="addToImages('${src}','gallery');return false" class="btn btn-primary btn-sm btn-block">Вставить в галерею</a><br />
+		<a href="#" onclick="addToImages('${src}','info');return false" class="btn btn-primary btn-sm btn-block">Вставить в инфоблок</a><br />
+		<a href="#" onclick="delFromClipboard('${id}');return false" class="btn btn-danger btn-sm btn-block">Удалить из буфера обмена</a><br />
 	`;
 	
 	let container= `
 		<table>
 			<tr>
-				<td><img src="${src}" width="250"></td>
+				<td><img src="${src}" width="350"></td>
 				<td>&nbsp;</td>
 				<td>${buttons}</td>
 			</tr>
@@ -182,12 +191,17 @@ function clipboard(el){ // Работа с буфером обмена изоб�
 	OpenModalBox('Буфер обмена изображениями', container);
 }
 
+function delFromImages(id){ // Удаление из дополнительных полей
+	delete imagesTable[id];
+	$("#images-" + id).remove();
+}
+
 
 function setUpEditor(data){ // Загрузка в  редактор полей из базы
 	$("#tabs").tabs('enable',1);
 	$("#tabs").tabs('enable',2);
-	$('#tabs').tabs("option", "active", 1);
-	$('form[name="friendly_url"]').attr( 'meta_id', data.meta_id );
+	$('#tabs').tabs("option", "active", 2);
+	$('form[name="friendly_url"]').attr( 'meta_id', data.id );
 	$('form[name="friendly_url"] input[name="friendly_url"]').val( data.friendly_url );
 	$('form[name="friendly_url"] input[name="meta_h1"]').val( data.meta_h1 );
 	$('form[name="friendly_url"] input[name="meta_title"]').val( data.meta_title );
@@ -259,19 +273,67 @@ function setUpEditor(data){ // Загрузка в  редактор полей 
 		}
 	});
 	
-	
-	$.each(additional_fields, function (index, value) { // Дополнительные поля
-		if(value == 'select'){
-			$('form[name="friendly_url"] #' + index + " option[value='" + data[index] + "']").attr("selected", "selected");
-			$('form[name="friendly_url"] #' + index).trigger('change');
-		}
-	});
+	$('#additional_fields').html('');
+	if("images" in data){
+		$.each(data.images, function (index, value) { // Дополнительные поля
+			console.log( index );
+			console.log( value );
+			
+			imagesTable[index]= [value.img_url, value.img_alt, value.img_size];
+			add_to_additional_fields(index, value);
+
+		});
+	}
 	
 	counter();
 	logger(data.status, data.css_class);
 }
 
 
+function add_to_additional_fields(index= false, value= false){ // Рендер: Дополнительные поля
+	if(index === false){
+		index= imagesTable.length;
+	}
+	if(value === false){
+		value= {
+			img_url: '',
+			img_alt: '',
+			img_size: ''
+		}
+	}
+	
+	$('#additional_fields').append(
+				`
+				<div id="images-${index}" class="row" style="margin-bottom: 15px"> 
+					<div class="col-sm-12">
+						<legend>Изображение: ${value.img_size}, №: ${index} </legend> 
+					</div>
+					
+					<div class="col-sm-3">
+						<img class="additional-images" src="${value.img_url}" alt="">
+					</div>
+					<div class="col-sm-9">
+						<div class="form-group">
+							<label class="col-sm-2" for="img_alt">Описание (ALT)</label>
+							<div class="col-sm-12">
+								<input type="text" class="form-control" name="img_alt-${index}" value="${value.img_alt}" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-2" for="img_url">Адрес (URL)</label>
+							<div class="col-sm-12">
+								<input type="text" class="form-control" name="img_url-${index}" value="${value.img_url}" />
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-12">
+						<a class="btn btn-danger pull-right" href="#" onclick="delFromImages(${index});return false" >Удалить</a>
+					</div>
+				</div>
+				`
+	);
+}
 
 
 function edit_url(id, lock){ // Клик из таблицы, редактирование
@@ -378,14 +440,6 @@ function save_url(oper_name){ // Перехват отправки форм
 		form_data.append("meta_text", $('#meta_text').val() );
 		form_data.append("content", tinymce.activeEditor.getContent() );
 		form_data.append("image", $('#images_collection img').attr('src') );
-
-
-		$.each(additional_fields, function (index, value) { // Дополнительные поля
-			if(value == 'select'){
-				form_data.append(index, $('form[name="friendly_url"] #' + index).select2('data')[0].text );
-			}
-		});
-
 
 		$.ajax({
 			url: this_path,

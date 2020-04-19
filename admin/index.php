@@ -529,7 +529,7 @@ $profile = $db->getOne('md_users');
 		</div>
 	</section>
 	<!-- /Журнал -->
-	<div id="clipboard"></div>
+	<div id="clipboard-container"><div id="clipboard"></div></div>
 </div>
 <!--End Container-->
 

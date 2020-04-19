@@ -59,7 +59,7 @@ DROP TABLE IF EXISTS `md_meta`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `md_meta` (
-  `meta_id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `friendly_url` varchar(256) NOT NULL,
   `meta_title` text NOT NULL,
   `meta_h1` text NOT NULL,
@@ -68,7 +68,7 @@ CREATE TABLE `md_meta` (
   `meta_text` text NOT NULL,
   `content` text NOT NULL,
   `image` varchar(255) NOT NULL,
-  PRIMARY KEY (`meta_id`),
+  PRIMARY KEY (`id`),
   KEY `friendly_url` (`friendly_url`)
 ) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -249,7 +249,7 @@ CREATE TABLE `md_users_login` (
   PRIMARY KEY (`user_login_id`),
   KEY `user_id` (`user_id`),
   KEY `key` (`key`)
-) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -258,7 +258,7 @@ CREATE TABLE `md_users_login` (
 
 LOCK TABLES `md_users_login` WRITE;
 /*!40000 ALTER TABLE `md_users_login` DISABLE KEYS */;
-INSERT INTO `md_users_login` VALUES (18,1,'','178.130.37.64','2020-04-17 18:50:35','f2ebd156770d817748f0aa1ca9a364b3879f0ef5326c0f105db59d8a30d4650a');
+INSERT INTO `md_users_login` VALUES (19,1,'','178.130.37.64','2020-04-19 00:41:46','9789c5d8c95fa65d5fad47359122a0a394dbdb0371c721ecbef2bccfe8507008');
 /*!40000 ALTER TABLE `md_users_login` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -271,4 +271,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-04-18 20:56:55
+-- Dump completed on 2020-04-19  6:15:28

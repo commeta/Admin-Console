@@ -45,12 +45,12 @@
 					</div>
 				</fieldset>
 				<div id="ckfinder1"></div>
-				<?php print_additional_fields();?>
-					<div class="form-group">
-						<div class="col-sm-9 col-sm-offset-3">
-							<button type="submit" class="btn btn-primary"> Сохранить <i class="fa fa-refresh fa-spin"></i> </button>
-						</div>
+
+				<div class="form-group">
+					<div class="col-sm-9 col-sm-offset-3">
+						<button type="submit" class="btn btn-primary"> Сохранить <i class="fa fa-refresh fa-spin"></i> </button>
 					</div>
+				</div>
 			</form>
 		</div>
 	</div>
