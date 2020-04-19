@@ -84,6 +84,37 @@ INSERT INTO `md_meta` VALUES (1,'/index.html','Главная','Главная',
 UNLOCK TABLES;
 
 --
+-- Table structure for table `md_meta_additional_fields`
+--
+
+DROP TABLE IF EXISTS `md_meta_additional_fields`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `md_meta_additional_fields` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `parent_id` int(11) NOT NULL,
+  `img_src` varchar(255) NOT NULL,
+  `img_alt` varchar(255) NOT NULL,
+  `field_type` varchar(32) NOT NULL,
+  `field_header` varchar(255) NOT NULL,
+  `field_content` text NOT NULL,
+  `field_link_url` varchar(255) NOT NULL,
+  `field_link_title` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `md_meta_additional_fields`
+--
+
+LOCK TABLES `md_meta_additional_fields` WRITE;
+/*!40000 ALTER TABLE `md_meta_additional_fields` DISABLE KEYS */;
+INSERT INTO `md_meta_additional_fields` VALUES (1,1,'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==','Generic placeholder image','info','Разработка','Каждый из нас понимает очевидную вещь: курс на социально-ориентированный национальный проект в значительной степени обусловливает важность дальнейших направлений развития.','#','Подробнее &raquo;'),(2,1,'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==','Generic placeholder image','info','Оптимизация','Противоположная точка зрения подразумевает, что интерактивные прототипы представляют собой не что иное, как квинтэссенцию победы маркетинга над разумом и должны быть ограничены.','#','Подробнее &raquo;'),(3,1,'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==','Generic placeholder image','info','Продвижение','Противоположная точка зрения подразумевает, что активно развивающиеся страны третьего мира и по сей день остаются уделом либералов, которые жаждут быть превращены в посмешище.','#','Подробнее &raquo;'),(4,1,'/img/uploads/seo_vse_napravlenia_rabot_nad_proektom.jpg','Generic placeholder image','paragraph','Интернет маркетинг','Являясь всего лишь частью общей картины, сделанные на базе интернет-аналитики выводы являются только методом политического участия и ограничены исключительно образом мышления.<','/img/uploads/seo_vse_napravlenia_rabot_nad_proektom.jpg',''),(5,1,'/img/uploads/CSS_Shorthand_Cheat_Sheet.jpg','Generic placeholder image','paragraph','Разработка шаблона','Высокий уровень вовлечения представителей целевой аудитории является четким доказательством простого факта: постоянное информационно-пропагандистское обеспечение нашей деятельности обеспечивает широкому кругу (специалистов) участие в формировании инновационных методов управления процессами.','/img/uploads/CSS_Shorthand_Cheat_Sheet.jpg',''),(6,1,'/img/uploads/JatuTLPbK7w.jpg','Generic placeholder image','paragraph','Настройка сервера','Мы вынуждены отталкиваться от того, что постоянный количественный рост и сфера нашей активности однозначно определяет каждого участника как способного принимать собственные решения касаемо направлений прогрессивного развития.','/img/uploads/JatuTLPbK7w.jpg','');
+/*!40000 ALTER TABLE `md_meta_additional_fields` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `md_meta_img`
 --
 
@@ -93,9 +124,9 @@ DROP TABLE IF EXISTS `md_meta_img`;
 CREATE TABLE `md_meta_img` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `parent_id` int(11) NOT NULL,
-  `img_url` varchar(255) NOT NULL,
+  `img_src` varchar(255) NOT NULL,
   `img_alt` varchar(255) NOT NULL,
-  `img_size` varchar(32) NOT NULL,
+  `img_type` varchar(32) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -271,4 +302,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-04-19 22:55:46
+-- Dump completed on 2020-04-20  0:30:56

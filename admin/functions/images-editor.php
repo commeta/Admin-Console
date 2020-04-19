@@ -20,7 +20,7 @@ $(document).ready(function() {
 	var clip= 0;
 
 	CKFinder.widget( 'ckfinder', { // Загрузим фотки филиала в редактор изображений ckfinder
-		height: 600,
+		height: $(window).height() - 200,
 		chooseFiles: true,
 		onInit: function( finder ) {
 			finder.on( 'files:choose', function( evt ) { // Буфер обмена изображениями
@@ -42,7 +42,7 @@ $(document).ready(function() {
 						$('#clipboard').append(
 							`
 							<div id="clip-${clip}">
-								<a href="#" onclick="clipboard(this);return false" title="">
+								<a href="#" onclick="clipboard(this);return false">
 									<img src="${file.getUrl()}" alt=""><br />
 									<b>Имя файла:</b> ${file.get( 'name' )}<br />
 									<b>URL:</b> ${file.getUrl()}<br />

@@ -161,9 +161,9 @@ function addToImages(src, to){ // Добавление из буфера обм�
 	let index= imagesTable.length;
 	imagesTable[index]= [src, '', to];
 	let value= {
-		img_url: src,
+		img_src: src,
 		img_alt: '',
-		img_size: to
+		img_type: to
 	}
 	add_to_additional_fields(index, value);
 	
@@ -232,19 +232,15 @@ function setUpEditor(data){ // Загрузка в  редактор полей 
 	$('form[name="friendly_url"] #page_content').val( data.content );
 	tinymce_init('#page_content');
 	
-	//$('#clipboard').html('');
 	if(data.image != '' && data.image != 'undefined') $('#images_collection').append('<a class="fancybox" rel="gallery1" href="' + data.image + '" title=""><img src="' + data.image + '" width="250px" alt=""></a>');
 	
 	var clip= 0;
 	CKFinder.widget( 'ckfinder1', { // Загрузим фотки филиала в редактор изображений ckfinder
-		height: 600,
+		height: 400,
 		chooseFiles: true,
 		onInit: function( finder ) {
 			finder.on( 'files:choose', function( evt ) { // Буфер обмена изображениями
 				var file = evt.data.files.first();
-				//$('#images_collection').html('');
-				//$('#images_collection').append('<a class="fancybox" rel="gallery1" href="' + file.getUrl() + '" title=""><img src="' + file.getUrl() + '" width="25px" alt=""></a>');
-				
 				// Iterate over the files collection.
 				evt.data.files.forEach( function( file ) {
 					// Send command to the server.
@@ -259,8 +255,7 @@ function setUpEditor(data){ // Загрузка в  редактор полей 
 							return;
 						}
 
-						$('#clipboard').append(
-							`
+						$('#clipboard').append(`
 							<div id="clip-${clip}">
 								<a href="#" onclick="clipboard(this);return false" title="">
 									<img src="${file.getUrl()}" alt=""><br />
@@ -270,8 +265,7 @@ function setUpEditor(data){ // Загрузка в  редактор полей 
 									<b>Размер:</b> ${response.size} Байт<br />
 								</a>
 							</div>
-							`
-						);
+						`);
 						
 						$('#clipboard').BootSideMenu.open();
 						clip++;
@@ -298,7 +292,7 @@ function setUpEditor(data){ // Загрузка в  редактор полей 
 		$.each(data.images, function (index, value) { // Дополнительные поля
 			//console.log( index );
 			//console.log( value );
-			imagesTable[index]= [value.img_url, value.img_alt, value.img_size];
+			imagesTable[index]= [value.img_src, value.img_alt, value.img_type];
 			add_to_additional_fields(index, value);
 		});
 		
@@ -315,9 +309,9 @@ function create_additional_fields(type){ // Рендер: Дополнитель
 	let index= imagesTable.length;
 	imagesTable[index]= ['', '', type];
 	let value= {
-		img_url: '',
+		img_src: '',
 		img_alt: '',
-		img_size: type
+		img_type: type
 	}
 	add_to_additional_fields(index, value);
 }
@@ -330,9 +324,9 @@ function add_to_additional_fields(index= false, value= false){ // Рендер: 
 	}
 	if(value === false){
 		value= {
-			img_url: '',
+			img_src: '',
 			img_alt: '',
-			img_size: ''
+			img_type: ''
 		}
 	}
 	
@@ -340,12 +334,12 @@ function add_to_additional_fields(index= false, value= false){ // Рендер: 
 				`
 				<div id="images-${index}" class="row" style="margin-bottom: 15px"> 
 					<div class="col-sm-12">
-						<legend>Изображение: ${value.img_size}, №: ${index} </legend> 
-						<input type="hidden" name="img_size-${index}" value="${value.img_size}" />
+						<legend>Изображение: ${value.img_type}, №: ${index} </legend> 
+						<input type="hidden" name="img_type-${index}" value="${value.img_type}" />
 					</div>
 					
 					<div class="col-sm-3">
-						<img class="additional-images" src="${value.img_url}" alt="">
+						<img class="additional-images" src="${value.img_src}">
 					</div>
 					<div class="col-sm-9">
 						<div class="form-group">
@@ -356,9 +350,9 @@ function add_to_additional_fields(index= false, value= false){ // Рендер: 
 						</div>
 
 						<div class="form-group">
-							<label class="col-sm-4" for="img_url">Адрес (URL)</label>
+							<label class="col-sm-4" for="img_src">Адрес (URL)</label>
 							<div class="col-sm-12">
-								<input type="text" class="form-control" name="img_url-${index}" value="${value.img_url}" />
+								<input type="text" class="form-control" name="img_src-${index}" value="${value.img_src}" />
 							</div>
 						</div>
 					</div>
@@ -478,6 +472,7 @@ function save_url(oper_name){ // Перехват отправки форм
 		$(`form[name="${oper_name}"]`).find ('input[type=text], input[type=hidden], textearea, select').each(function() {
 			let id= $(this).attr('id');
 			data[this.name] = $(this).val();
+			console.log( this );
 		});
 		$(`form[name="${oper_name}"]`).find ('input[type=checkbox], input[type=radio]').each(function() {
 			if ($(this).is(':checked')){
@@ -487,7 +482,6 @@ function save_url(oper_name){ // Перехват отправки форм
 		});
 	
 		console.log( data );
-	
 	}
 	
 	
