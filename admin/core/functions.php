@@ -94,9 +94,17 @@ function load_url(){ // Загрузка значения
 
 	$db->where('parent_id', $id );
 	$images= $db->get(db_table_images);
-	if($db->count > 0){ // Дополнительные поля, изображения
+	if($db->count > 0){ // Дополнительные поля, изображения Слайдеер\Галерея
 		$add['images']= $images;
 	}
+	
+	
+	$db->where('parent_id', $id );
+	$fields= $db->get(db_table_additional_fields);
+	if($db->count > 0){ // Дополнительные поля, Инфоблоки\Параграфы
+		$add['fields']= $fields;
+	}
+	
 
 	$db->where('id', $id );
 	$friendly_url= $db->getOne(db_table);

@@ -3,7 +3,12 @@
 	<div class="col-xs-12 col-sm-12">
 		<div class="box box-content bg-tab">
 			<form method="post" action="" class="form-horizontal ajax-form" name="additional_fields" onsubmit="save_url('additional_fields');return false;">
+				
 				<div id="additional_fields" class="sort"></div>
+				<div id="additional_fields_slider" class="sort"></div>
+				<div id="additional_fields_gallery" class="sort"></div>
+				<div id="additional_fields_info" class="sort"></div>
+				<div id="additional_fields_paragraph" class="sort"></div>
 				
 				<div class="form-group">
 					<div class="col-sm-9 col-sm-offset-3">

@@ -1,6 +1,7 @@
 <?php
 const db_table= 'md_meta';
 const db_table_images= 'md_meta_img';
+const db_table_additional_fields= 'md_meta_additional_fields';
 
 const root_path_url= '/';
 require_once('includes.php');

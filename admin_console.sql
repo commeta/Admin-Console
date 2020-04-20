@@ -100,6 +100,7 @@ CREATE TABLE `md_meta_additional_fields` (
   `field_content` text NOT NULL,
   `field_link_url` varchar(255) NOT NULL,
   `field_link_title` varchar(255) NOT NULL,
+  `field_order` int(10) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -110,7 +111,7 @@ CREATE TABLE `md_meta_additional_fields` (
 
 LOCK TABLES `md_meta_additional_fields` WRITE;
 /*!40000 ALTER TABLE `md_meta_additional_fields` DISABLE KEYS */;
-INSERT INTO `md_meta_additional_fields` VALUES (1,1,'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==','Generic placeholder image','info','Разработка','Каждый из нас понимает очевидную вещь: курс на социально-ориентированный национальный проект в значительной степени обусловливает важность дальнейших направлений развития.','#','Подробнее &raquo;'),(2,1,'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==','Generic placeholder image','info','Оптимизация','Противоположная точка зрения подразумевает, что интерактивные прототипы представляют собой не что иное, как квинтэссенцию победы маркетинга над разумом и должны быть ограничены.','#','Подробнее &raquo;'),(3,1,'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==','Generic placeholder image','info','Продвижение','Противоположная точка зрения подразумевает, что активно развивающиеся страны третьего мира и по сей день остаются уделом либералов, которые жаждут быть превращены в посмешище.','#','Подробнее &raquo;'),(4,1,'/img/uploads/seo_vse_napravlenia_rabot_nad_proektom.jpg','Generic placeholder image','paragraph','Интернет маркетинг','Являясь всего лишь частью общей картины, сделанные на базе интернет-аналитики выводы являются только методом политического участия и ограничены исключительно образом мышления.<','/img/uploads/seo_vse_napravlenia_rabot_nad_proektom.jpg',''),(5,1,'/img/uploads/CSS_Shorthand_Cheat_Sheet.jpg','Generic placeholder image','paragraph','Разработка шаблона','Высокий уровень вовлечения представителей целевой аудитории является четким доказательством простого факта: постоянное информационно-пропагандистское обеспечение нашей деятельности обеспечивает широкому кругу (специалистов) участие в формировании инновационных методов управления процессами.','/img/uploads/CSS_Shorthand_Cheat_Sheet.jpg',''),(6,1,'/img/uploads/JatuTLPbK7w.jpg','Generic placeholder image','paragraph','Настройка сервера','Мы вынуждены отталкиваться от того, что постоянный количественный рост и сфера нашей активности однозначно определяет каждого участника как способного принимать собственные решения касаемо направлений прогрессивного развития.','/img/uploads/JatuTLPbK7w.jpg','');
+INSERT INTO `md_meta_additional_fields` VALUES (1,1,'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==','Generic placeholder image','info','Разработка','Каждый из нас понимает очевидную вещь: курс на социально-ориентированный национальный проект в значительной степени обусловливает важность дальнейших направлений развития.','#','Подробнее &raquo;',1),(2,1,'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==','Generic placeholder image','info','Оптимизация','Противоположная точка зрения подразумевает, что интерактивные прототипы представляют собой не что иное, как квинтэссенцию победы маркетинга над разумом и должны быть ограничены.','#','Подробнее &raquo;',2),(3,1,'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==','Generic placeholder image','info','Продвижение','Противоположная точка зрения подразумевает, что активно развивающиеся страны третьего мира и по сей день остаются уделом либералов, которые жаждут быть превращены в посмешище.','#','Подробнее &raquo;',3),(4,1,'/img/uploads/seo_vse_napravlenia_rabot_nad_proektom.jpg','Generic placeholder image','paragraph','Интернет маркетинг','Являясь всего лишь частью общей картины, сделанные на базе интернет-аналитики выводы являются только методом политического участия и ограничены исключительно образом мышления.<','/img/uploads/seo_vse_napravlenia_rabot_nad_proektom.jpg','',1),(5,1,'/img/uploads/CSS_Shorthand_Cheat_Sheet.jpg','Generic placeholder image','paragraph','Разработка шаблона','Высокий уровень вовлечения представителей целевой аудитории является четким доказательством простого факта: постоянное информационно-пропагандистское обеспечение нашей деятельности обеспечивает широкому кругу (специалистов) участие в формировании инновационных методов управления процессами.','/img/uploads/CSS_Shorthand_Cheat_Sheet.jpg','',2),(6,1,'/img/uploads/JatuTLPbK7w.jpg','Generic placeholder image','paragraph','Настройка сервера','Мы вынуждены отталкиваться от того, что постоянный количественный рост и сфера нашей активности однозначно определяет каждого участника как способного принимать собственные решения касаемо направлений прогрессивного развития.','/img/uploads/JatuTLPbK7w.jpg','',3);
 /*!40000 ALTER TABLE `md_meta_additional_fields` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -127,6 +128,7 @@ CREATE TABLE `md_meta_img` (
   `img_src` varchar(255) NOT NULL,
   `img_alt` varchar(255) NOT NULL,
   `img_type` varchar(32) NOT NULL,
+  `img_order` int(10) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -137,7 +139,7 @@ CREATE TABLE `md_meta_img` (
 
 LOCK TABLES `md_meta_img` WRITE;
 /*!40000 ALTER TABLE `md_meta_img` DISABLE KEYS */;
-INSERT INTO `md_meta_img` VALUES (1,1,'/img/uploads/Chto_dolzhen_delat_razrabotchik_a_chto_zakazchik.jpg','First slide','slider'),(2,1,'/img/uploads/jQuery_CheatSheet.jpg','Second slide','slider'),(3,1,'/img/uploads/linux_perfomance_tools.jpg','Third slide','slider'),(4,1,'/img/uploads/The_Physical_Internet.jpg','Fifth slide','slider');
+INSERT INTO `md_meta_img` VALUES (1,1,'/img/uploads/Chto_dolzhen_delat_razrabotchik_a_chto_zakazchik.jpg','First slide','slider',1),(2,1,'/img/uploads/jQuery_CheatSheet.jpg','Second slide','slider',2),(3,1,'/img/uploads/linux_perfomance_tools.jpg','Third slide','slider',3),(4,1,'/img/uploads/The_Physical_Internet.jpg','Fifth slide','slider',4);
 /*!40000 ALTER TABLE `md_meta_img` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -302,4 +304,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-04-20  0:30:56
+-- Dump completed on 2020-04-20  4:39:45

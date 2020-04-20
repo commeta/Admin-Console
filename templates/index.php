@@ -7,13 +7,15 @@ if($cached_page = get_cached_page( $urlMd5 )){
 	die($cached_page);
 }
 
+$db->orderBy("img_order","Asc");
 $db->where("parent_id",$md_meta['id']); // Запрос изображений из БД
-$md_meta_img= $db->get("md_meta_img", null, ['id','img_src','img_alt','img_type']);
+$md_meta_img= $db->get("md_meta_img", null, ['img_src','img_alt','img_type']);
+
 $slider = array_filter($md_meta_img, fn($k) => $k['img_type'] == 'slider'); // Изображения для слайдера
 
-
-$db->where("parent_id",$md_meta['id']); // Запрос изображений из БД
-$md_meta_additional_fields= $db->get("md_meta_additional_fields", null, ['id','img_src','img_alt','field_type', 'field_header', 'field_content', 'field_link_url', 'field_link_title']);
+$db->orderBy("field_order","Asc");
+$db->where("parent_id",$md_meta['id']); // Запрос дополнительных полей из БД
+$md_meta_additional_fields= $db->get("md_meta_additional_fields", null, ['img_src','img_alt','field_type', 'field_header', 'field_content', 'field_link_url', 'field_link_title']);
 
 $info = array_filter($md_meta_additional_fields, fn($k) => $k['field_type'] == 'info');
 $paragraph = array_filter($md_meta_additional_fields, fn($k) => $k['field_type'] == 'paragraph');
@@ -24,14 +26,17 @@ require_once('chanks/header.php');
 
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">
 		<ol class="carousel-indicators">
+			
 <?php
 foreach($slider as $k=>$slide){
 	$active= $k == 0 ? 'class="active"' : '';
 	printf('<li data-target="#myCarousel" data-slide-to="%d" %s></li>',$k,$active);
 }
 ?>
+
 		</ol>
 		<div class="carousel-inner">
+			
 <?php
 foreach($slider as $k=>$slide){
 	$active= $k == 0 ? 'active' : '';
@@ -54,9 +59,11 @@ SLIDE;
 	<div class="container marketing">
 		<!-- Three columns of text below the carousel -->
 		<div class="row">
+			
 <?php
 foreach($info as $inf){
 	echo <<<INFO
+	
 			<div class="col-lg-4"> <img class="rounded-circle" src="{$inf['img_src']}" alt="{$inf['img_alt']}" width="140" height="140">
 				<h2>{$inf['field_header']}</h2>
 				<p>{$inf['field_content']}</p>
@@ -78,6 +85,7 @@ foreach($paragraph as $k=>$p){
 	$ordermd1= (($k % 2) == 0) ? 'order-md-1' : '';
 	
 	echo <<<INFO
+	
 		<hr class="featurette-divider">
 		<div class="row featurette">
 			<div class="col-md-7 {$ordermd2}">
