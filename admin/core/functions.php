@@ -151,70 +151,91 @@ function save_url(){ // Редактирование, сохранение ре�
 }
 
 
-function save_additional_fields(){
+function save_additional_fields(){ // Сохранение дополнительных полей
 	if(!isset($_POST['id']) || $_POST['id'] == '' ||  $_POST['id'] == 'undefined') die(json_encode(array('status'=>'Страница не сохранена.','css_class'=>'danger')));
+	
 	$db = MysqliDb::getInstance();
 	$id = $db->escape($_POST['id']);
 	
+	###### db_table_images
+	$db->where('parent_id', $id ); // Список id имеющихся в базе
+	$ids= $db->map('id')->ArrayBuilder()->get(db_table_images, null, ['id']);
+
+	foreach(['slider','gallery'] as $images){
+		if( !isset($_POST[$images]) ) die(json_encode(array('status'=>'Страница не сохранена.','css_class'=>'danger')));
+		$order= 1;
+		foreach(json_decode($_POST[$images], true) as $image){
+			$image_id= $image['id'];
+			unset($image['id']);
+			
+			if( $image['img_type'] != $images ) die(json_encode(array('status'=>'Страница не сохранена.','css_class'=>'danger')));
+			
+			foreach($image as &$i) $i= $db->escape($i);
+			$image['img_order']= $order;
+
+			if($image_id !== 0 && array_key_exists($image_id, $ids)){ // Update
+				unset($ids[$image_id]);
+				
+				$db->where('id', $image_id );
+				if($db->update(db_table_images, $image)){
+					die(json_encode(array('status'=>'Страница не сохранена.','css_class'=>'danger')));
+				}
+			} else { // Insert
+				$image['parent_id']= $id;
+				$db->insert(db_table_images, $image);
+			}
+			
+			$order++;
+		}
+	}
+	
+	if( count($ids) > 0 ){
+		$db->where('id', array_keys($ids), 'in');
+		$db->delete(db_table_images);
+	}
 	
 	
-	//print_r( json_decode($_POST['slider']) );
-	//print_r( json_decode($_POST['gallery']) );
-	//print_r( json_decode($_POST['info']) );
-	//print_r( json_decode($_POST['paragraph']) );
+	###### db_table_additional_fields
+	$db->where('parent_id', $id ); // Список id имеющихся в базе
+	$ids= $db->map('id')->ArrayBuilder()->get(db_table_additional_fields, null, ['id']);
+
+	foreach(['info','paragraph'] as $fields){
+		if( !isset($_POST[$fields]) ) die(json_encode(array('status'=>'Страница не сохранена.','css_class'=>'danger')));
+		$order= 1;
+		foreach(json_decode($_POST[$fields], true) as $field){
+			$field_id= $field['id'];
+			unset($field['id']);
+			
+			if( $field['field_type'] != $fields ) die(json_encode(array('status'=>'Страница не сохранена.','css_class'=>'danger')));
+			
+			foreach($field as &$i) $i= $db->escape($i);
+			$field['field_order']= $order;
+
+			if($field_id !== 0 && array_key_exists($field_id, $ids)){ // Update
+				unset($ids[$field_id]);
+				
+				$db->where('id', $field_id );
+				if($db->update(db_table_additional_fields, $field)){
+					die(json_encode(array('status'=>'Страница не сохранена.','css_class'=>'danger')));
+				}
+			} else { // Insert
+				$field['parent_id']= $id;
+				$db->insert(db_table_additional_fields, $field);
+			}
+			
+			$order++;
+		}
+	}
 	
-	die(json_encode(array('status'=>'Страница не сохранена.','css_class'=>'danger', $_POST['slider'], $_POST['gallery'], $_POST['info'], $_POST['paragraph'])));
+	if( count($ids) > 0 ){
+		$db->where('id', array_keys($ids), 'in');
+		$db->delete(db_table_additional_fields);
+	}
 	
+	clean_cache();
+	die(json_encode(array('status'=>'Страница сохранена.','css_class'=>'success')));
 }
 
-/*
-Array
-(
-    [img_type-1] => slider
-    [img_alt-1] => Generic placeholder image
-    [img_src-1] => data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==
-    [img_type-0] => slider
-    [img_alt-0] => Generic placeholder image
-    [img_src-0] => data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==
-    [img_type-2] => slider
-    [img_alt-2] => Generic placeholder image
-    [img_src-2] => data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==
-    [img_type-3] => slider
-    [img_alt-3] => Generic placeholder image
-    [img_src-3] => /img/uploads/seo_vse_napravlenia_rabot_nad_proektom.jpg
-    [field_type-0] => info
-    [field_link_url-0] => #
-    [field_link_title-0] => Подробнее »
-    [field_header-0] => Разработка
-    [field_type-1] => info
-    [field_link_url-1] => #
-    [field_link_title-1] => Подробнее »
-    [field_header-1] => Оптимизация
-    [field_type-2] => info
-    [field_link_url-2] => #
-    [field_link_title-2] => Подробнее »
-    [field_header-2] => Продвижение
-    [field_type-3] => paragraph
-    [field_link_url-3] => /img/uploads/seo_vse_napravlenia_rabot_nad_proektom.jpg
-    [field_link_title-3] => 
-    [field_header-3] => Интернет маркетинг
-    [field_type-4] => paragraph
-    [img_alt-4] => Generic placeholder image
-    [img_src-4] => /img/uploads/CSS_Shorthand_Cheat_Sheet.jpg
-    [field_link_url-4] => /img/uploads/CSS_Shorthand_Cheat_Sheet.jpg
-    [field_link_title-4] => 
-    [field_header-4] => Разработка шаблона
-    [field_type-5] => paragraph
-    [img_alt-5] => Generic placeholder image
-    [img_src-5] => /img/uploads/JatuTLPbK7w.jpg
-    [field_link_url-5] => /img/uploads/JatuTLPbK7w.jpg
-    [field_link_title-5] => 
-    [field_header-5] => Настройка сервера
-    [oper] => save_additional_fields
-    [ajax] => true
-    [id] => 1
-)
-*/
 
 function get_table(){ // Получить таблицу импорта
 	$db = MysqliDb::getInstance();

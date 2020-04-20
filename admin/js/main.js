@@ -579,6 +579,7 @@ function create_url(){ // Добавить url
 
 function save_url(oper_name){ // Перехват отправки форм
 	$('form[name="'+oper_name+'"]').find('button[type="submit"]').addClass("btn-danger");
+	$('form[name="'+oper_name+'"]').find('button[type="submit"]').prop('disabled',true);
 	
 	if(oper_name == 'additional_fields'){ // Сохранение из формы редактирование дополнительных полей
 		var data = {};
@@ -586,7 +587,7 @@ function save_url(oper_name){ // Перехват отправки форм
 		let slider= [];
 		$("#additional_fields_slider").find('.row').each(function(index, value) {
 			let values= {};
-			$(value).find('input[type=text], input[type=hidden], textearea, select').each(function() {
+			$(value).find('input[type=text], input[type=hidden], textarea, select').each(function() {
 				values[this.name]= $(this).val();
 			});
 			slider.push(values);
@@ -595,7 +596,7 @@ function save_url(oper_name){ // Перехват отправки форм
 		let gallery= [];
 		$("#additional_fields_gallery").find('.row').each(function(index, value) {
 			let values= {};
-			$(value).find('input[type=text], input[type=hidden], textearea, select').each(function() {
+			$(value).find('input[type=text], input[type=hidden], textarea, select').each(function() {
 				values[this.name]= $(this).val();
 			});
 			gallery.push(values);
@@ -604,7 +605,7 @@ function save_url(oper_name){ // Перехват отправки форм
 		let info= [];
 		$("#additional_fields_info").find('.row').each(function(index, value) {
 			let values= {};
-			$(value).find('input[type=text], input[type=hidden], textearea, select').each(function() {
+			$(value).find('input[type=text], input[type=hidden], textarea, select').each(function() {
 				values[this.name]= $(this).val();
 			});
 			info.push(values);
@@ -613,7 +614,7 @@ function save_url(oper_name){ // Перехват отправки форм
 		let paragraph= [];
 		$("#additional_fields_paragraph").find('.row').each(function(index, value) {
 			let values= {};
-			$(value).find('input[type=text], input[type=hidden], textearea, select').each(function() {
+			$(value).find('input[type=text], input[type=hidden], textarea, select').each(function() {
 				values[this.name]= $(this).val();
 			});
 			paragraph.push(values);
