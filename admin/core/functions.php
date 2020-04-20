@@ -177,9 +177,7 @@ function save_additional_fields(){ // Сохранение дополнител�
 				unset($ids[$image_id]);
 				
 				$db->where('id', $image_id );
-				if($db->update(db_table_images, $image)){
-					die(json_encode(array('status'=>'Страница не сохранена.','css_class'=>'danger')));
-				}
+				$db->update(db_table_images, $image);
 			} else { // Insert
 				$image['parent_id']= $id;
 				$db->insert(db_table_images, $image);
@@ -215,9 +213,7 @@ function save_additional_fields(){ // Сохранение дополнител�
 				unset($ids[$field_id]);
 				
 				$db->where('id', $field_id );
-				if($db->update(db_table_additional_fields, $field)){
-					die(json_encode(array('status'=>'Страница не сохранена.','css_class'=>'danger')));
-				}
+				$db->update(db_table_additional_fields, $field);
 			} else { // Insert
 				$field['parent_id']= $id;
 				$db->insert(db_table_additional_fields, $field);
