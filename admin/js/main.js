@@ -20,8 +20,8 @@ $(document).ready(function() {
 		
 	$('.core-messages').show();
 	
-// https://github.com/AndreaLombardo/BootSideMenu
-	$('#clipboard-container').BootSideMenu({  
+
+	$('#clipboard-container').BootSideMenu({  // https://github.com/AndreaLombardo/BootSideMenu
         side: "right",
         pushBody: false,
         remember: false,
@@ -171,7 +171,8 @@ function addToImages(src, type){ // Добавление из буфера об�
 		let value= {
 			img_src: src,
 			img_alt: '',
-			img_type: type
+			img_type: type,
+			id: 0
 		}
 		add_to_additional_fields(index, value, type);
 	}
@@ -186,7 +187,8 @@ function addToImages(src, type){ // Добавление из буфера об�
 			field_link_url: '',
 			field_type: type,
 			img_alt: '',
-			img_src: src
+			img_src: src,
+			id: 0
 		}
 		add_to_additional_fields(index, value, type);
 	}
@@ -311,10 +313,7 @@ function setUpEditor(data){ // Загрузка в  редактор полей 
 		}
 	});
 	
-	$('#additional_fields_slider').html('');
-	$('#additional_fields_info').html('');
-	$('#additional_fields_gallery').html('');
-	$('#additional_fields_paragraph').html('');
+	$('#additional_fields_slider, #additional_fields_info, #additional_fields_gallery, #additional_fields_paragraph').html('');
 	
 	additionalFields= {
 		slider: [],
@@ -354,7 +353,8 @@ function create_additional_fields(type){ // Рендер: Дополнитель
 		let value= {
 			img_src: 'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
 			img_alt: '',
-			img_type: type
+			img_type: type,
+			id: 0
 		}
 		add_to_additional_fields(index, value, type);
 	}
@@ -369,7 +369,8 @@ function create_additional_fields(type){ // Рендер: Дополнитель
 			field_link_url: '',
 			field_type: type,
 			img_alt: '',
-			img_src: 'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
+			img_src: 'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
+			id: 0
 		}
 		add_to_additional_fields(index, value, type);
 	}
@@ -377,20 +378,8 @@ function create_additional_fields(type){ // Рендер: Дополнитель
 
 
 
-function add_to_additional_fields(index= false, value= false, type= false){ // Рендер: Дополнительные поля	
+function add_to_additional_fields(index, value, type){ // Рендер: Дополнительные поля	
 	if( type == 'slider' || type == 'gallery' ){
-		if(index === false)	{
-			index= additionalFields[type].length;
-		}
-		
-		if(value === false){
-			value= {
-				img_src: 'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
-				img_alt: '',
-				img_type: type
-			}
-		}
-		
 		if(type == 'slider' && additionalFields[type].length == 1) $('#additional_fields_slider').html('<h3>Слайдер</h3>');
 		if(type == 'gallery' && additionalFields[type].length == 1) $('#additional_fields_gallery').html('<h3>Галерея</h3>');
 		
@@ -398,7 +387,8 @@ function add_to_additional_fields(index= false, value= false, type= false){ // �
 				<div id="images-${type}-${index}" class="row" style="margin-bottom: 15px"> 
 					<div class="col-sm-12">
 						<legend>Изображение: ${value.img_type} </legend> 
-						<input type="hidden" name="img_type-${index}" value="${value.img_type}" />
+						<input type="hidden" name="img_type" value="${value.img_type}" />
+						<input type="hidden" name="id" value="${value.id}" />
 					</div>
 					
 					<div class="col-sm-3">
@@ -408,14 +398,14 @@ function add_to_additional_fields(index= false, value= false, type= false){ // �
 						<div class="form-group">
 							<label class="col-sm-4" for="img_alt">Описание (ALT)</label>
 							<div class="col-sm-12">
-								<input type="text" class="form-control" name="img_alt-${index}" value="${value.img_alt}" />
+								<input type="text" class="form-control" name="img_alt" value="${value.img_alt}" />
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label class="col-sm-4" for="img_src">Адрес изображения (SRC)</label>
 							<div class="col-sm-12">
-								<input type="text" class="form-control" name="img_src-${index}" value="${value.img_src}" />
+								<input type="text" class="form-control" name="img_src" value="${value.img_src}" />
 							</div>
 						</div>
 					</div>
@@ -428,22 +418,6 @@ function add_to_additional_fields(index= false, value= false, type= false){ // �
 	
 	
 	if( type == 'info' || type == 'paragraph' ){
-		if(index === false){
-			index= additionalFields[type].length;
-		}
-		
-		if(value === false){
-			value= {
-				field_content: '',
-				field_header: '',
-				field_link_title: '',
-				field_link_url: '',
-				field_type: type,
-				img_alt: '',
-				img_src: 'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
-			}
-		}
-		
 		if(type == 'info' && additionalFields[type].length == 1) $('#additional_fields_info').html('<h3>Инфо</h3>');
 		if(type == 'paragraph' && additionalFields[type].length == 1) $('#additional_fields_paragraph').html('<h3>Параграф</h3>');
 
@@ -451,7 +425,8 @@ function add_to_additional_fields(index= false, value= false, type= false){ // �
 				<div id="fields-${type}-${index}" class="row" style="margin-bottom: 15px"> 
 					<div class="col-sm-12">
 						<legend>Поле: ${value.field_type} </legend> 
-						<input type="hidden" name="field_type-${index}" value="${value.field_type}" />
+						<input type="hidden" name="field_type" value="${value.field_type}" />
+						<input type="hidden" name="id" value="${value.id}" />
 					</div>
 					
 					<div class="col-sm-3">
@@ -461,42 +436,42 @@ function add_to_additional_fields(index= false, value= false, type= false){ // �
 						<div class="form-group">
 							<label class="col-sm-4" for="img_alt">Описание (ALT)</label>
 							<div class="col-sm-12">
-								<input type="text" class="form-control" name="img_alt-${index}" value="${value.img_alt}" />
+								<input type="text" class="form-control" name="img_alt" value="${value.img_alt}" />
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label class="col-sm-4" for="img_src">Адрес изображения (SRC)</label>
 							<div class="col-sm-12">
-								<input type="text" class="form-control" name="img_src-${index}" value="${value.img_src}" />
+								<input type="text" class="form-control" name="img_src" value="${value.img_src}" />
 							</div>
 						</div>
 						
 						<div class="form-group">
 							<label class="col-sm-4" for="field_link_url">Адрес ссылки (URL)</label>
 							<div class="col-sm-12">
-								<input type="text" class="form-control" name="field_link_url-${index}" value="${value.field_link_url}" />
+								<input type="text" class="form-control" name="field_link_url" value="${value.field_link_url}" />
 							</div>
 						</div>
 						
 						<div class="form-group">
 							<label class="col-sm-4" for="field_link_title">Якорь ссылки</label>
 							<div class="col-sm-12">
-								<input type="text" class="form-control" name="field_link_title-${index}" value="${value.field_link_title}" />
+								<input type="text" class="form-control" name="field_link_title" value="${value.field_link_title}" />
 							</div>
 						</div>
 						
 						<div class="form-group">
 							<label class="col-sm-4" for="field_header">Заголовок элемента</label>
 							<div class="col-sm-12">
-								<input type="text" class="form-control" name="field_header-${index}" value="${value.field_header}" />
+								<input type="text" class="form-control" name="field_header" value="${value.field_header}" />
 							</div>
 						</div>
 					</div>
 					<div class="col-sm-12">
 						<label class="col-sm-4" for="field_content">Содержимое элемента</label>
 						<div class="col-sm-12">
-							<textarea type="text" class="form-control" name="field_content-${index}" >${value.field_content}</textarea>
+							<textarea type="text" class="form-control" name="field_content" >${value.field_content}</textarea>
 						</div>
 					</div>
 					<div class="col-sm-12" style="margin-top: 15px">
@@ -606,20 +581,65 @@ function save_url(oper_name){ // Перехват отправки форм
 	// $('form[name="'+oper_name+'"]').find('.btn').addClass("btn-danger");
 	if(oper_name == 'additional_fields'){ // Сохранение из формы редактирование дополнительных полей
 		var data = {};
-		
-		$(`form[name="${oper_name}"]`).find ('input[type=text], input[type=hidden], textearea, select').each(function() {
-			let id= $(this).attr('id');
-			data[this.name] = $(this).val();
+
+		let slider= [];
+		$("#additional_fields_slider").find('.row').each(function(index, value) {
+			let values= {};
+			$(value).find('input[type=text], input[type=hidden], textearea, select').each(function() {
+				values[this.name]= $(this).val();
+			});
+			slider.push(values);
 		});
 		
-		/*
-		$(`form[name="${oper_name}"]`).find ('input[type=checkbox], input[type=radio]').each(function() {
-			if ($(this).is(':checked')){
-				let id= $(this).attr('id');
-				data[this.name] = $(this).val();
+		let gallery= [];
+		$("#additional_fields_gallery").find('.row').each(function(index, value) {
+			let values= {};
+			$(value).find('input[type=text], input[type=hidden], textearea, select').each(function() {
+				values[this.name]= $(this).val();
+			});
+			gallery.push(values);
+		});
+
+		let info= [];
+		$("#additional_fields_info").find('.row').each(function(index, value) {
+			let values= {};
+			$(value).find('input[type=text], input[type=hidden], textearea, select').each(function() {
+				values[this.name]= $(this).val();
+			});
+			info.push(values);
+		});
+
+		let paragraph= [];
+		$("#additional_fields_paragraph").find('.row').each(function(index, value) {
+			let values= {};
+			$(value).find('input[type=text], input[type=hidden], textearea, select').each(function() {
+				values[this.name]= $(this).val();
+			});
+			paragraph.push(values);
+		});
+
+		data['slider']= JSON.stringify( slider ) ;
+		data['gallery']= JSON.stringify( gallery ) ;
+		data['info']= JSON.stringify( info ) ;
+		data['paragraph']= JSON.stringify( paragraph ) ;
+		
+		data['oper']= 'save_additional_fields';
+		data['ajax']= 'true';
+		data['id']= $('form[name="friendly_url"]').attr('meta_id');
+		
+		$.ajax({
+			url: this_path,
+			dataType: "json",
+			data: data,
+			type: "post",
+			success:  function (data) {
+				console.log(data);
+			},
+			error: function (jqXHR, textStatus, errorThrown) {
+				alert(errorThrown);
 			}
 		});
-		*/
+		
 	}
 	
 	

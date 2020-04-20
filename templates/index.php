@@ -22,7 +22,7 @@ $info = array_filter($md_meta_additional_fields, fn($k) => $k['field_type'] == '
 
 require_once('chanks/header.php');
 ?>
-<main role="main" class="">
+<main role="main">
 
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">
 		<ol class="carousel-indicators">
@@ -62,6 +62,7 @@ SLIDE;
 			
 <?php
 foreach($info as $inf){
+	$inf['field_content']= nl2br($inf['field_content']);
 	echo <<<INFO
 	
 			<div class="col-lg-4"> <img class="rounded-circle" src="{$inf['img_src']}" alt="{$inf['img_alt']}" width="140" height="140">
@@ -83,6 +84,7 @@ INFO;
 foreach($paragraph as $p){
 	$ordermd1= $p['field_order'] % 2 ? 'order-md-1' : '';
 	$ordermd2= $p['field_order'] % 2 ? 'order-md-2' : '';
+	$p['field_content']= nl2br($p['field_content']);
 	echo <<<INFO
 	
 		<hr class="featurette-divider">

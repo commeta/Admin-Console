@@ -94,7 +94,7 @@ function load_url(){ // Загрузка значения
 
 	$db->where('parent_id', $id );
 	$images= $db->get(db_table_images);
-	if($db->count > 0){ // Дополнительные поля, изображения Слайдеер\Галерея
+	if($db->count > 0){ // Дополнительные поля, изображения Слайдер\Галерея
 		$add['images']= $images;
 	}
 	
@@ -130,7 +130,6 @@ function load_url(){ // Загрузка значения
 function save_url(){ // Редактирование, сохранение результата
 	if(!isset($_POST['id']) || $_POST['id'] == '' ||  $_POST['id'] == 'undefined') die(json_encode(array('status'=>'Страница не сохранена.','css_class'=>'danger')));
 	$db = MysqliDb::getInstance();
-	$add= [];
 	$id = $db->escape($_POST['id']);
 	$db->where('id', $id ); // Сохраним
 		
@@ -143,7 +142,7 @@ function save_url(){ // Редактирование, сохранение ре�
 		'meta_text'=>$db->escape($_POST['meta_text']),
 		'content'=>$db->escape(str_replace(["\r\n","\n"],'',$_POST['content'])),
 		'image'=>$db->escape($_POST['image'])
-	) + $add)){
+	))){
 		clean_cache();
 		die(json_encode(array('status'=>'Страница сохранена.','css_class'=>'success')));
 	}
@@ -151,6 +150,71 @@ function save_url(){ // Редактирование, сохранение ре�
 	die(json_encode(array('status'=>'Страница не сохранена.','css_class'=>'danger')));
 }
 
+
+function save_additional_fields(){
+	if(!isset($_POST['id']) || $_POST['id'] == '' ||  $_POST['id'] == 'undefined') die(json_encode(array('status'=>'Страница не сохранена.','css_class'=>'danger')));
+	$db = MysqliDb::getInstance();
+	$id = $db->escape($_POST['id']);
+	
+	
+	
+	//print_r( json_decode($_POST['slider']) );
+	//print_r( json_decode($_POST['gallery']) );
+	//print_r( json_decode($_POST['info']) );
+	//print_r( json_decode($_POST['paragraph']) );
+	
+	die(json_encode(array('status'=>'Страница не сохранена.','css_class'=>'danger', $_POST['slider'], $_POST['gallery'], $_POST['info'], $_POST['paragraph'])));
+	
+}
+
+/*
+Array
+(
+    [img_type-1] => slider
+    [img_alt-1] => Generic placeholder image
+    [img_src-1] => data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==
+    [img_type-0] => slider
+    [img_alt-0] => Generic placeholder image
+    [img_src-0] => data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==
+    [img_type-2] => slider
+    [img_alt-2] => Generic placeholder image
+    [img_src-2] => data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==
+    [img_type-3] => slider
+    [img_alt-3] => Generic placeholder image
+    [img_src-3] => /img/uploads/seo_vse_napravlenia_rabot_nad_proektom.jpg
+    [field_type-0] => info
+    [field_link_url-0] => #
+    [field_link_title-0] => Подробнее »
+    [field_header-0] => Разработка
+    [field_type-1] => info
+    [field_link_url-1] => #
+    [field_link_title-1] => Подробнее »
+    [field_header-1] => Оптимизация
+    [field_type-2] => info
+    [field_link_url-2] => #
+    [field_link_title-2] => Подробнее »
+    [field_header-2] => Продвижение
+    [field_type-3] => paragraph
+    [field_link_url-3] => /img/uploads/seo_vse_napravlenia_rabot_nad_proektom.jpg
+    [field_link_title-3] => 
+    [field_header-3] => Интернет маркетинг
+    [field_type-4] => paragraph
+    [img_alt-4] => Generic placeholder image
+    [img_src-4] => /img/uploads/CSS_Shorthand_Cheat_Sheet.jpg
+    [field_link_url-4] => /img/uploads/CSS_Shorthand_Cheat_Sheet.jpg
+    [field_link_title-4] => 
+    [field_header-4] => Разработка шаблона
+    [field_type-5] => paragraph
+    [img_alt-5] => Generic placeholder image
+    [img_src-5] => /img/uploads/JatuTLPbK7w.jpg
+    [field_link_url-5] => /img/uploads/JatuTLPbK7w.jpg
+    [field_link_title-5] => 
+    [field_header-5] => Настройка сервера
+    [oper] => save_additional_fields
+    [ajax] => true
+    [id] => 1
+)
+*/
 
 function get_table(){ // Получить таблицу импорта
 	$db = MysqliDb::getInstance();

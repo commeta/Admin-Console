@@ -50,6 +50,9 @@ if(isset($_POST['ajax'])){		// Менеджер обработки ajax запр
 			case 'save_url':	// Редактирование, сохранение результата
 				save_url();
 				break;
+			case 'save_additional_fields':	// Редактирование, сохранение результата дополнительных полей
+				save_additional_fields();
+				break;
 			case 'get_table':	// Получить таблицу импорта
 				get_table();
 				break;
