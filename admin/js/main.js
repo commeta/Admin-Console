@@ -578,7 +578,8 @@ function create_url(){ // Добавить url
 
 
 function save_url(oper_name){ // Перехват отправки форм
-	// $('form[name="'+oper_name+'"]').find('.btn').addClass("btn-danger");
+	$('form[name="'+oper_name+'"]').find('button[type="submit"]').addClass("btn-danger");
+	
 	if(oper_name == 'additional_fields'){ // Сохранение из формы редактирование дополнительных полей
 		var data = {};
 
@@ -634,6 +635,9 @@ function save_url(oper_name){ // Перехват отправки форм
 			type: "post",
 			success:  function (data) {
 				console.log(data);
+				$('form[name="'+oper_name+'"]').find('button[type="submit"]').removeClass("btn-danger");
+				$('form[name="'+oper_name+'"]').find('button[type="submit"]').prop('disabled',false);
+				
 			},
 			error: function (jqXHR, textStatus, errorThrown) {
 				alert(errorThrown);
@@ -668,8 +672,8 @@ function save_url(oper_name){ // Перехват отправки форм
 			type: "post",
 			success:  function (data) {
 				logger(data.status, data.css_class);
-				$('form[name="'+oper_name+'"]').find('.btn').removeClass("btn-danger");
-				$('form[name="'+oper_name+'"]').find('.btn').prop('disabled',false);
+				$('form[name="'+oper_name+'"]').find('button[type="submit"]').removeClass("btn-danger");
+				$('form[name="'+oper_name+'"]').find('button[type="submit"]').prop('disabled',false);
 
 				var table = $('#datatable-main').DataTable(); // Обновить таблицу
 				table.draw(); 
