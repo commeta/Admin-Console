@@ -1,6 +1,4 @@
 <?php
-// https://github.com/ThingEngineer/PHP-MySQLi-Database-Class#initialization
-
 /**
  * MysqliDb Class
  *
@@ -12,7 +10,7 @@
  * @copyright Copyright (c) 2010-2017
  * @license   http://opensource.org/licenses/gpl-3.0.html GNU Public License
  * @link      http://github.com/joshcam/PHP-MySQLi-Database-Class 
- * @version   2.9.2
+ * @version   2.9.3
  */
 
 class MysqliDb
@@ -430,11 +428,7 @@ class MysqliDb
      */
     public static function getInstance()
     {
-        if(isset(self::$_instance)) {
-            return self::$_instance;
-        } else {
-            return new MysqliDb();
-        }
+        return self::$_instance;
     }
 
     /**
@@ -970,12 +964,6 @@ class MysqliDb
      */
     public function where($whereProp, $whereValue = 'DBNULL', $operator = '=', $cond = 'AND')
     {
-        // forkaround for an old operation api
-        if (is_array($whereValue) && ($key = key($whereValue)) != "0") {
-            $operator = $key;
-            $whereValue = $whereValue[$key];
-        }
-
         if (count($this->_where) == 0) {
             $cond = '';
         }
@@ -1847,7 +1835,7 @@ class MysqliDb
         $dataColumns = array_keys($tableData);
         if ($isInsert) {
             if (isset ($dataColumns[0]))
-                $this->_query .= ' (`' . implode($dataColumns, '`, `') . '`) ';
+                $this->_query .= ' (`' . implode('`, `', $dataColumns) . '`) ';
             $this->_query .= ' VALUES (';
         } else {
             $this->_query .= " SET ";
@@ -2516,6 +2504,7 @@ class MysqliDb
 }
 
 // END class
+
 
 
 // Init !

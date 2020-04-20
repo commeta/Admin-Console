@@ -236,6 +236,7 @@ function clipboard(el){ // Работа с буфером обмена изоб�
 function delFromImages(id,type){ // Удаление из дополнительных полей
 	additionalFields[type].pop();
 	$("#" + id).remove();
+	if(additionalFields[type].length == 0) $('#additional_fields_' + type).html('');
 }
 
 
@@ -330,7 +331,6 @@ function setUpEditor(data){ // Загрузка в  редактор полей 
 		
 		$('#tabs').tabs("option", "active", 2);
 	}
-	
 	
 	if("fields" in data){	
 		$.each(data.fields, function (index, value) { // Дополнительные поля
@@ -508,7 +508,6 @@ function add_to_additional_fields(index= false, value= false, type= false){ // �
 	
 	// Sortable for elements
 	$(".sort").sortable({items: "div.row", appendTo: 'div.sort' });
-	
 }
 
 
