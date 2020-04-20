@@ -8,17 +8,17 @@ if($cached_page = get_cached_page( $urlMd5 )){
 }
 
 $db->orderBy("img_order","Asc");
-$db->where("parent_id",$md_meta['id']); // Запрос изображений из БД
+$db->where("parent_id", $md_meta['id']); // Запрос изображений из БД
 $md_meta_img= $db->get("md_meta_img", null, ['img_src','img_alt','img_type']);
 
 $slider = array_filter($md_meta_img, fn($k) => $k['img_type'] == 'slider'); // Изображения для слайдера
 
 $db->orderBy("field_order","Asc");
-$db->where("parent_id",$md_meta['id']); // Запрос дополнительных полей из БД
+$db->where("parent_id", $md_meta['id']); // Запрос дополнительных полей из БД
 $md_meta_additional_fields= $db->get("md_meta_additional_fields", null, ['img_src','img_alt','field_type', 'field_header', 'field_content', 'field_link_url', 'field_link_title']);
 
-$info = array_filter($md_meta_additional_fields, fn($k) => $k['field_type'] == 'info');
 $paragraph = array_filter($md_meta_additional_fields, fn($k) => $k['field_type'] == 'paragraph');
+$info = array_filter($md_meta_additional_fields, fn($k) => $k['field_type'] == 'info');
 
 require_once('chanks/header.php');
 ?>
@@ -80,10 +80,11 @@ INFO;
 		<!-- START THE FEATURETTES -->
 		
 <?php
-foreach($paragraph as $k=>$p){
-	$ordermd2= (($k % 2) == 0) ? 'order-md-2' : '';
-	$ordermd1= (($k % 2) == 0) ? 'order-md-1' : '';
-	
+$k=0;
+foreach($paragraph as $p){
+	$ordermd1= $k % 2 ? 'order-md-1' : '';
+	$ordermd2= $k % 2 ? 'order-md-2' : '';
+	$k++;
 	echo <<<INFO
 	
 		<hr class="featurette-divider">

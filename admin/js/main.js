@@ -1,10 +1,7 @@
 "use strict";
 var this_path= window.location.href.split('#').join(''); // Путь для аякс
 var root_path_url= '/';
-var sliderTable= [];
-var galleryTable= [];
-var infoTable= [];
-var paragraphTable= [];
+
 var additionalFields= {
 	slider: [],
 	gallery: [],
@@ -162,7 +159,7 @@ function delFromClipboard(id){ // Удаление из буфера обмен�
 
 
 
-function addToImages(src, type){ // Добавление из буфера обмена, в таблицу и изображений (слайдер, галерея, инфоблок)
+function addToImages(src, type){ // Добавление из буфера обмена, в таблицу и изображений (слайдер, галерея, инфоблок, параграф)
 	if( !$('#additional_fields').length ){
 		alert('Для вставки в таблицу изображений - перейдите в раздел редактирования страницы!');
 		return;
@@ -283,8 +280,8 @@ function setUpEditor(data){ // Загрузка в  редактор полей 
 
 						$('#clipboard').append(`
 							<div id="clip-${clip}">
-								<a href="#" onclick="clipboard(this);return false" title="">
-									<img src="${file.getUrl()}" alt=""><br />
+								<a href="#" onclick="clipboard(this);return false">
+									<img src="${file.getUrl()}"><br />
 									<b>Имя файла:</b> ${file.get( 'name' )}<br />
 									<b>URL:</b> ${file.getUrl()}<br />
 									<b>Размеры:</b> ${response.width}x${response.height}<br />
@@ -297,11 +294,11 @@ function setUpEditor(data){ // Загрузка в  редактор полей 
 						clip++;
 						
 						// Log image data:
-						console.log( '-------------------' );
-						console.log( 'Name:', file.get( 'name' ) );
-						console.log( 'URL:', file.getUrl() );
-						console.log( 'Dimensions:', response.width + 'x' + response.height );
-						console.log( 'Size:', response.size + 'B' );
+						//console.log( '-------------------' );
+						//console.log( 'Name:', file.get( 'name' ) );
+						//console.log( 'URL:', file.getUrl() );
+						//console.log( 'Dimensions:', response.width + 'x' + response.height );
+						//console.log( 'Size:', response.size + 'B' );
 					} );
 				} );
 				
@@ -447,8 +444,6 @@ function add_to_additional_fields(index= false, value= false, type= false){ // �
 			}
 		}
 		
-		//console.log(value);
-		
 		if(type == 'info' && additionalFields[type].length == 1) $('#additional_fields_info').html('<h3>Инфо</h3>');
 		if(type == 'paragraph' && additionalFields[type].length == 1) $('#additional_fields_paragraph').html('<h3>Параграф</h3>');
 
@@ -510,8 +505,6 @@ function add_to_additional_fields(index= false, value= false, type= false){ // �
 				</div>
 		`);
 	}
-	
-	
 	
 	// Sortable for elements
 	$(".sort").sortable({items: "div.row", appendTo: 'div.sort' });
@@ -618,7 +611,6 @@ function save_url(oper_name){ // Перехват отправки форм
 		$(`form[name="${oper_name}"]`).find ('input[type=text], input[type=hidden], textearea, select').each(function() {
 			let id= $(this).attr('id');
 			data[this.name] = $(this).val();
-			//console.log( this );
 		});
 		
 		/*
@@ -629,8 +621,6 @@ function save_url(oper_name){ // Перехват отправки форм
 			}
 		});
 		*/
-		
-		//console.log( data );
 	}
 	
 	
