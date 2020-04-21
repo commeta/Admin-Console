@@ -37,7 +37,6 @@ function get_tables(){ // Менеджер обработки ajax запрос�
 	// The `db` parameter represents the column name in the database, while the `dt` parameter represents the DataTables column identifier. In this case simple indexes
 	$columns = array(
 		array( 'db' => 'id', 'dt' => 0 ),
-		//array( 'db' => 'friendly_url',  'dt' => 1 ),
 		array(
 			'db'        => 'friendly_url',
 			'dt'        => 1,
@@ -140,7 +139,7 @@ function save_url(){ // Редактирование, сохранение ре�
 		'meta_description'=>$db->escape($_POST['meta_description']),
 		'meta_keywords'=>$db->escape($_POST['meta_keywords']),
 		'meta_text'=>$db->escape($_POST['meta_text']),
-		'content'=>$db->escape(str_replace(["\r\n","\n"],'',$_POST['content'])),
+		'content'=>$db->escape($_POST['content']),
 		'image'=>$db->escape($_POST['image'])
 	))){
 		clean_cache();
@@ -187,7 +186,7 @@ function save_additional_fields(){ // Сохранение дополнител�
 		}
 	}
 	
-	if( count($ids) > 0 ){
+	if( count($ids) > 0 ){ // Удаление удаленных
 		$db->where('id', array_keys($ids), 'in');
 		$db->delete(db_table_images);
 	}
@@ -223,7 +222,7 @@ function save_additional_fields(){ // Сохранение дополнител�
 		}
 	}
 	
-	if( count($ids) > 0 ){
+	if( count($ids) > 0 ){ // Удаление удаленных
 		$db->where('id', array_keys($ids), 'in');
 		$db->delete(db_table_additional_fields);
 	}

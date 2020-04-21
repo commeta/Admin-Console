@@ -184,7 +184,7 @@ function addToImages(src, type){ // Добавление из буфера об�
 			field_content: '',
 			field_header: '',
 			field_link_title: '',
-			field_link_url: '',
+			field_link_url: '#',
 			field_type: type,
 			img_alt: '',
 			img_src: src,
@@ -366,7 +366,7 @@ function create_additional_fields(type){ // Рендер: Дополнитель
 			field_content: '',
 			field_header: '',
 			field_link_title: '',
-			field_link_url: '',
+			field_link_url: '#',
 			field_type: type,
 			img_alt: '',
 			img_src: 'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
@@ -635,7 +635,7 @@ function save_url(oper_name){ // Перехват отправки форм
 			data: data,
 			type: "post",
 			success:  function (data) {
-				console.log(data);
+				logger(data.status, data.css_class);
 				$('form[name="'+oper_name+'"]').find('button[type="submit"]').removeClass("btn-danger");
 				$('form[name="'+oper_name+'"]').find('button[type="submit"]').prop('disabled',false);
 				
