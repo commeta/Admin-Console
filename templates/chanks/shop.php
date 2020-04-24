@@ -35,7 +35,7 @@ foreach($md_shop as $v){ // Вывод карточек
 							<div class="d-flex justify-content-between align-items-center">
 								<div class="btn-group">
 									<a class="btn btn-sm btn-outline-secondary" href="{$v['friendly_url']}">Просмотр</a>
-									<a class="btn btn-sm btn-outline-secondary" href="#" product-id="{$v['id']}" product-cost="{$v['cost']}" product-category="{$v['category']}" product-name="{$v['short']}" onclick="add_to_cart(this);return false">В корзину</a>
+									<a class="btn btn-sm btn-outline-secondary" href="#" product-url="{$v['friendly_url']}" product-id="{$v['id']}" product-cost="{$v['cost']}" product-category="{$v['category']}" product-name="{$v['short']}" onclick="add_to_cart(this);return false">В корзину</a>
 								</div>
 								<small class="text-muted">0 like</small>
 							</div>

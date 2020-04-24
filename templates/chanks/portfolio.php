@@ -23,7 +23,8 @@ foreach($category as $v){ // Вывод фильтра
 foreach($md_portfolio as $v){ // Вывод карточек
 	$idFilter= array_search($v['category'],$category);
 
-	if($img_screenshot[$v['id']]['img_src'] == '') $img_screenshot[$v['id']]['img_src'] = "holder.js/348x225?theme=thumb&bg=55595c&fg=eceeef&text={$v['meta_h1']}";
+	if($img_screenshot[$v['id']]['img_src'] == '' || $img_screenshot[$v['id']]['img_src'] == 'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==') 
+		$img_screenshot[$v['id']]['img_src'] = "holder.js/348x225?theme=thumb&bg=55595c&fg=eceeef&text={$v['meta_h1']}";
 		
 	echo <<<PORTFOLIO
 	

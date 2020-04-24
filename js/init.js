@@ -199,16 +199,21 @@ function add_to_cart(el){ // Добавление в корзину
 	let category= $(el).attr('product-category');
 	let name= $(el).attr('product-name');
 	let cost= $(el).attr('product-cost');
+	let url= $(el).attr('product-url');
 	
-	$(el).text("Добавлено");
-	$(el).toggleClass("btn-success btn-outline-secondary");
+	
+	if(!cart_order[id]) { 
+		$(el).text(`В корзине: 1`);
+		$(el).toggleClass("btn-success btn-outline-secondary");
+	}
 	
 	cart_order[id]= {
 		id: id, 
 		category: category,
 		name: name,
 		count: 1,
-		cost: +cost
+		cost: +cost,
+		url: url
 	}
 
 	let count= Object.keys(cart_order).length;
@@ -220,10 +225,13 @@ function add_to_cart(el){ // Добавление в корзину
 
 $('#cart-link').click(function(){ // Клик по корзине, вывод списка товаров
 	let count= Object.keys(cart_order).length;
+	let countProducts= 0;
+	let price= 0;
+	
 	let products= `
 		<thead>
 			<tr>
-				<th>№</th>
+				<th>#</th>
 				<th>Наименование</th>
 				<th>Цена</th>
 				<th>Количество</th>
@@ -233,16 +241,33 @@ $('#cart-link').click(function(){ // Клик по корзине, вывод с
 	`;
 
 	for (var order in cart_order) {
+		let result= +cart_order[order].cost * +cart_order[order].count;
+		price += result;
+		
+		countProducts += +cart_order[order].count;
 		products +=`
 			<tr>
 				<td>${cart_order[order].id}</td>
-				<td>${cart_order[order].name} (<i>${cart_order[order].category}</i>)</td>
+				<td><a href="${cart_order[order].url}" target="_BLANC">${cart_order[order].name}</a> (<i>${cart_order[order].category}</i>)</td>
 				<td>${float2str(cart_order[order].cost)}</td>
 				<td><input product-id="${cart_order[order].id}" class="form-control order-count" type="number" value="${cart_order[order].count}"></td>
-				<td>${float2str(cart_order[order].cost)}</td>
+				<td>${float2str(result)}</td>
 			</tr>
 		`;
 	}
+	
+	products += `
+		<tfoot>
+			<tr>
+				<th></th>
+				<th>ИТОГО:</th>
+				<th></th>
+				<th class="countProducts">${countProducts}</th>
+				<th class="price">${float2str(price)}</th>
+			</tr>
+		</tfoot>
+	`;
+	
 
 	let body= `
 		<p>Содержимое корзины:</p>
@@ -254,17 +279,31 @@ $('#cart-link').click(function(){ // Клик по корзине, вывод с
 		<button type="button" class="btn btn-primary">Оформить заказ</button>
 	`;
 
-	newModal(`В корзине: ${count} ${num2str(count, ['позиция', 'позиции', 'позиций'])}`, body, buttons);
+	//newModal(`В корзине: ${countProducts} ${num2str(count, ['позиция', 'позиции', 'позиций'])}`, body, buttons);
+	newModal(`Корзина`, body, buttons);
 	
-	$(".order-count").bind('keydown keyup change enter',function(e){ // Расчет стоимости
+	$(".order-count").bind('keydown keyup change input propertychange cut copy paste',function(e){ // Расчет стоимости
 		let $nextTD = $(this).closest('td').next();
 		let $prevTD = $(this).closest('td').prev();
 		let count= $(this).val();
 		let id= $(this).attr("product-id");
 		let cost= cart_order[id].cost;
-		cart_order[id].count= count;
 		let result= cost * count;
+		let price= 0;
+		let countResult= 0;
+
+		cart_order[id].count= count;
 		$nextTD.html( float2str(result) );
+		
+		$(`a[product-id=${id}]`).text(`В корзине: ${count}`);
+		
+		for (var order in cart_order) {
+			let result= +cart_order[order].cost * +cart_order[order].count;
+			price += +result;
+			countResult += +cart_order[order].count;
+		}
+		$(this).closest('table').find('.price').html( `${float2str(price)}` );
+		$(this).closest('table').find('.countProducts').html( `${countResult}` );
 	});
 	
 	return false;
@@ -280,7 +319,7 @@ function num2str(n, text_forms) {  // Склонение числовых зна
 	return text_forms[2];
 }
 
-function float2str( float ){
+function float2str( float ){ // Форматирует дробь в строку, добавляет символ рубль
 	let result;
 	if( float - Math.floor(float) === 0 ){
 		result= float + "-00 &#8381";
