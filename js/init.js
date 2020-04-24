@@ -393,6 +393,8 @@ var cart_order= {};
 			data: data,
 			type: "post",
 			success:  function (data) {
+				if(data.cart === 0) return;
+				
 				cart_order= data.cart;
 				let countResult= 0;
 				
