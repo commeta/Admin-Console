@@ -30,7 +30,7 @@ if(isset($_POST['oper']) && $_POST['oper'] == 'load_cart'):
 	if( !isset($_SESSION['xauthtoken']) ) { // Уникальный xauthtoken
 		$_SESSION['xauthtoken'] = strval(bin2hex(openssl_random_pseudo_bytes(32)));
 	} else {
-		die(json_encode(['cart'=>$_SESSION['cart']]));
+		if(isset($_SESSION['cart'])) die(json_encode(['cart'=>$_SESSION['cart']]));
 		
 	}
 
