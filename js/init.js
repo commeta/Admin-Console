@@ -196,16 +196,14 @@ var ajax_url_path= '/ajax.php';
 	var timer= false;
 	var cart_order= {};
 
-	function add_to_cart(el,cart_order){ // Добавление в корзину
+	function add_to_cart(el){ // Добавление в корзину
 		let id= $(el).attr('product-id');
 		let category= $(el).attr('product-category');
 		let name= $(el).attr('product-name');
 		let cost= $(el).attr('product-cost');
 		let url= $(el).attr('product-url');
 		
-		
-		
-		if(cart_order === null || !cart_order[id]) { 
+		if(!cart_order[id]) { 
 			$(el).text(`В корзине: 1`);
 			$(el).toggleClass("btn-success btn-outline-secondary");
 		} else {
@@ -413,8 +411,7 @@ var ajax_url_path= '/ajax.php';
 		});
 		
 		$('.add_to_cart').click(function(el){
-			add_to_cart(this,cart_order);
-			console.log(this);
+			add_to_cart(this);
 			return false;
 		});
 		
