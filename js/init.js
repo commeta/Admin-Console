@@ -1,10 +1,9 @@
-'use strict';
-
 var ajax_url_path= '/ajax.php';
 
 
 // Пример отлова ошибок, log файл: /temp/front-error.log
 (function($) { 
+	'use strict';
 	window.onerror = function(message, url, lineNumber) { // Поймана ошибка, выпавшая в глобальную область!
 		var data = Object();
 		data['oper']= 'send_error';
@@ -24,6 +23,8 @@ var ajax_url_path= '/ajax.php';
 
 
 (function($) {	// Загрузка шрифта
+	'use strict';
+
 	function createStyle(txt) {
 		var style = document.createElement('style');
 		style.textContent = txt;
@@ -62,6 +63,8 @@ var ajax_url_path= '/ajax.php';
 
 
 (function($) {// external js: isotope.pkgd.js
+	'use strict';
+
 	$(document).ready(function() {
 			$('.works').isotope({ // /portfolio/
 				itemSelector: '.work'	
@@ -89,6 +92,8 @@ var ajax_url_path= '/ajax.php';
 
 // Example starter JavaScript for disabling form submissions if there are invalid fields
 (function($) {
+	'use strict';
+
 	$(document).ready(function() {
 
 		var files; // Сборщик файлов
@@ -192,7 +197,9 @@ var ajax_url_path= '/ajax.php';
 
 
 (function($) {	// Работа с корзиной 
-// Инициализация
+	'use strict';
+
+	// Инициализация
 	var timer= false;
 	var cart_order= {};
 
@@ -219,9 +226,6 @@ var ajax_url_path= '/ajax.php';
 			url: url
 		}
 
-		let count= Object.keys(cart_order).length;
-		$("#cart").text( count );
-		
 		let countResult= 0;
 		for (var order in cart_order) { // Обход корзины
 			countResult += +cart_order[order].count;
@@ -229,9 +233,6 @@ var ajax_url_path= '/ajax.php';
 		$("#cart").text( `${countResult}` );
 		saveCartTimer();
 	}
-
-
-
 
 	$('#cart-link').click(function(){ // Клик по корзине, вывод списка товаров
 		let count= Object.keys(cart_order).length;
@@ -323,7 +324,6 @@ var ajax_url_path= '/ajax.php';
 		return false;
 	});
 
-
 	function num2str(n, text_forms) {  // Склонение числовых значений
 		//  num2str(1, ['минута', 'минуты', 'минут']);
 		n = Math.abs(n) % 100; var n1 = n % 10;
@@ -343,8 +343,6 @@ var ajax_url_path= '/ajax.php';
 		return result.replace('.','-');
 	}
 
-
-
 	function newModal(title,body,buttons){ // Рендер модального окна
 		$('#modal .modal-title').text(title);
 		$('#modal .modal-body').html(body);
@@ -352,17 +350,16 @@ var ajax_url_path= '/ajax.php';
 		$('#modal').modal('show');
 	}
 
-
 	function saveCartTimer(){
-		if(timer) { // Сохраним на сервере
+		if(timer) { // Сохраним на сервере не чаще одного раза в две секунды
 			clearTimeout(timer);
-			timer= setTimeout(saveCart,1000);
+			timer= setTimeout(saveCart,2000);
 		} else {
 			timer= setTimeout(saveCart,1000);
 		}
 	}
 
-	function saveCart(){
+	function saveCart(){ // Сохраним корзину на сервере
 		var data = {};
 		data['cart']= JSON.stringify( cart_order ) ;
 		data['oper']= 'save_cart';
@@ -374,6 +371,7 @@ var ajax_url_path= '/ajax.php';
 			type: "post",
 			success:  function (data) {
 				console.log("save success");
+				timer= false;
 			},
 			error: function (jqXHR, textStatus, errorThrown) {
 				console.log("save error");
@@ -381,7 +379,8 @@ var ajax_url_path= '/ajax.php';
 		});
 	}
 
-	$(document).ready(function() {
+	$(document).ready(function() { 
+		// Загрузка корзины с сервера
 		var data = {};
 		data['oper']= 'load_cart';
 		
@@ -391,6 +390,8 @@ var ajax_url_path= '/ajax.php';
 			data: data,
 			type: "post",
 			success:  function (data) {
+				console.log(data);
+				
 				if(data.cart == 0) return;
 				
 				cart_order= data.cart;
@@ -410,69 +411,74 @@ var ajax_url_path= '/ajax.php';
 			}
 		});
 		
-		$('.add_to_cart').click(function(el){
+		$('.add_to_cart').click(function(el){ // Событие по кнопке добавить в корзину
 			add_to_cart(this);
 			return false;
 		});
-		
 	});
 
 })(jQuery);
 
 
-// Schedules the next memory measurement using setTimeout with
-// a randomized interval.
-function scheduleMeasurement() {
-  if (!performance.measureMemory) {
-    console.log(
-      "performance.measureMemory() is not available. " +
-        "Currently only Chrome 82+ supports it as an Origin Trial."
-    );
-    return;
-  }
-  const interval = measurementInterval();
-  console.log(
-    "Scheduling memory measurement in " +
-      Math.round(interval / 1000) +
-      " seconds."
-  );
-  setTimeout(performMeasurement, interval);
-}
 
-// Start measurements after page load on the main window.
-window.onload = function() {
-  scheduleMeasurement();
-};
 
-// Computes a random interval in milliseconds such that on
-// average there is one measurement every five minutes.
-// See https://bit.ly/3bR0hys for an explanation of the math.
-function measurementInterval() {
-  const MEAN_INTERVAL_IN_MS = 5 * 60 * 1000;
-  return -Math.log(Math.random()) * MEAN_INTERVAL_IN_MS;
-}
+(function($) {
+	'use strict';
+	
+	// Schedules the next memory measurement using setTimeout with
+	// a randomized interval.
+	function scheduleMeasurement() {
+	  if (!performance.measureMemory) {
+		console.log(
+		  "performance.measureMemory() is not available. " +
+			"Currently only Chrome 82+ supports it as an Origin Trial."
+		);
+		return;
+	  }
+	  const interval = measurementInterval();
+	  console.log(
+		"Scheduling memory measurement in " +
+		  Math.round(interval / 1000) +
+		  " seconds."
+	  );
+	  setTimeout(performMeasurement, interval);
+	}
 
-// Invokes the API, records the result, and schedules
-// the next measurement.
-async function performMeasurement() {
-  // 1. Invoke performance.measureMemory().
-  let result;
-  try {
-    result = await performance.measureMemory();
-  } catch (error) {
-    if (error instanceof DOMException && error.name === "SecurityError") {
-      console.log("The context is not secure.");
-      console.log(
-        "Make sure that Site Isolation is enabled in Chrome " +
-          "and that the page is not embedded as an iframe."
-      );
-      return;
-    }
-    // Rethrow other errors.
-    throw error;
-  }
-  // 2. Record the result.
-  console.log("Memory usage:", result);
-  // 3. Schedule the next measurement.
-  scheduleMeasurement();
-}
+	// Start measurements after page load on the main window.
+	window.onload = function() {
+	  scheduleMeasurement();
+	};
+
+	// Computes a random interval in milliseconds such that on
+	// average there is one measurement every five minutes.
+	// See https://bit.ly/3bR0hys for an explanation of the math.
+	function measurementInterval() {
+	  const MEAN_INTERVAL_IN_MS = 5 * 60 * 1000;
+	  return -Math.log(Math.random()) * MEAN_INTERVAL_IN_MS;
+	}
+
+	// Invokes the API, records the result, and schedules
+	// the next measurement.
+	async function performMeasurement() {
+	  // 1. Invoke performance.measureMemory().
+	  let result;
+	  try {
+		result = await performance.measureMemory();
+	  } catch (error) {
+		if (error instanceof DOMException && error.name === "SecurityError") {
+		  console.log("The context is not secure.");
+		  console.log(
+			"Make sure that Site Isolation is enabled in Chrome " +
+			  "and that the page is not embedded as an iframe."
+		  );
+		  return;
+		}
+		// Rethrow other errors.
+		throw error;
+	  }
+	  // 2. Record the result.
+	  console.log("Memory usage:", result);
+	  // 3. Schedule the next measurement.
+	  scheduleMeasurement();
+	}
+})(jQuery);

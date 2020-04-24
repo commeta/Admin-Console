@@ -47,6 +47,13 @@ if( !isset($_SESSION['xauthtoken']) ) { // Уникальный xauthtoken
 	$_SESSION['xauthtoken'] = strval(bin2hex(openssl_random_pseudo_bytes(32)));
 }
 
+if( !isset($_COOKIE['xauthtoken']) ) { // Уникальный xauthtoken
+	$domain = ($_SERVER['HTTP_HOST'] != 'localhost') ? $_SERVER['HTTP_HOST'] : false;
+	setcookie('xauthtoken', $_SESSION['xauthtoken'], time()+60*60*24*365, '/', $domain, false);
+}
+
+
+
 
 ########################################################################
 // Функции шаблонов
