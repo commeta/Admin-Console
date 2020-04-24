@@ -1,6 +1,8 @@
 'use strict';
 
 var ajax_url_path= '/ajax.php';
+var timer= false;
+var cart_order= {};
 
 
 // Пример отлова ошибок, log файл: /temp/front-error.log
@@ -193,8 +195,6 @@ var ajax_url_path= '/ajax.php';
 
 (function($) {	// Работа с корзиной 
 // Инициализация
-	var timer= false;
-	var cart_order= {};
 
 	function add_to_cart(el){ // Добавление в корзину
 		let id= $(el).attr('product-id');
