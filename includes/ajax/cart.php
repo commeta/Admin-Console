@@ -64,7 +64,6 @@ if(isset($_POST['oper']) && $_POST['oper'] == 'load_cart'):
 		$cart= unserialize($md_cart['storage']);
 		die(json_encode( ['cart' => $cart] ));
 	}
-	
 
 	die(json_encode(['cart'=>'0']));
 endif;

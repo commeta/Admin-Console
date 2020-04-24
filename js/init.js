@@ -231,11 +231,11 @@ var ajax_url_path= '/ajax.php';
 			countResult += +cart_order[order].count;
 		}
 		$("#cart").text( `${countResult}` );
-		saveCartTimer();
+		saveCart();
 	}
 
 	$('#cart-link').click(function(){ // Клик по корзине, вывод списка товаров
-		let count= Object.keys(cart_order).length;
+		let count= 0;
 		let countProducts= 0;
 		let price= 0;
 		
@@ -254,16 +254,19 @@ var ajax_url_path= '/ajax.php';
 		for (var order in cart_order) {
 			let result= +cart_order[order].cost * +cart_order[order].count;
 			price += result;
+			count++
 			
 			countProducts += +cart_order[order].count;
 			products +=`
-				<tr>
-					<td>${cart_order[order].id}</td>
-					<td><a href="${cart_order[order].url}" target="_BLANC">${cart_order[order].name}</a> (<i>${cart_order[order].category}</i>)</td>
-					<td>${float2str(cart_order[order].cost)}</td>
-					<td><input product-id="${cart_order[order].id}" class="form-control order-count" type="number" value="${cart_order[order].count}"></td>
-					<td>${float2str(result)}</td>
-				</tr>
+				<tbody>
+					<tr>
+						<td>${count}</td>
+						<td><a href="${cart_order[order].url}" target="_BLANC">${cart_order[order].name}</a> (<i>${cart_order[order].category}</i>)</td>
+						<td>${float2str(cart_order[order].cost)}</td>
+						<td><input product-id="${cart_order[order].id}" class="form-control order-count" type="number" value="${cart_order[order].count}"></td>
+						<td>${float2str(result)}</td>
+					</tr>
+				</tbody>
 			`;
 		}
 		
@@ -312,6 +315,7 @@ var ajax_url_path= '/ajax.php';
 				price += +result;
 				countResult += +cart_order[order].count;
 			}
+
 			$(this).closest('table').find('.price').html( `${float2str(price)}` );
 			$(this).closest('table').find('.countProducts').html( `${countResult}` );
 			
@@ -370,7 +374,7 @@ var ajax_url_path= '/ajax.php';
 			data: data,
 			type: "post",
 			success:  function (data) {
-				console.log("save success");
+				//console.log("save success");
 				timer= false;
 			},
 			error: function (jqXHR, textStatus, errorThrown) {
@@ -390,8 +394,6 @@ var ajax_url_path= '/ajax.php';
 			data: data,
 			type: "post",
 			success:  function (data) {
-				console.log(data);
-				
 				if(data.cart == 0) return;
 				
 				cart_order= data.cart;

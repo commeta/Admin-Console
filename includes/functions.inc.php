@@ -53,6 +53,7 @@ if( !isset($_COOKIE['xauthtoken']) ) { // Уникальный xauthtoken
 
 $_SESSION['xauthtoken']= $xauthtoken;
 
+
 ########################################################################
 // Функции шаблонов
 
