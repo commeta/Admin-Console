@@ -1,4 +1,11 @@
 
+
+var ajax_url_path= '/ajax.php';
+var timer= false;
+var cart_order= {};
+
+
+
 // Пример отлова ошибок, log файл: /temp/front-error.log
 (function($) { 
 	window.onerror = function(message, url, lineNumber) { // Поймана ошибка, выпавшая в глобальную область!
@@ -188,12 +195,8 @@
 
 
 (function($) {	// Работа с корзиной 
-	// Инициализация
+// Инициализация
 	'use strict';
-
-	var ajax_url_path= '/ajax.php';
-	var timer= false;
-	var cart_order= {};
 
 	function add_to_cart(el){ // Добавление в корзину
 		let id= $(el).attr('product-id');
@@ -416,12 +419,6 @@
 	});
 
 })(jQuery);
-
-
-
-
-
-
 
 
 // Schedules the next memory measurement using setTimeout with
