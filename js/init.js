@@ -1,10 +1,6 @@
 
 
 var ajax_url_path= '/ajax.php';
-var timer= false;
-var cart_order= {};
-
-
 
 // Пример отлова ошибок, log файл: /temp/front-error.log
 (function($) { 
@@ -197,6 +193,8 @@ var cart_order= {};
 (function($) {	// Работа с корзиной 
 // Инициализация
 	'use strict';
+	var timer= false;
+	var cart_order= {};
 
 	function add_to_cart(el){ // Добавление в корзину
 		let id= $(el).attr('product-id');
