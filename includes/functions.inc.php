@@ -43,17 +43,15 @@ if($db->count > 0){ // Подготовка мета тегов
 
 // Сессии
 session_start();
-if( !isset($_SESSION['xauthtoken']) ) { // Уникальный xauthtoken
-	$_SESSION['xauthtoken'] = strval(bin2hex(openssl_random_pseudo_bytes(32)));
-}
-
 if( !isset($_COOKIE['xauthtoken']) ) { // Уникальный xauthtoken
+	$xauthtoken= strval(bin2hex(openssl_random_pseudo_bytes(32)));
 	$domain = ($_SERVER['HTTP_HOST'] != 'localhost') ? $_SERVER['HTTP_HOST'] : false;
-	setcookie('xauthtoken', $_SESSION['xauthtoken'], time()+60*60*24*365, '/', $domain, false);
+	setcookie('xauthtoken', $xauthtoken, time()+60*60*24*365, '/', $domain, false);
+} else {
+	$xauthtoken= $_COOKIE['xauthtoken'];
 }
 
-
-
+$_SESSION['xauthtoken']= $xauthtoken;
 
 ########################################################################
 // Функции шаблонов

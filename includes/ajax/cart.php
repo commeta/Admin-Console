@@ -8,7 +8,6 @@
 ########################################################################
 if(isset($_POST['oper']) && $_POST['oper'] == 'save_cart'):
 	// Пример обработчика корзины, заглушка!
-	
 	if( !isset($_COOKIE['xauthtoken']) ) { // Уникальный xauthtoken
 		$xauthtoken= strval(bin2hex(openssl_random_pseudo_bytes(32)));
 
@@ -38,6 +37,9 @@ if(isset($_POST['oper']) && $_POST['oper'] == 'save_cart'):
 			'ip'			=> $_SERVER['REMOTE_ADDR']	
 		]);
 	}
+	
+	// Удалить самые старые записи корзин
+	
 
 	die(json_encode([]));
 endif;
