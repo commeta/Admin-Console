@@ -268,7 +268,6 @@ $('#cart-link').click(function(){ // Клик по корзине, вывод с
 			</tr>
 		</tfoot>
 	`;
-	
 
 	let body= `
 		<p>Содержимое корзины:</p>
@@ -305,6 +304,8 @@ $('#cart-link').click(function(){ // Клик по корзине, вывод с
 		}
 		$(this).closest('table').find('.price').html( `${float2str(price)}` );
 		$(this).closest('table').find('.countProducts').html( `${countResult}` );
+		
+		$("#cart").text( `${countResult}` );
 	});
 	
 	return false;
