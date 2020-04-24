@@ -196,7 +196,7 @@ var cart_order= {};
 (function($) {	// Работа с корзиной 
 // Инициализация
 
-	function add_to_cart(el){ // Добавление в корзину
+	function add_to_cart(el,cart_order){ // Добавление в корзину
 		let id= $(el).attr('product-id');
 		let category= $(el).attr('product-category');
 		let name= $(el).attr('product-name');
@@ -411,7 +411,7 @@ var cart_order= {};
 		});
 		
 		$('.add_to_cart').click(function(el){
-			add_to_cart(this);
+			add_to_cart(this,cart_order);
 			console.log(this);
 			return false;
 		});
