@@ -1,4 +1,4 @@
-<main role="main" class="">
+<main role="main" class="shop">
 	
 	<section class="jumbotron text-center bg-light">
 		<div class="container">
@@ -24,8 +24,8 @@ foreach($md_shop as $v){ // Вывод карточек
 	$idFilter= array_search($v['category'],$category);
 
 	if($img_gallery[$v['id']]['img_src'] == '') $img_gallery[$v['id']]['img_src'] = "holder.js/348x225?theme=thumb&bg=55595c&fg=eceeef&text={$v['meta_h1']}";
-		
-	echo <<<PORTFOLIO
+
+	echo <<<SHOP
 	
 				<div class="col-md-4 work filter$idFilter">
 					<div class="card mb-4 shadow-sm">
@@ -35,7 +35,7 @@ foreach($md_shop as $v){ // Вывод карточек
 							<div class="d-flex justify-content-between align-items-center">
 								<div class="btn-group">
 									<a class="btn btn-sm btn-outline-secondary" href="{$v['friendly_url']}">Просмотр</a>
-									<a class="btn btn-sm btn-outline-secondary add_to_cart" href="#" product-url="{$v['friendly_url']}" product-id="{$v['id']}" product-cost="{$v['cost']}" product-category="{$v['category']}" product-name="{$v['short']}" >В корзину</a>
+									<a class="btn btn-sm btn-outline-secondary add_to_cart" href="#" product-url="{$v['friendly_url']}" product-id="{$v['id']}" product-category="{$v['category']}" product-name="{$v['short']}" >В корзину</a>
 								</div>
 								<small class="text-muted">0 like</small>
 							</div>
@@ -43,7 +43,7 @@ foreach($md_shop as $v){ // Вывод карточек
 					</div>
 				</div>
 				
-PORTFOLIO;
+SHOP;
 }
 ?>
 

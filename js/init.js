@@ -202,14 +202,14 @@ var ajax_url_path= '/ajax.php';
 	// Инициализация
 	var timer= false;
 	var cart_order= {};
+	var extended_product= {};
 
 	function add_to_cart(el){ // Добавление в корзину
 		let id= $(el).attr('product-id');
 		let category= $(el).attr('product-category');
 		let name= $(el).attr('product-name');
-		let cost= $(el).attr('product-cost');
 		let url= $(el).attr('product-url');
-		
+
 		if(!cart_order[id]) { 
 			$(el).text(`В корзине: 1`);
 			$(el).toggleClass("btn-success btn-outline-secondary");
@@ -217,12 +217,12 @@ var ajax_url_path= '/ajax.php';
 			return;
 		}
 		
-		cart_order[id]= {
+		cart_order[id]= { 
 			id: id, 
 			category: category,
 			name: name,
 			count: 1,
-			cost: +cost,
+			cost: extended_product[id].cost,
 			url: url
 		}
 
@@ -328,6 +328,43 @@ var ajax_url_path= '/ajax.php';
 		return false;
 	});
 
+
+	function newModal(title,body,buttons){ // Рендер модального окна
+		$('#modal .modal-title').text(title);
+		$('#modal .modal-body').html(body);
+		$('#modal .modal-footer').html(buttons);
+		$('#modal').modal('show');
+	}
+
+	function saveCartTimer(){
+		if(timer) { // Сохраним на сервере не чаще одного раза в секунду
+			clearTimeout(timer);
+			timer= setTimeout(saveCart,1000);
+		} else {
+			timer= setTimeout(saveCart,1000);
+		}
+	}
+
+	function saveCart(){ // Сохраним корзину на сервере
+		var data = {};
+		data['cart']= JSON.stringify( cart_order ) ;
+		data['oper']= 'save_cart';
+		
+		$.ajax({
+			url: ajax_url_path,
+			dataType: "json",
+			data: data,
+			type: "post",
+			success:  function (data) {
+				timer= false;
+			},
+			error: function (jqXHR, textStatus, errorThrown) {
+				console.log("save error");
+			}
+		});
+	}
+
+
 	function num2str(n, text_forms) {  // Склонение числовых значений
 		//  num2str(1, ['минута', 'минуты', 'минут']);
 		n = Math.abs(n) % 100; var n1 = n % 10;
@@ -347,44 +384,9 @@ var ajax_url_path= '/ajax.php';
 		return result.replace('.','-');
 	}
 
-	function newModal(title,body,buttons){ // Рендер модального окна
-		$('#modal .modal-title').text(title);
-		$('#modal .modal-body').html(body);
-		$('#modal .modal-footer').html(buttons);
-		$('#modal').modal('show');
-	}
-
-	function saveCartTimer(){
-		if(timer) { // Сохраним на сервере не чаще одного раза в две секунды
-			clearTimeout(timer);
-			timer= setTimeout(saveCart,2000);
-		} else {
-			timer= setTimeout(saveCart,1000);
-		}
-	}
-
-	function saveCart(){ // Сохраним корзину на сервере
-		var data = {};
-		data['cart']= JSON.stringify( cart_order ) ;
-		data['oper']= 'save_cart';
-		
-		$.ajax({
-			url: ajax_url_path,
-			dataType: "json",
-			data: data,
-			type: "post",
-			success:  function (data) {
-				//console.log("save success");
-				timer= false;
-			},
-			error: function (jqXHR, textStatus, errorThrown) {
-				console.log("save error");
-			}
-		});
-	}
 
 	$(document).ready(function() { 
-		// Загрузка корзины с сервера
+		// Загрузка корзины, и параметров товаров, с сервера
 		var data = {};
 		data['oper']= 'load_cart';
 		
@@ -393,7 +395,10 @@ var ajax_url_path= '/ajax.php';
 			dataType: "json",
 			data: data,
 			type: "post",
-			success:  function (data) {
+			success: function (data) {
+				if(data.extended !== 0) { // Дополнительные поля товара
+					extended_product= data.extended;
+				}
 				if(data.cart == 0) return;
 				
 				cart_order= data.cart;
@@ -484,3 +489,6 @@ var ajax_url_path= '/ajax.php';
 	  scheduleMeasurement();
 	}
 })(jQuery);
+
+
+

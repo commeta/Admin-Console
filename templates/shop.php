@@ -14,7 +14,7 @@ if($cached_page = get_cached_page( $urlMd5 )){
 if($request_url['path'] == '/shop/') { // Если это раздел
 	// Запрос всех страниц
 	$db->orderBy("public_time","Desc");
-	$md_shop= $db->get('md_shop', null, ['id','friendly_url','meta_h1','short','category', 'cost']);
+	$md_shop= $db->get('md_shop', null, ['id','friendly_url','meta_h1','short','category']);
 	if($db->count < 1) goto die404;
 	
 	// Массив родителей

@@ -69,7 +69,7 @@ CREATE TABLE `md_cart` (
   PRIMARY KEY (`id`),
   KEY `xauthtoken` (`xauthtoken`),
   KEY `event_time` (`event_time`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -78,7 +78,7 @@ CREATE TABLE `md_cart` (
 
 LOCK TABLES `md_cart` WRITE;
 /*!40000 ALTER TABLE `md_cart` DISABLE KEYS */;
-INSERT INTO `md_cart` VALUES (10,'4842c99956da0b86f060f2b867beaf0afe96ac8868424872219cc94cc33efbc1','2020-04-24 09:43:50','a:2:{i:4;a:6:{s:2:\"id\";s:1:\"4\";s:8:\"category\";s:31:\"Вторая категория\";s:4:\"name\";s:63:\"Четвертый товар короткое описание\";s:5:\"count\";s:1:\"4\";s:4:\"cost\";d:25.07;s:3:\"url\";s:25:\"/shop/fourth-product.html\";}i:6;a:6:{s:2:\"id\";s:1:\"6\";s:8:\"category\";s:31:\"Вторая категория\";s:4:\"name\";s:57:\"Шестой товар короткое описание\";s:5:\"count\";i:1;s:4:\"cost\";i:32;s:3:\"url\";s:24:\"/shop/sixth-product.html\";}}','127.0.0.1');
+INSERT INTO `md_cart` VALUES (17,'4842c99956da0b86f060f2b867beaf0afe96ac8868424872219cc94cc33efbc1','2020-04-24 11:56:54','a:3:{i:4;a:6:{s:2:\"id\";s:1:\"4\";s:8:\"category\";s:31:\"Вторая категория\";s:4:\"name\";s:63:\"Четвертый товар короткое описание\";s:5:\"count\";i:1;s:4:\"cost\";d:25.07;s:3:\"url\";s:25:\"/shop/fourth-product.html\";}i:5;a:6:{s:2:\"id\";s:1:\"5\";s:8:\"category\";s:31:\"Вторая категория\";s:4:\"name\";s:55:\"Пятый товар короткое описание\";s:5:\"count\";s:2:\"13\";s:4:\"cost\";d:12.22;s:3:\"url\";s:24:\"/shop/fifth-product.html\";}i:6;a:6:{s:2:\"id\";s:1:\"6\";s:8:\"category\";s:31:\"Вторая категория\";s:4:\"name\";s:57:\"Шестой товар короткое описание\";s:5:\"count\";s:1:\"2\";s:4:\"cost\";i:32;s:3:\"url\";s:24:\"/shop/sixth-product.html\";}}','127.0.0.1');
 /*!40000 ALTER TABLE `md_cart` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -296,7 +296,6 @@ CREATE TABLE `md_shop` (
   `short` text NOT NULL,
   `meta_text` text NOT NULL,
   `category` varchar(255) NOT NULL,
-  `cost` float NOT NULL,
   `public_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `category` (`category`),
@@ -311,8 +310,37 @@ CREATE TABLE `md_shop` (
 
 LOCK TABLES `md_shop` WRITE;
 /*!40000 ALTER TABLE `md_shop` DISABLE KEYS */;
-INSERT INTO `md_shop` VALUES (1,'/shop/first-product.html','Первый товар из каталога продукции','Первый товар','','','Первый товар content','Первый товар description','Первый товар короткое описание','Первый товар content','Первая категория',45,'2020-04-23 20:51:15'),(2,'/shop/second-product.html','Второй товар из каталога продукции','Второй товар','','','Второй товар content','Второй товар description','Второй товар короткое описание','Второй товар content','Вторая категория',18.5,'2020-04-23 22:07:13'),(3,'/shop/third-product.html','Третий товар из каталога продукции','Третий товар','','','Третий товар content','Третий товар description','Третий товар короткое описание','Третий товар content','Вторая категория',23,'2020-04-23 22:40:53'),(4,'/shop/fourth-product.html','Четвертый товар из каталога продукции','Четвертый товар','','','Четвертый товар content','Четвертый товар description','Четвертый товар короткое описание','Четвертый товар content','Вторая категория',25.07,'2020-04-23 22:48:56'),(5,'/shop/fifth-product.html','Пятый товар из каталога продукции','Пятый товар','','','Пятый товар content','Пятый товар description','Пятый товар короткое описание','Пятый товар content','Вторая категория',12.22,'2020-04-23 22:50:09'),(6,'/shop/sixth-product.html','Шестой товар из каталога продукции','Шестой товар','','','Шестой товар content','Шестой товар description','Шестой товар короткое описание','Шестой товар content','Вторая категория',32,'2020-04-23 22:51:01');
+INSERT INTO `md_shop` VALUES (1,'/shop/first-product.html','Первый товар из каталога продукции','Первый товар','','','Первый товар content','Первый товар description','Первый товар короткое описание','Первый товар content','Первая категория','2020-04-23 20:51:15'),(2,'/shop/second-product.html','Второй товар из каталога продукции','Второй товар','','','Второй товар content','Второй товар description','Второй товар короткое описание','Второй товар content','Вторая категория','2020-04-23 22:07:13'),(3,'/shop/third-product.html','Третий товар из каталога продукции','Третий товар','','','Третий товар content','Третий товар description','Третий товар короткое описание','Третий товар content','Вторая категория','2020-04-23 22:40:53'),(4,'/shop/fourth-product.html','Четвертый товар из каталога продукции','Четвертый товар','','','Четвертый товар content','Четвертый товар description','Четвертый товар короткое описание','Четвертый товар content','Вторая категория','2020-04-23 22:48:56'),(5,'/shop/fifth-product.html','Пятый товар из каталога продукции','Пятый товар','','','Пятый товар content','Пятый товар description','Пятый товар короткое описание','Пятый товар content','Вторая категория','2020-04-23 22:50:09'),(6,'/shop/sixth-product.html','Шестой товар из каталога продукции','Шестой товар','','','Шестой товар content','Шестой товар description','Шестой товар короткое описание','Шестой товар content','Вторая категория','2020-04-23 22:51:01');
 /*!40000 ALTER TABLE `md_shop` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `md_shop_extended_product`
+--
+
+DROP TABLE IF EXISTS `md_shop_extended_product`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `md_shop_extended_product` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `parent_id` int(11) NOT NULL,
+  `product_heidht` varchar(255) NOT NULL,
+  `product_weight` varchar(255) NOT NULL,
+  `product_width` varchar(255) NOT NULL,
+  `cost` float NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `parent_id` (`parent_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `md_shop_extended_product`
+--
+
+LOCK TABLES `md_shop_extended_product` WRITE;
+/*!40000 ALTER TABLE `md_shop_extended_product` DISABLE KEYS */;
+INSERT INTO `md_shop_extended_product` VALUES (2,1,'','','',45),(3,2,'','','',18.5),(4,3,'','','',23),(5,4,'','','',25.07),(6,5,'','','',12.22),(7,6,'','','',32);
+/*!40000 ALTER TABLE `md_shop_extended_product` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -399,7 +427,7 @@ CREATE TABLE `md_users_login` (
   KEY `user_id` (`user_id`),
   KEY `key` (`key`),
   KEY `xauthtoken` (`xauthtoken`)
-) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -408,7 +436,7 @@ CREATE TABLE `md_users_login` (
 
 LOCK TABLES `md_users_login` WRITE;
 /*!40000 ALTER TABLE `md_users_login` DISABLE KEYS */;
-INSERT INTO `md_users_login` VALUES (21,1,'','178.130.37.64','2020-04-23 02:27:15','0c3b75d70dae04adbff7dd4e335fb3485fe285e0314e8f1e25a27b73e8f2020f'),(22,1,'','127.0.0.1','2020-04-23 19:49:50','e3100f137bfbb83154e3a98f8794abab2e7b53dc1cf400608bb465b3d45a91ef');
+INSERT INTO `md_users_login` VALUES (24,1,'','127.0.0.1','2020-04-24 11:07:00','52466b40bc74a309a37ae5f96ed07c010302b3b2ca839d61233f40341dc20dfc'),(25,1,'','127.0.0.1','2020-04-24 11:07:55','ab0f77193e8d36ebde673a57de0ed9a292e05bacd6b9cfbbd9cb6cb4759a1027');
 /*!40000 ALTER TABLE `md_users_login` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -421,4 +449,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-04-24 12:44:16
+-- Dump completed on 2020-04-24 14:57:54

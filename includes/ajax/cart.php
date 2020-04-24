@@ -37,9 +37,6 @@ if(isset($_POST['oper']) && $_POST['oper'] == 'save_cart'):
 			'ip'			=> $_SERVER['REMOTE_ADDR']	
 		]);
 	}
-	
-	// Удалить самые старые записи корзин
-	
 
 	die(json_encode([]));
 endif;
@@ -57,15 +54,22 @@ if(isset($_POST['oper']) && $_POST['oper'] == 'load_cart'):
 		$xauthtoken= $db->escape($_COOKIE['xauthtoken']);
 	}
 
-	$db->where("xauthtoken", $xauthtoken);
+	$md_shop_extended_product= $db->map('parent_id')->ArrayBuilder()->get('md_shop_extended_product');
+
+	$db->where("xauthtoken", $xauthtoken); // join
 	$md_cart= $db->getOne('md_cart');
 
 	if($db->count > 0) {
 		$cart= unserialize($md_cart['storage']);
-		die(json_encode( ['cart' => $cart] ));
+		
+		foreach($cart as &$product){
+			$product['cost']= $md_shop_extended_product[$product['id']]['cost'];
+		}
+		
+		die(json_encode( ['cart' => $cart, 'extended'=> $md_shop_extended_product] ));
 	}
 
-	die(json_encode(['cart'=>'0']));
+	die(json_encode(['cart'=>'0', 'extended'=> $md_shop_extended_product]));
 endif;
 
 
