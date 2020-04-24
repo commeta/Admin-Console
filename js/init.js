@@ -1,3 +1,5 @@
+'use strict';
+
 var ajax_url_path= '/ajax.php';
 var timer= false;
 var cart_order= {};
@@ -193,7 +195,6 @@ var cart_order= {};
 
 (function($) {	// Работа с корзиной 
 // Инициализация
-	'use strict';
 
 	function add_to_cart(el){ // Добавление в корзину
 		let id= $(el).attr('product-id');
