@@ -83,3 +83,8 @@ code {
 .order-count{
 	width: 80px
 }
+
+.modal .modal-body{
+	max-height: calc( 100vh - 200px);
+	overflow-y: auto;
+}

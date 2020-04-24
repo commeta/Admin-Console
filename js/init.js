@@ -201,10 +201,11 @@ function add_to_cart(el){ // Добавление в корзину
 	let cost= $(el).attr('product-cost');
 	let url= $(el).attr('product-url');
 	
-	
 	if(!cart_order[id]) { 
 		$(el).text(`В корзине: 1`);
 		$(el).toggleClass("btn-success btn-outline-secondary");
+	} else {
+		return;
 	}
 	
 	cart_order[id]= {
