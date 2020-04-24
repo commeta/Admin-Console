@@ -1,5 +1,7 @@
 'use strict';
 
+var ajax_url_path= '/ajax.php';
+var timer= false;
 
 // Пример отлова ошибок, log файл: /temp/front-error.log
 (function($) { 
@@ -10,7 +12,7 @@
 		data['src']= url + ' ' + message + ' ' + lineNumber;
 
 		$.ajax({ // Обработчик /includes/ajax/send-message.php
-			url:'/ajax.php',
+			url: ajax_url_path,
 			data: data,
 			type:'post'
 		});
@@ -41,7 +43,7 @@
 		}
 		
 		$.ajax({
-			url:'/ajax.php',
+			url: ajax_url_path,
 			data: data,
 			type:'post',
 			success:function(data){
@@ -100,7 +102,7 @@
 			
 			data.append( 'oper', 'send_files' );
 			$.ajax({
-				url         : '/ajax.php',
+				url: ajax_url_path,
 				type        : 'POST',
 				data        : data,
 				cache       : false,
@@ -164,7 +166,7 @@
 					$data['oper']= $(form).attr('id');
 					
 					$.ajax({ // Обработчик: /includes/ajax/send-message.php
-						url:'/ajax.php',
+						url: ajax_url_path,
 						data: $data,
 						type:'post',
 						success:function(data){
@@ -297,7 +299,7 @@ $('#cart-link').click(function(){ // Клик по корзине, вывод с
 		
 		$(`a[product-id=${id}]`).text(`В корзине: ${count}`);
 		
-		for (var order in cart_order) {
+		for (var order in cart_order) { // Обход корзины
 			let result= +cart_order[order].cost * +cart_order[order].count;
 			price += +result;
 			countResult += +cart_order[order].count;
@@ -306,8 +308,11 @@ $('#cart-link').click(function(){ // Клик по корзине, вывод с
 		$(this).closest('table').find('.countProducts').html( `${countResult}` );
 		
 		$("#cart").text( `${countResult}` );
+		
+		saveCartTimer();
 	});
 	
+	saveCartTimer();
 	return false;
 });
 
@@ -341,7 +346,61 @@ function newModal(title,body,buttons){ // Рендер модального ок
 }
 
 
+function saveCartTimer(){
+	if(timer) { // Сохраним на сервере
+		clearTimeout(timer);
+		timer= setTimeout(saveCart,1000);
+	} else {
+		timer= setTimeout(saveCart,1000);
+	}
+}
 
+function saveCart(){
+	var data = {};
+	data['cart']= JSON.stringify( cart_order ) ;
+	data['oper']= 'save_cart';
+	
+	$.ajax({
+		url: ajax_url_path,
+		dataType: "json",
+		data: data,
+		type: "post",
+		success:  function (data) {
+			console.log("save success");
+		},
+		error: function (jqXHR, textStatus, errorThrown) {
+			console.log("save error");
+		}
+	});
+}
+
+$(document).ready(function() {
+	var data = {};
+	data['oper']= 'load_cart';
+	
+	$.ajax({
+		url: ajax_url_path,
+		dataType: "json",
+		data: data,
+		type: "post",
+		success:  function (data) {
+			cart_order= data.cart;
+			let countResult= 0;
+			
+			for (var order in cart_order) {
+				countResult += +cart_order[order].count;
+				let id= cart_order[order].id;
+				
+				$(`a[product-id=${id}]`).text(`В корзине: ${+cart_order[order].count}`);
+				$(`a[product-id=${id}]`).toggleClass("btn-success btn-outline-secondary");
+			}
+			$("#cart").text( `${countResult}` );
+		},
+		error: function (jqXHR, textStatus, errorThrown) {
+			console.log("save error");
+		}
+	});
+});
 
 
 //################################
