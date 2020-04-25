@@ -305,6 +305,21 @@ var ajax_url_path= '/ajax.php';
 						</li>
 				`);
 			}
+			
+			$(ul).append(`
+					<li class="list-group-item d-flex justify-content-between bg-light">
+						<div class="text-success">
+							<h6 class="my-0">Промо код</h6>
+							<small>Активирован</small>
+						</div>
+						<span class="text-success">-5</span>
+					</li>
+					<li class="list-group-item d-flex justify-content-between">
+						<span>Итого (РУБЛИ)</span>
+						<strong>${ float2str(get_price_products_in_cart() - 5) }</strong>
+					</li>
+			`);
+			
 		});
 		$(".cart-chekout .badge-pill").text( get_count_products_in_cart() );
 	}
