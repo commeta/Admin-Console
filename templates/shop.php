@@ -41,7 +41,7 @@ if($request_url['path'] == '/shop/') { // Если это раздел
 	}
 	
 	$db->where('parent_id', $parents, 'in'); // Доп параметры товара
-	$md_shop_extended_product= $db->map('parent_id')->ArrayBuilder()->get('md_shop_extended_product', null, ['id','parent_id','cost', 'balance']);
+	$md_shop_extended_product= $db->map('parent_id')->ArrayBuilder()->get('md_shop_extended_product', null, ['id','parent_id','cost', 'balance', 'reserved']);
 		
 	require_once(pages_dir.'chanks/header.php');
 	require_once(pages_dir.'chanks/shop.php');

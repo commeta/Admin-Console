@@ -258,10 +258,10 @@ var ajax_url_path= '/ajax.php';
 
 	function float2str( float ){ // Форматирует дробь в строку, добавляет символ рубль
 		let result;
-		if( float - Math.floor(float) === 0 ){
-			result= float + "-00 &#8381";
+		if( +float - Math.floor(+float) === 0 ){
+			result= +float + "-00 &#8381";
 		} else {
-			result= float.toFixed(2) + " &#8381";
+			result= +float.toFixed(2) + " &#8381";
 		}
 		return result.replace('.','-');
 	}
@@ -380,7 +380,7 @@ var ajax_url_path= '/ajax.php';
 				return;
 			}
 			
-			if(+extended_product[id].balance < count) {
+			if(+extended_product[id].balance - +extended_product[id].reserved < count) {
 				$(this).val(extended_product[id].balance);
 				return;
 			}
