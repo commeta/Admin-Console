@@ -58,5 +58,4 @@ var likes= {
 	parents: JSON.parse(`<?=json_encode($parents)?>`),
 	likesrc: 'portfolio'
 };
-console.log( likes );
 </script>
