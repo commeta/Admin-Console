@@ -1,4 +1,4 @@
-<main role="main" class="">
+<main role="main" class="portfolio">
 	
 	<section class="jumbotron text-center bg-light">
 		<div class="container">
@@ -37,7 +37,7 @@ foreach($md_portfolio as $v){ // Вывод карточек
 								<div class="btn-group">
 									<a class="btn btn-sm btn-outline-secondary" href="{$v['friendly_url']}">Просмотр</a>
 								</div>
-								<small class="text-muted">9 mins</small>
+								<small class="text-muted like" like-id="{$v['id']}"><span>0</span> <a href="#">Лайк</a></small>
 							</div>
 						</div>
 					</div>
@@ -52,3 +52,11 @@ PORTFOLIO;
 	</div>
 
 </main>
+
+<script>
+var likes= {
+	parents: JSON.parse(`<?=json_encode($parents)?>`),
+	likesrc: 'portfolio'
+};
+console.log( likes );
+</script>

@@ -95,7 +95,8 @@ if(isset($_POST['oper']) && $_POST['oper'] == 'save_like'):
 	}
 	
 	$tables= [
-		'shop'=>'md_shop_like'
+		'shop'=> 'md_shop_like',
+		'portfolio'=> 'md_portfolio_like'
 	];
 	
 	$db->where("xauthtoken", $xauthtoken);
@@ -122,9 +123,12 @@ endif;
 
 
 
+
+
 if(isset($_POST['oper']) && $_POST['oper'] == 'load_like'):
 	$tables= [
-		'shop'=>'md_shop_like'
+		'shop'=> 'md_shop_like',
+		'portfolio'=> 'md_portfolio_like'
 	];
 	
 	$likes= [];
@@ -139,5 +143,7 @@ if(isset($_POST['oper']) && $_POST['oper'] == 'load_like'):
 
 	die(json_encode(['likes'=>$likes]));
 endif;
+
+
 
 ?>

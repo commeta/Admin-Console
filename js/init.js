@@ -493,7 +493,6 @@ var ajax_url_path= '/ajax.php';
 (function($) {	// Работа с лайками
 	'use strict';
 
-
 	$('.like a').click(function(e) { // Клик лайк
 		e.preventDefault();
 
@@ -518,8 +517,8 @@ var ajax_url_path= '/ajax.php';
 		});
 	});
 	
-	//$(document).ready(function() { 
-		// Загрузка лайков, с сервера
+	
+	if(typeof(likes) != "undefined" && likes !== null) { // Загрузка лайков, с сервера
 		var data = {};
 		data['oper']= 'load_like';
 		data['like_src']= likes['likesrc'];
@@ -541,8 +540,8 @@ var ajax_url_path= '/ajax.php';
 				console.log("save error");
 			}
 		});
-	//});
-	
+	}
+
 
 })(jQuery);
 
