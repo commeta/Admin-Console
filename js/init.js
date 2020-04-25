@@ -269,8 +269,6 @@ var ajax_url_path= '/ajax.php';
 
 	// Обработчики
 	function add_to_cart(el){ // Добавление в корзину по клику
-		e.preventDefault();
-		
 		let id= $(el).attr('product-id');
 
 		if(!cart_order[id]) $(el).text(`В корзине: 1`).toggleClass("btn-success btn-outline-secondary");
@@ -329,7 +327,7 @@ var ajax_url_path= '/ajax.php';
 		$(".cart-chekout .badge-pill").text( get_count_products_in_cart() );
 	}
 
-	$('#cart-link').click(function(){ // Клик по корзине, вывод списка товаров
+	$('#cart-link').click(function(e){ // Клик по корзине, вывод списка товаров
 		e.preventDefault();
 		
 		if($.isEmptyObject(cart_order)) return;
@@ -478,7 +476,7 @@ var ajax_url_path= '/ajax.php';
 		});
 		
 		$('.add_to_cart').click(function(el){ // Событие по кнопке добавить в корзину
-			e.preventDefault();
+			el.preventDefault();
 			
 			add_to_cart(this);
 			return false;
