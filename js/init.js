@@ -289,7 +289,7 @@ var ajax_url_path= '/ajax.php';
 		saveCart();
 	}
 
-	function cartChekoutRender(){
+	function cartChekoutRender(){ // Корзина с формой отправки на странице заполнения платежных данных
 		$(".cart-chekout").find('ul').each(function(index, value) {
 			$(this).html('');
 			let ul= this;
@@ -321,6 +321,9 @@ var ajax_url_path= '/ajax.php';
 			`);
 			
 		});
+		
+		
+		$("#cart-chekout-order").val( JSON.stringify( cart_order ) );
 		$(".cart-chekout .badge-pill").text( get_count_products_in_cart() );
 	}
 

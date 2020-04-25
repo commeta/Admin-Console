@@ -58,7 +58,7 @@ require_once('chanks/header.php');
 
 				<form class="card p-2">
 					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Promo code">
+						<input type="text" class="form-control" placeholder="Промо код">
 						<div class="input-group-append">
 							<button type="submit" class="btn btn-secondary ">Отправить</button>
 						</div>
@@ -253,6 +253,7 @@ require_once('chanks/header.php');
 						</div>
 					</div>
 					<hr class="mb-4">
+					<input type="hidden" id="cart-chekout-order">
 					<button class="btn btn-primary btn-lg btn-block" type="submit">Продолжить оформление заказа</button>
 				</form>
 			</div>
