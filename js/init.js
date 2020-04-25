@@ -280,6 +280,8 @@ var ajax_url_path= '/ajax.php';
 			name: $(el).attr('product-name'),
 			count: 1,
 			cost: extended_product[id].cost,
+			balance: extended_product[id].balance,
+			reserved: extended_product[id].reserved,
 			url: $(el).attr('product-url')
 		}
 
@@ -367,7 +369,6 @@ var ajax_url_path= '/ajax.php';
 		let buttons= `
 			<button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
 			<a class="btn btn-primary" href="/chekout.html">Оформить заказ</a>
-			
 		`;
 
 
@@ -401,8 +402,8 @@ var ajax_url_path= '/ajax.php';
 				return;
 			}
 			
-			if(+extended_product[id].balance - +extended_product[id].reserved < count) {
-				$(this).val(extended_product[id].balance);
+			if(+cart_order[id].balance - +cart_order[id].reserved < count) {
+				$(this).val(cart_order[id].balance);
 				return;
 			}
 			
