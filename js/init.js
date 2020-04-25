@@ -215,8 +215,8 @@ var ajax_url_path= '/ajax.php';
 	function get_price_products_in_cart(){ // Общая стоимость объектов вкорзине
 		let price= 0;
 		for (var order in cart_order) { // Обход корзины
-			let result= +cart_order[order].cost * +cart_order[order].count;
-			price += +result;
+			let result= +cart_order[order].cost.toFixed(2) * +cart_order[order].count;
+			price += +result.toFixed(2);
 		}
 		return price;
 	}
@@ -360,7 +360,7 @@ var ajax_url_path= '/ajax.php';
 					<td><a href="${cart_order[order].url}" target="_BLANC">${cart_order[order].name}</a> (<i>${cart_order[order].category}</i>)</td>
 					<td>${float2str(+cart_order[order].cost)}</td>
 					<td><input class="form-control order-count" type="number" value="${cart_order[order].count}"></td>
-					<td>${float2str(result)}</td>
+					<td>${float2str(+result)}</td>
 					<td><a href="#" class="delete-item">X</a></td>
 				</tr>
 			`;
