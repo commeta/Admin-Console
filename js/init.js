@@ -225,24 +225,17 @@ var ajax_url_path= '/ajax.php';
 
 	function add_to_cart(el){ // Добавление в корзину
 		let id= $(el).attr('product-id');
-		let category= $(el).attr('product-category');
-		let name= $(el).attr('product-name');
-		let url= $(el).attr('product-url');
 
-		if(!cart_order[id]) { 
-			$(el).text(`В корзине: 1`);
-			$(el).toggleClass("btn-success btn-outline-secondary");
-		} else {
-			return;
-		}
+		if(!cart_order[id]) $(el).text(`В корзине: 1`).toggleClass("btn-success btn-outline-secondary");
+		else return;
 		
 		cart_order[id]= { 
 			id: id, 
-			category: category,
-			name: name,
+			category: $(el).attr('product-category'),
+			name: $(el).attr('product-name'),
 			count: 1,
 			cost: extended_product[id].cost,
-			url: url
+			url: $(el).attr('product-url')
 		}
 
 		$("#cart").text( `${get_count_products_in_cart()}` );
@@ -351,8 +344,6 @@ var ajax_url_path= '/ajax.php';
 		return false;
 	});
 	
-	
-
 	function newModal(title,body,buttons){ // Рендер модального окна
 		$('#modal .modal-title').text(title);
 		$('#modal .modal-body').html(body);
@@ -388,16 +379,6 @@ var ajax_url_path= '/ajax.php';
 		});
 	}
 
-
-	function num2str(n, text_forms) {  // Склонение числовых значений
-		//  num2str(1, ['минута', 'минуты', 'минут']);
-		n = Math.abs(n) % 100; var n1 = n % 10;
-		if (n > 10 && n < 20) { return text_forms[2]; }
-		if (n1 > 1 && n1 < 5) { return text_forms[1]; }
-		if (n1 == 1) { return text_forms[0]; }
-		return text_forms[2];
-	}
-
 	function float2str( float ){ // Форматирует дробь в строку, добавляет символ рубль
 		let result;
 		if( float - Math.floor(float) === 0 ){
@@ -407,7 +388,6 @@ var ajax_url_path= '/ajax.php';
 		}
 		return result.replace('.','-');
 	}
-
 
 	$(document).ready(function() { 
 		// Загрузка корзины, и параметров товаров, с сервера
@@ -423,19 +403,19 @@ var ajax_url_path= '/ajax.php';
 				if(data.extended !== 0) { // Дополнительные поля товара
 					extended_product= data.extended;
 				}
+				
 				if(data.cart == 0) return;
 				
 				cart_order= data.cart;
-				let countResult= 0;
 				
 				for (var order in cart_order) {
-					countResult += +cart_order[order].count;
 					let id= cart_order[order].id;
 					
 					$(`a[product-id=${id}]`).text(`В корзине: ${+cart_order[order].count}`);
 					$(`a[product-id=${id}]`).toggleClass("btn-success btn-outline-secondary");
 				}
-				$("#cart").text( `${countResult}` );
+				
+				$("#cart").text( `${get_count_products_in_cart()}` );
 			},
 			error: function (jqXHR, textStatus, errorThrown) {
 				console.log("save error");
@@ -450,6 +430,20 @@ var ajax_url_path= '/ajax.php';
 
 })(jQuery);
 
+
+
+
+
+
+
+	function num2str(n, text_forms) {  // Склонение числовых значений
+		//  num2str(1, ['минута', 'минуты', 'минут']);
+		n = Math.abs(n) % 100; var n1 = n % 10;
+		if (n > 10 && n < 20) { return text_forms[2]; }
+		if (n1 > 1 && n1 < 5) { return text_forms[1]; }
+		if (n1 == 1) { return text_forms[0]; }
+		return text_forms[2];
+	}
 
 
 
