@@ -313,18 +313,19 @@ var ajax_url_path= '/ajax.php';
 			count++
 			
 			countProducts += +cart_order[order].count;
+			
 			products +=`
 				<tr prod-id="${cart_order[order].id}">
 					<td>${count}</td>
 					<td><a href="${cart_order[order].url}" target="_BLANC">${cart_order[order].name}</a> (<i>${cart_order[order].category}</i>)</td>
-					<td>${float2str(cart_order[order].cost)}</td>
+					<td>${float2str(+cart_order[order].cost)}</td>
 					<td><input class="form-control order-count" type="number" value="${cart_order[order].count}"></td>
 					<td>${float2str(result)}</td>
-					<td><a href="#" class="delete-item">x</a></td>
+					<td><a href="#" class="delete-item">X</a></td>
 				</tr>
 			`;
 		}
-		
+
 		products += `
 			<tfoot>
 				<tr>
@@ -348,8 +349,8 @@ var ajax_url_path= '/ajax.php';
 			<button type="button" class="btn btn-primary">Оформить заказ</button>
 		`;
 
+
 		newModal(`Корзина`, body, buttons);
-		
 		
 		// Обработчики таблицы корзины
 		$( ".delete-item" ).unbind();
