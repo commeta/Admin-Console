@@ -215,8 +215,8 @@ var ajax_url_path= '/ajax.php';
 	function get_price_products_in_cart(){ // Общая стоимость объектов вкорзине
 		let price= 0;
 		for (var order in cart_order) { // Обход корзины
-			let result= +cart_order[order].cost.toFixed(2) * +cart_order[order].count;
-			price += +result.toFixed(2);
+			let result= +cart_order[order].cost * +cart_order[order].count;
+			price += +result;
 		}
 		return price;
 	}
