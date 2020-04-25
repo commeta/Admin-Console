@@ -283,7 +283,7 @@ var ajax_url_path= '/ajax.php';
 			url: $(el).attr('product-url')
 		}
 
-		$("#cart").text( `${get_count_products_in_cart()}` );
+		$("#cart").text( get_count_products_in_cart() );
 		saveCart();
 	}
 
@@ -359,9 +359,9 @@ var ajax_url_path= '/ajax.php';
 			delete cart_order[id];
 			
 			$(`a[product-id=${id}]`).text(`В корзину`).toggleClass("btn-success btn-outline-secondary");
-			$(".table-cart .price").html( `${float2str(get_price_products_in_cart())}` );
-			$(".table-cart .countProducts").html( `${get_count_products_in_cart()}` );
-			$("#cart").text( `${get_count_products_in_cart()}` );
+			$(".table-cart .price").html( float2str(get_price_products_in_cart()) );
+			$(".table-cart .countProducts").html( get_count_products_in_cart() );
+			$("#cart").text( get_count_products_in_cart() );
 			
 			if($.isEmptyObject(cart_order)) $(".table-cart").remove();
 			
@@ -374,16 +374,23 @@ var ajax_url_path= '/ajax.php';
 			let id= $(this).closest('tr').attr("prod-id");
 			let cost= +cart_order[id].cost;
 
-			if(count < 1){ $(this).val(1); return;}
-			if(+extended_product[id].balance < count){ $(this).val(extended_product[id].balance); return;}
+			if(count < 1) {
+				$(this).val(1);
+				return;
+			}
+			
+			if(+extended_product[id].balance < count) {
+				$(this).val(extended_product[id].balance);
+				return;
+			}
 			
 			cart_order[id].count= count;
 			$(this).closest('td').next().html( float2str(cost * count) );
 			
 			$(`a[product-id=${id}]`).text(`В корзине: ${count}`);
-			$(".table-cart .price").html( `${float2str(get_price_products_in_cart())}` );
-			$(".table-cart .countProducts").html( `${get_count_products_in_cart()}` );
-			$("#cart").text( `${get_count_products_in_cart()}` );
+			$(".table-cart .price").html( float2str(get_price_products_in_cart()) );
+			$(".table-cart .countProducts").html( get_count_products_in_cart() );
+			$("#cart").text( get_count_products_in_cart() );
 			
 			saveCartTimer();
 		});
@@ -407,7 +414,7 @@ var ajax_url_path= '/ajax.php';
 				if(data.cart == 0) return;
 				
 				cart_order= data.cart;
-				$("#cart").text( `${get_count_products_in_cart()}` );
+				$("#cart").text( get_count_products_in_cart() );
 
 				for (var order in cart_order) {
 					let id= cart_order[order].id;
