@@ -121,4 +121,23 @@ if(isset($_POST['oper']) && $_POST['oper'] == 'save_like'):
 endif;
 
 
+
+if(isset($_POST['oper']) && $_POST['oper'] == 'load_like'):
+	$tables= [
+		'shop'=>'md_shop_like'
+	];
+	
+	$likes= [];
+	if( array_key_exists($_POST['like_src'], $tables) ){
+		foreach(json_decode($db->escape($_POST['ids']), true) as $id){
+			$db->where("like_id", $id );
+			$likes[$id]= $db->getValue($tables[$_POST['like_src']], "count(*)");
+		}
+	} else {
+		die(json_encode(['error_table_not_found']));
+	}
+
+	die(json_encode(['likes'=>$likes]));
+endif;
+
 ?>

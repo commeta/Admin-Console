@@ -518,31 +518,33 @@ var ajax_url_path= '/ajax.php';
 				console.log("save error");
 			}
 		});
-		
-		
-
 	});
-
-//like
-/*
-	$('.reviews_bot .usefull a').click(function(e) { // Клик лайк в отзывах 
-		e.preventDefault();
-		var msg_id= $(this).attr('msg_id');
+	
+	//$(document).ready(function() { 
+		// Загрузка лайков, с сервера
+		var data = {};
+		data['oper']= 'load_like';
+		data['like_src']= likes['likesrc'];
+		data['ids']= JSON.stringify( likes['parents'] );
 		
-		var form_data= new FormData();
-		form_data.append("oper", 'like_message');
-		form_data.append("msg_id", msg_id );
-		
-		saveAndLoadAjaxContent(form_data, function(data){
-			if( $.cookie('xauthtoken_comments') == undefined ){
-				$.cookie('xauthtoken_comments', data.xauthtoken_comments, { expires: 9999, path: '/' });
+		$.ajax({
+			url: ajax_url_path,
+			dataType: "json",
+			data: data,
+			type: "post",
+			success: function (data) {
+				if(typeof(data.likes) != "undefined" && data.likes !== null) {
+					for (var id in data.likes) {
+						$(`.like[like-id=${id}] span`).text(`${data.likes[id]}`);
+					}
+				}
+			},
+			error: function (jqXHR, textStatus, errorThrown) {
+				console.log("save error");
 			}
-
-			$('.usefull a[msg_id="'+ msg_id +'"]').text('Полезно (' + data.cnt + ')');
 		});
-		return false;
-	});
-*/
+	//});
+	
 
 })(jQuery);
 
