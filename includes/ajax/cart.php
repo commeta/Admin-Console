@@ -4,7 +4,7 @@
 ########################################################################
 
 
-
+// Работа с корзиной, beta - набросок
 ########################################################################
 if(isset($_POST['oper']) && $_POST['oper'] == 'save_cart'):
 	// Пример обработчика корзины, заглушка!
@@ -63,7 +63,9 @@ if(isset($_POST['oper']) && $_POST['oper'] == 'load_cart'):
 		$cart= unserialize($md_cart['storage']);
 		
 		foreach($cart as &$product){
-			$product['cost']= $md_shop_extended_product[$product['id']]['cost'];
+			if( isset($md_shop_extended_product[$product['id']]) ){
+				$product= $product + $md_shop_extended_product[$product['id']];
+			}
 		}
 		
 		die(json_encode( ['cart' => $cart, 'extended'=> $md_shop_extended_product] ));

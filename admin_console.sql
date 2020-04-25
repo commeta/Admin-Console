@@ -78,7 +78,7 @@ CREATE TABLE `md_cart` (
 
 LOCK TABLES `md_cart` WRITE;
 /*!40000 ALTER TABLE `md_cart` DISABLE KEYS */;
-INSERT INTO `md_cart` VALUES (17,'4842c99956da0b86f060f2b867beaf0afe96ac8868424872219cc94cc33efbc1','2020-04-24 11:56:54','a:3:{i:4;a:6:{s:2:\"id\";s:1:\"4\";s:8:\"category\";s:31:\"Вторая категория\";s:4:\"name\";s:63:\"Четвертый товар короткое описание\";s:5:\"count\";i:1;s:4:\"cost\";d:25.07;s:3:\"url\";s:25:\"/shop/fourth-product.html\";}i:5;a:6:{s:2:\"id\";s:1:\"5\";s:8:\"category\";s:31:\"Вторая категория\";s:4:\"name\";s:55:\"Пятый товар короткое описание\";s:5:\"count\";s:2:\"13\";s:4:\"cost\";d:12.22;s:3:\"url\";s:24:\"/shop/fifth-product.html\";}i:6;a:6:{s:2:\"id\";s:1:\"6\";s:8:\"category\";s:31:\"Вторая категория\";s:4:\"name\";s:57:\"Шестой товар короткое описание\";s:5:\"count\";s:1:\"2\";s:4:\"cost\";i:32;s:3:\"url\";s:24:\"/shop/sixth-product.html\";}}','127.0.0.1');
+INSERT INTO `md_cart` VALUES (17,'4842c99956da0b86f060f2b867beaf0afe96ac8868424872219cc94cc33efbc1','2020-04-24 11:56:54','a:4:{i:3;a:10:{s:2:\"id\";s:1:\"3\";s:8:\"category\";s:31:\"Вторая категория\";s:4:\"name\";s:57:\"Третий товар короткое описание\";s:5:\"count\";i:7;s:4:\"cost\";i:23;s:3:\"url\";s:24:\"/shop/third-product.html\";s:9:\"parent_id\";i:3;s:14:\"product_heidht\";s:0:\"\";s:14:\"product_weight\";s:0:\"\";s:13:\"product_width\";s:0:\"\";}i:4;a:10:{s:2:\"id\";s:1:\"4\";s:8:\"category\";s:31:\"Вторая категория\";s:4:\"name\";s:63:\"Четвертый товар короткое описание\";s:5:\"count\";s:1:\"3\";s:4:\"cost\";d:25.07;s:3:\"url\";s:25:\"/shop/fourth-product.html\";s:9:\"parent_id\";i:4;s:14:\"product_heidht\";s:0:\"\";s:14:\"product_weight\";s:0:\"\";s:13:\"product_width\";s:0:\"\";}i:5;a:10:{s:2:\"id\";s:1:\"5\";s:8:\"category\";s:31:\"Вторая категория\";s:4:\"name\";s:55:\"Пятый товар короткое описание\";s:5:\"count\";i:15;s:4:\"cost\";d:12.22;s:3:\"url\";s:24:\"/shop/fifth-product.html\";s:9:\"parent_id\";i:5;s:14:\"product_heidht\";s:0:\"\";s:14:\"product_weight\";s:0:\"\";s:13:\"product_width\";s:0:\"\";}i:6;a:10:{s:2:\"id\";s:1:\"6\";s:8:\"category\";s:31:\"Вторая категория\";s:4:\"name\";s:57:\"Шестой товар короткое описание\";s:5:\"count\";s:1:\"2\";s:4:\"cost\";i:32;s:3:\"url\";s:24:\"/shop/sixth-product.html\";s:9:\"parent_id\";i:6;s:14:\"product_heidht\";s:0:\"\";s:14:\"product_weight\";s:0:\"\";s:13:\"product_width\";s:0:\"\";}}','127.0.0.1');
 /*!40000 ALTER TABLE `md_cart` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -427,7 +427,7 @@ CREATE TABLE `md_users_login` (
   KEY `user_id` (`user_id`),
   KEY `key` (`key`),
   KEY `xauthtoken` (`xauthtoken`)
-) ENGINE=MyISAM AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -436,7 +436,7 @@ CREATE TABLE `md_users_login` (
 
 LOCK TABLES `md_users_login` WRITE;
 /*!40000 ALTER TABLE `md_users_login` DISABLE KEYS */;
-INSERT INTO `md_users_login` VALUES (24,1,'','127.0.0.1','2020-04-24 11:07:00','52466b40bc74a309a37ae5f96ed07c010302b3b2ca839d61233f40341dc20dfc'),(25,1,'','127.0.0.1','2020-04-24 11:07:55','ab0f77193e8d36ebde673a57de0ed9a292e05bacd6b9cfbbd9cb6cb4759a1027');
+INSERT INTO `md_users_login` VALUES (24,1,'','127.0.0.1','2020-04-24 11:07:00','52466b40bc74a309a37ae5f96ed07c010302b3b2ca839d61233f40341dc20dfc'),(25,1,'','127.0.0.1','2020-04-24 11:07:55','ab0f77193e8d36ebde673a57de0ed9a292e05bacd6b9cfbbd9cb6cb4759a1027'),(26,1,'','127.0.0.1','2020-04-24 22:06:39','283b02c4dd305470fe8229a3717339e2e285e141aaa04ef2fe1708cae7cc5da7');
 /*!40000 ALTER TABLE `md_users_login` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -449,4 +449,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-04-24 14:57:54
+-- Dump completed on 2020-04-25  3:22:31

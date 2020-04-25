@@ -196,13 +196,32 @@ var ajax_url_path= '/ajax.php';
 
 
 
-(function($) {	// Работа с корзиной 
+(function($) {	// Работа с корзиной, beta - набросок
 	'use strict';
 
 	// Инициализация
 	var timer= false;
 	var cart_order= {};
 	var extended_product= {};
+
+
+	function get_count_products_in_cart(){ // Общее количество объектов вкорзине
+		let countResult= 0;
+		for (var order in cart_order) { // Обход корзины
+			countResult += +cart_order[order].count;
+		}
+		return countResult;
+	}
+
+	function get_price_products_in_cart(){ // Общая стоимость объектов вкорзине
+		let price= 0;
+		for (var order in cart_order) { // Обход корзины
+			let result= +cart_order[order].cost * +cart_order[order].count;
+			price += +result;
+		}
+		return price;
+	}
+
 
 	function add_to_cart(el){ // Добавление в корзину
 		let id= $(el).attr('product-id');
@@ -226,11 +245,7 @@ var ajax_url_path= '/ajax.php';
 			url: url
 		}
 
-		let countResult= 0;
-		for (var order in cart_order) { // Обход корзины
-			countResult += +cart_order[order].count;
-		}
-		$("#cart").text( `${countResult}` );
+		$("#cart").text( `${get_count_products_in_cart()}` );
 		saveCart();
 	}
 
@@ -247,6 +262,7 @@ var ajax_url_path= '/ajax.php';
 					<th>Цена</th>
 					<th>Количество</th>
 					<th>Стоимость</th>
+					<th></th>
 				</tr>
 			</thead>
 		`;
@@ -258,15 +274,14 @@ var ajax_url_path= '/ajax.php';
 			
 			countProducts += +cart_order[order].count;
 			products +=`
-				<tbody>
-					<tr>
-						<td>${count}</td>
-						<td><a href="${cart_order[order].url}" target="_BLANC">${cart_order[order].name}</a> (<i>${cart_order[order].category}</i>)</td>
-						<td>${float2str(cart_order[order].cost)}</td>
-						<td><input product-id="${cart_order[order].id}" class="form-control order-count" type="number" value="${cart_order[order].count}"></td>
-						<td>${float2str(result)}</td>
-					</tr>
-				</tbody>
+				<tr>
+					<td>${count}</td>
+					<td><a href="${cart_order[order].url}" target="_BLANC">${cart_order[order].name}</a> (<i>${cart_order[order].category}</i>)</td>
+					<td>${float2str(cart_order[order].cost)}</td>
+					<td><input product-id="${cart_order[order].id}" class="form-control order-count" type="number" value="${cart_order[order].count}"></td>
+					<td>${float2str(result)}</td>
+					<td><a href="#" prod-id="${cart_order[order].id}" class="delete-item">x</a></td>
+				</tr>
 			`;
 		}
 		
@@ -278,13 +293,14 @@ var ajax_url_path= '/ajax.php';
 					<th></th>
 					<th class="countProducts">${countProducts}</th>
 					<th class="price">${float2str(price)}</th>
+					<th></th>
 				</tr>
 			</tfoot>
 		`;
 
 		let body= `
 			<p>Содержимое корзины:</p>
-			<table class="table table-striped table-sm">${products}</table>
+			<table class="table table-striped table-sm table-cart">${products}</table>
 		`;
 
 		let buttons= `
@@ -292,34 +308,41 @@ var ajax_url_path= '/ajax.php';
 			<button type="button" class="btn btn-primary">Оформить заказ</button>
 		`;
 
-		//newModal(`В корзине: ${countProducts} ${num2str(count, ['позиция', 'позиции', 'позиций'])}`, body, buttons);
 		newModal(`Корзина`, body, buttons);
 		
-		$(".order-count").bind('keydown keyup change input propertychange cut copy paste',function(e){ // Расчет стоимости
-			let $nextTD = $(this).closest('td').next();
-			let $prevTD = $(this).closest('td').prev();
-			let count= $(this).val();
+		$( ".delete-item" ).bind( "click", function(e) { // Удаление товара из корзины
+			let id= $(this).attr("prod-id");
+			$(this).closest('tr').remove();
+			
+			delete cart_order[id];
+			
+			$(`a[product-id=${id}]`).text(`В корзину`).toggleClass("btn-success btn-outline-secondary");
+			$(".table-cart .price").html( `${float2str(get_price_products_in_cart())}` );
+			$(".table-cart .countProducts").html( `${get_count_products_in_cart()}` );
+			$("#cart").text( `${get_count_products_in_cart()}` );
+			
+			saveCartTimer();
+		});
+		
+		
+		$(".order-count").bind('keydown keyup change input propertychange cut copy paste',function(e){ // Расчет стоимости корзины
+			let count= +$(this).val();
 			let id= $(this).attr("product-id");
-			let cost= cart_order[id].cost;
-			let result= cost * count;
-			let price= 0;
-			let countResult= 0;
+			
+			let cost= +cart_order[id].cost;
 
+			if(count < 0){
+				$(this).val(0);
+				return;
+			}
+			
 			cart_order[id].count= count;
-			$nextTD.html( float2str(result) );
+			$(this).closest('td').next().html( float2str(cost * count) );
 			
 			$(`a[product-id=${id}]`).text(`В корзине: ${count}`);
-			
-			for (var order in cart_order) { // Обход корзины
-				let result= +cart_order[order].cost * +cart_order[order].count;
-				price += +result;
-				countResult += +cart_order[order].count;
-			}
-
-			$(this).closest('table').find('.price').html( `${float2str(price)}` );
-			$(this).closest('table').find('.countProducts').html( `${countResult}` );
-			
-			$("#cart").text( `${countResult}` );
+			$(".table-cart .price").html( `${float2str(get_price_products_in_cart())}` );
+			$(".table-cart .countProducts").html( `${get_count_products_in_cart()}` );
+			$("#cart").text( `${get_count_products_in_cart()}` );
 			
 			saveCartTimer();
 		});
@@ -327,7 +350,8 @@ var ajax_url_path= '/ajax.php';
 		saveCartTimer();
 		return false;
 	});
-
+	
+	
 
 	function newModal(title,body,buttons){ // Рендер модального окна
 		$('#modal .modal-title').text(title);
