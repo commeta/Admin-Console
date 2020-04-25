@@ -18,6 +18,10 @@ if(isset($_POST['oper']) && $_POST['oper'] == 'save_cart'):
 	}
 
 	$cart= json_decode($_POST['cart'], true);
+	foreach($cart as &$c){
+		foreach($c as &$p) $p= $db->escape($p);
+	}
+	
 	$cart= serialize($cart);
 
 	$db->where("xauthtoken", $xauthtoken);
@@ -59,18 +63,19 @@ if(isset($_POST['oper']) && $_POST['oper'] == 'load_cart'):
 
 	if($db->count > 0) {
 		$cart= unserialize($md_cart['storage']);
-		
-		$ids= array_keys($cart); // Доп параметры товара
-		$db->where('parent_id', $ids, 'in');
-		$md_shop_extended_product= $db->map('parent_id')->ArrayBuilder()->get('md_shop_extended_product', null, ['id','parent_id','cost']);
-		
-		foreach($cart as &$product){
-			if( isset($md_shop_extended_product[$product['id']]) ){
-				$product= $product + $md_shop_extended_product[$product['id']];
+		if(count($cart) > 0){
+			$ids= array_keys($cart); // Доп параметры товара
+			$db->where('parent_id', $ids, 'in');
+			$md_shop_extended_product= $db->map('parent_id')->ArrayBuilder()->get('md_shop_extended_product', null, ['id','parent_id','cost']);
+			
+			foreach($cart as &$product){
+				if( $db->count > 0 && isset($md_shop_extended_product[$product['id']]) ){
+					$product= $product + $md_shop_extended_product[$product['id']];
+				}
 			}
-		}
-		
-		die(json_encode( ['cart' => $cart] ));
+			
+			die(json_encode( ['cart' => $cart] ));
+		} 
 	}
 
 	die(json_encode(['cart'=> 0]));

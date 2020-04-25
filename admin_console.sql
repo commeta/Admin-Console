@@ -78,7 +78,7 @@ CREATE TABLE `md_cart` (
 
 LOCK TABLES `md_cart` WRITE;
 /*!40000 ALTER TABLE `md_cart` DISABLE KEYS */;
-INSERT INTO `md_cart` VALUES (17,'4842c99956da0b86f060f2b867beaf0afe96ac8868424872219cc94cc33efbc1','2020-04-24 11:56:54','a:6:{i:1;a:6:{s:2:\"id\";s:1:\"1\";s:8:\"category\";s:31:\"Первая категория\";s:4:\"name\";s:57:\"Первый товар короткое описание\";s:5:\"count\";i:1;s:4:\"cost\";i:45;s:3:\"url\";s:24:\"/shop/first-product.html\";}i:2;a:7:{s:2:\"id\";s:1:\"2\";s:8:\"category\";s:31:\"Вторая категория\";s:4:\"name\";s:57:\"Второй товар короткое описание\";s:5:\"count\";i:1;s:4:\"cost\";d:18.5;s:3:\"url\";s:25:\"/shop/second-product.html\";s:9:\"parent_id\";i:2;}i:3;a:6:{s:2:\"id\";s:1:\"3\";s:8:\"category\";s:31:\"Вторая категория\";s:4:\"name\";s:57:\"Третий товар короткое описание\";s:5:\"count\";i:1;s:4:\"cost\";i:23;s:3:\"url\";s:24:\"/shop/third-product.html\";}i:4;a:7:{s:2:\"id\";s:1:\"4\";s:8:\"category\";s:31:\"Вторая категория\";s:4:\"name\";s:63:\"Четвертый товар короткое описание\";s:5:\"count\";i:1;s:4:\"cost\";d:25.07;s:3:\"url\";s:25:\"/shop/fourth-product.html\";s:9:\"parent_id\";i:4;}i:5;a:7:{s:2:\"id\";s:1:\"5\";s:8:\"category\";s:31:\"Вторая категория\";s:4:\"name\";s:55:\"Пятый товар короткое описание\";s:5:\"count\";i:1;s:4:\"cost\";d:12.22;s:3:\"url\";s:24:\"/shop/fifth-product.html\";s:9:\"parent_id\";i:5;}i:6;a:7:{s:2:\"id\";s:1:\"6\";s:8:\"category\";s:31:\"Вторая категория\";s:4:\"name\";s:57:\"Шестой товар короткое описание\";s:5:\"count\";i:9;s:4:\"cost\";i:32;s:3:\"url\";s:24:\"/shop/sixth-product.html\";s:9:\"parent_id\";i:6;}}','127.0.0.1');
+INSERT INTO `md_cart` VALUES (17,'4842c99956da0b86f060f2b867beaf0afe96ac8868424872219cc94cc33efbc1','2020-04-24 11:56:54','a:3:{i:4;a:6:{s:2:\"id\";s:1:\"4\";s:8:\"category\";s:31:\"Вторая категория\";s:4:\"name\";s:63:\"Четвертый товар короткое описание\";s:5:\"count\";s:1:\"1\";s:4:\"cost\";s:5:\"25.07\";s:3:\"url\";s:25:\"/shop/fourth-product.html\";}i:5;a:6:{s:2:\"id\";s:1:\"5\";s:8:\"category\";s:31:\"Вторая категория\";s:4:\"name\";s:55:\"Пятый товар короткое описание\";s:5:\"count\";s:1:\"1\";s:4:\"cost\";s:5:\"12.22\";s:3:\"url\";s:24:\"/shop/fifth-product.html\";}i:6;a:6:{s:2:\"id\";s:1:\"6\";s:8:\"category\";s:31:\"Вторая категория\";s:4:\"name\";s:57:\"Шестой товар короткое описание\";s:5:\"count\";s:1:\"1\";s:4:\"cost\";s:2:\"32\";s:3:\"url\";s:24:\"/shop/sixth-product.html\";}}','127.0.0.1');
 /*!40000 ALTER TABLE `md_cart` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -449,4 +449,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-04-25  5:33:51
+-- Dump completed on 2020-04-25  5:50:01

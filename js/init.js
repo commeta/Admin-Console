@@ -202,7 +202,6 @@ var ajax_url_path= '/ajax.php';
 	// Инициализация
 	var timer= false;
 	var cart_order= {};
-	//var extended_product= {};
 
 	// Библиотека
 	function get_count_products_in_cart(){ // Общее количество объектов вкорзине
