@@ -39,6 +39,9 @@ if($request_url['path'] == '/shop/') { // Если это раздел
 	foreach($md_shop as $v){
 		if( !in_array($v['category'],$category) ) $category[]= $v['category'];
 	}
+	
+	$db->where('parent_id', $parents, 'in'); // Доп параметры товара
+	$md_shop_extended_product= $db->map('parent_id')->ArrayBuilder()->get('md_shop_extended_product', null, ['id','parent_id','cost']);
 		
 	require_once(pages_dir.'chanks/header.php');
 	require_once(pages_dir.'chanks/shop.php');

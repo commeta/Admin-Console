@@ -52,3 +52,7 @@ SHOP;
 	</div>
 
 </main>
+
+<script>
+var extended_product = JSON.parse(`<?=json_encode($md_shop_extended_product)?>`);
+</script>

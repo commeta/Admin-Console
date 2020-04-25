@@ -202,7 +202,7 @@ var ajax_url_path= '/ajax.php';
 	// Инициализация
 	var timer= false;
 	var cart_order= {};
-	var extended_product= {};
+	//var extended_product= {};
 
 	// Библиотека
 	function get_count_products_in_cart(){ // Общее количество объектов вкорзине
@@ -313,13 +313,13 @@ var ajax_url_path= '/ajax.php';
 			
 			countProducts += +cart_order[order].count;
 			products +=`
-				<tr>
+				<tr prod-id="${cart_order[order].id}">
 					<td>${count}</td>
 					<td><a href="${cart_order[order].url}" target="_BLANC">${cart_order[order].name}</a> (<i>${cart_order[order].category}</i>)</td>
 					<td>${float2str(cart_order[order].cost)}</td>
-					<td><input product-id="${cart_order[order].id}" class="form-control order-count" type="number" value="${cart_order[order].count}"></td>
+					<td><input class="form-control order-count" type="number" value="${cart_order[order].count}"></td>
 					<td>${float2str(result)}</td>
-					<td><a href="#" prod-id="${cart_order[order].id}" class="delete-item">x</a></td>
+					<td><a href="#" class="delete-item">x</a></td>
 				</tr>
 			`;
 		}
@@ -353,7 +353,7 @@ var ajax_url_path= '/ajax.php';
 		// Обработчики таблицы корзины
 		$( ".delete-item" ).unbind();
 		$( ".delete-item" ).bind( "click", function(e) { // Удаление товара из корзины
-			let id= $(this).attr("prod-id");
+			let id= $(this).closest('tr').attr("prod-id");
 			$(this).closest('tr').remove();
 			delete cart_order[id];
 			
@@ -370,7 +370,7 @@ var ajax_url_path= '/ajax.php';
 		$( ".order-count" ).unbind();
 		$(".order-count").bind('keydown keyup change input propertychange cut copy paste',function(e){ // Расчет стоимости корзины
 			let count= +$(this).val();
-			let id= $(this).attr("product-id");
+			let id= $(this).closest('tr').attr("prod-id");
 			let cost= +cart_order[id].cost;
 
 			if(count < 1){
@@ -405,10 +405,6 @@ var ajax_url_path= '/ajax.php';
 			data: data,
 			type: "post",
 			success: function (data) {
-				if(data.extended !== 0) { // Дополнительные поля товара
-					extended_product= data.extended;
-				}
-				
 				if(data.cart == 0) return;
 				
 				cart_order= data.cart;
@@ -439,15 +435,15 @@ var ajax_url_path= '/ajax.php';
 
 
 
-
-	function num2str(n, text_forms) {  // Склонение числовых значений
-		//  num2str(1, ['минута', 'минуты', 'минут']);
-		n = Math.abs(n) % 100; var n1 = n % 10;
-		if (n > 10 && n < 20) { return text_forms[2]; }
-		if (n1 > 1 && n1 < 5) { return text_forms[1]; }
-		if (n1 == 1) { return text_forms[0]; }
-		return text_forms[2];
-	}
+/*
+function num2str(n, text_forms) {  // Склонение числовых значений
+	//  num2str(1, ['минута', 'минуты', 'минут']);
+	n = Math.abs(n) % 100; var n1 = n % 10;
+	if (n > 10 && n < 20) { return text_forms[2]; }
+	if (n1 > 1 && n1 < 5) { return text_forms[1]; }
+	if (n1 == 1) { return text_forms[0]; }
+	return text_forms[2];
+}
 
 
 
@@ -511,6 +507,6 @@ var ajax_url_path= '/ajax.php';
 	  scheduleMeasurement();
 	}
 })(jQuery);
-
+*/
 
 

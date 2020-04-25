@@ -54,13 +54,15 @@ if(isset($_POST['oper']) && $_POST['oper'] == 'load_cart'):
 		$xauthtoken= $db->escape($_COOKIE['xauthtoken']);
 	}
 
-	$md_shop_extended_product= $db->map('parent_id')->ArrayBuilder()->get('md_shop_extended_product');
-
 	$db->where("xauthtoken", $xauthtoken); // join
 	$md_cart= $db->getOne('md_cart');
 
 	if($db->count > 0) {
 		$cart= unserialize($md_cart['storage']);
+		
+		$ids= array_keys($cart); // Доп параметры товара
+		$db->where('parent_id', $ids, 'in');
+		$md_shop_extended_product= $db->map('parent_id')->ArrayBuilder()->get('md_shop_extended_product', null, ['id','parent_id','cost']);
 		
 		foreach($cart as &$product){
 			if( isset($md_shop_extended_product[$product['id']]) ){
@@ -68,10 +70,10 @@ if(isset($_POST['oper']) && $_POST['oper'] == 'load_cart'):
 			}
 		}
 		
-		die(json_encode( ['cart' => $cart, 'extended'=> $md_shop_extended_product] ));
+		die(json_encode( ['cart' => $cart] ));
 	}
 
-	die(json_encode(['cart'=>'0', 'extended'=> $md_shop_extended_product]));
+	die(json_encode(['cart'=> 0]));
 endif;
 
 
