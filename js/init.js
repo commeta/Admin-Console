@@ -288,6 +288,8 @@ var ajax_url_path= '/ajax.php';
 	}
 
 	$('#cart-link').click(function(){ // Клик по корзине, вывод списка товаров
+		if($.isEmptyObject(cart_order)) return;
+		
 		let count= 0;
 		let countProducts= 0;
 		let price= 0;

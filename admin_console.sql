@@ -69,7 +69,7 @@ CREATE TABLE `md_cart` (
   PRIMARY KEY (`id`),
   KEY `xauthtoken` (`xauthtoken`),
   KEY `event_time` (`event_time`)
-) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -78,7 +78,7 @@ CREATE TABLE `md_cart` (
 
 LOCK TABLES `md_cart` WRITE;
 /*!40000 ALTER TABLE `md_cart` DISABLE KEYS */;
-INSERT INTO `md_cart` VALUES (19,'4842c99956da0b86f060f2b867beaf0afe96ac8868424872219cc94cc33efbc1','2020-04-25 03:08:54','a:2:{i:5;a:6:{s:2:\"id\";s:1:\"5\";s:8:\"category\";s:31:\"Вторая категория\";s:4:\"name\";s:55:\"Пятый товар короткое описание\";s:5:\"count\";s:1:\"4\";s:4:\"cost\";s:5:\"12.22\";s:3:\"url\";s:24:\"/shop/fifth-product.html\";}i:6;a:6:{s:2:\"id\";s:1:\"6\";s:8:\"category\";s:31:\"Вторая категория\";s:4:\"name\";s:57:\"Шестой товар короткое описание\";s:5:\"count\";s:1:\"7\";s:4:\"cost\";s:2:\"32\";s:3:\"url\";s:24:\"/shop/sixth-product.html\";}}','127.0.0.1');
+INSERT INTO `md_cart` VALUES (20,'4842c99956da0b86f060f2b867beaf0afe96ac8868424872219cc94cc33efbc1','2020-04-25 03:14:11','a:1:{i:6;a:6:{s:2:\"id\";s:1:\"6\";s:8:\"category\";s:31:\"Вторая категория\";s:4:\"name\";s:57:\"Шестой товар короткое описание\";s:5:\"count\";s:1:\"1\";s:4:\"cost\";s:2:\"32\";s:3:\"url\";s:24:\"/shop/sixth-product.html\";}}','127.0.0.1');
 /*!40000 ALTER TABLE `md_cart` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -450,4 +450,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-04-25  6:10:13
+-- Dump completed on 2020-04-25  6:14:33
