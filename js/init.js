@@ -372,10 +372,8 @@ var ajax_url_path= '/ajax.php';
 			let id= $(this).closest('tr').attr("prod-id");
 			let cost= +cart_order[id].cost;
 
-			if(count < 1){
-				$(this).val(1);
-				return;
-			}
+			if(count < 1){ $(this).val(1); return;}
+			if(+extended_product[id].balance < count){ $(this).val(extended_product[id].balance); return;}
 			
 			cart_order[id].count= count;
 			$(this).closest('td').next().html( float2str(cost * count) );

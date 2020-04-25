@@ -66,7 +66,7 @@ if(isset($_POST['oper']) && $_POST['oper'] == 'load_cart'):
 		if(count($cart) > 0){
 			$ids= array_keys($cart); // Доп параметры товара
 			$db->where('parent_id', $ids, 'in');
-			$md_shop_extended_product= $db->map('parent_id')->ArrayBuilder()->get('md_shop_extended_product', null, ['id','parent_id','cost']);
+			$md_shop_extended_product= $db->map('parent_id')->ArrayBuilder()->get('md_shop_extended_product', null, ['id','parent_id','cost', 'balance']);
 			
 			foreach($cart as &$product){
 				if( $db->count > 0 && isset($md_shop_extended_product[$product['id']]) ){
