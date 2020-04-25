@@ -287,6 +287,26 @@ var ajax_url_path= '/ajax.php';
 		saveCart();
 	}
 
+	function cartChekoutRender(){
+		$(".cart-chekout").find('ul').each(function(index, value) {
+			$(this).html('');
+			let ul= this;
+			
+			for (var order in cart_order) {
+				$(ul).append(`
+						<li class="list-group-item d-flex justify-content-between lh-condensed">
+							<div>
+								<h6 class="my-0">${cart_order[order].name}</h6>
+								<small class="text-muted">${cart_order[order].category}</small>
+							</div>
+							<span class="text-muted">${cart_order[order].count}</span>
+						</li>
+				`);
+			}
+		});
+		$(".cart-chekout .badge-pill").text( get_count_products_in_cart() );
+	}
+
 	$('#cart-link').click(function(){ // Клик по корзине, вывод списка товаров
 		if($.isEmptyObject(cart_order)) return;
 		
@@ -346,7 +366,8 @@ var ajax_url_path= '/ajax.php';
 
 		let buttons= `
 			<button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-			<button type="button" class="btn btn-primary">Оформить заказ</button>
+			<a class="btn btn-primary" href="/chekout.html">Оформить заказ</a>
+			
 		`;
 
 
@@ -423,6 +444,8 @@ var ajax_url_path= '/ajax.php';
 					$(`a[product-id=${id}]`).text(`В корзине: ${+cart_order[order].count}`);
 					$(`a[product-id=${id}]`).toggleClass("btn-success btn-outline-secondary");
 				}
+				
+				cartChekoutRender();
 			},
 			error: function (jqXHR, textStatus, errorThrown) {
 				console.log("save error");

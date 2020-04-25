@@ -7,7 +7,7 @@ if($cached_page = get_cached_page( $urlMd5 )){
 
 require_once('chanks/header.php');
 ?>
-<main role="main" class="">
+<main role="main" class="chekout">
 	<div class="container">
 		<div class="py-5 text-center">
 			<img class="d-block mx-auto mb-4" src="/img/bootstrap-solid.svg" alt="" width="72" height="72">
@@ -16,7 +16,7 @@ require_once('chanks/header.php');
 		</div>
 
 		<div class="row">
-			<div class="col-md-4 order-md-2 mb-4">
+			<div class="col-md-4 order-md-2 mb-4 cart-chekout">
 				<h4 class="d-flex justify-content-between align-items-center mb-3">
 					<span class="text-muted">Ваша корзина</span>
 					<span class="badge badge-secondary badge-pill">3</span>
