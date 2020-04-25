@@ -37,7 +37,7 @@ foreach($md_shop as $v){ // Вывод карточек
 									<a class="btn btn-sm btn-outline-secondary" href="{$v['friendly_url']}">Просмотр</a>
 									<a class="btn btn-sm btn-outline-secondary add_to_cart" href="#" product-url="{$v['friendly_url']}" product-id="{$v['id']}" product-category="{$v['category']}" product-name="{$v['short']}" >В корзину</a>
 								</div>
-								<small class="text-muted">0 like</small>
+								<small class="text-muted like" like-id="{$v['id']}"><span>0</span> <a href="#">Лайк</a></small>
 							</div>
 						</div>
 					</div>
@@ -54,5 +54,10 @@ SHOP;
 </main>
 
 <script>
-var extended_product = JSON.parse(`<?=json_encode($md_shop_extended_product)?>`);
+var extended_product= JSON.parse(`<?=json_encode($md_shop_extended_product)?>`);
+
+var likes= {
+	parents: JSON.parse(`<?=json_encode($parents)?>`),
+	likesrc: 'shop'
+};
 </script>

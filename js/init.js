@@ -269,6 +269,8 @@ var ajax_url_path= '/ajax.php';
 
 	// Обработчики
 	function add_to_cart(el){ // Добавление в корзину по клику
+		e.preventDefault();
+		
 		let id= $(el).attr('product-id');
 
 		if(!cart_order[id]) $(el).text(`В корзине: 1`).toggleClass("btn-success btn-outline-secondary");
@@ -328,6 +330,8 @@ var ajax_url_path= '/ajax.php';
 	}
 
 	$('#cart-link').click(function(){ // Клик по корзине, вывод списка товаров
+		e.preventDefault();
+		
 		if($.isEmptyObject(cart_order)) return;
 		
 		let count= 0;
@@ -395,6 +399,8 @@ var ajax_url_path= '/ajax.php';
 		// Обработчики таблицы корзины
 		$( ".delete-item" ).unbind();
 		$( ".delete-item" ).bind( "click", function(e) { // Удаление товара из корзины
+			e.preventDefault();
+			
 			let id= $(this).closest('tr').attr("prod-id");
 			$(this).closest('tr').remove();
 			delete cart_order[id];
@@ -472,6 +478,8 @@ var ajax_url_path= '/ajax.php';
 		});
 		
 		$('.add_to_cart').click(function(el){ // Событие по кнопке добавить в корзину
+			e.preventDefault();
+			
 			add_to_cart(this);
 			return false;
 		});
@@ -480,6 +488,63 @@ var ajax_url_path= '/ajax.php';
 })(jQuery);
 
 
+
+
+
+
+(function($) {	// Работа с лайками
+	'use strict';
+
+
+	$('.like a').click(function(e) { // Клик лайк
+		e.preventDefault();
+
+		var data = {};
+		data['oper']= 'save_like';
+		data['like_id']= $(this).closest('.like').attr('like-id');
+		data['like_src']= likes['likesrc'];
+		
+		$.ajax({
+			url: ajax_url_path,
+			dataType: "json",
+			data: data,
+			type: "post",
+			success:  function (data) {
+				if(typeof(data.likes) != "undefined" && data.likes !== null) {
+					$(`.like[like-id=${data.like_id}] span`).text(`${data.likes}`);
+				}
+			},
+			error: function (jqXHR, textStatus, errorThrown) {
+				console.log("save error");
+			}
+		});
+		
+		
+
+	});
+
+//like
+/*
+	$('.reviews_bot .usefull a').click(function(e) { // Клик лайк в отзывах 
+		e.preventDefault();
+		var msg_id= $(this).attr('msg_id');
+		
+		var form_data= new FormData();
+		form_data.append("oper", 'like_message');
+		form_data.append("msg_id", msg_id );
+		
+		saveAndLoadAjaxContent(form_data, function(data){
+			if( $.cookie('xauthtoken_comments') == undefined ){
+				$.cookie('xauthtoken_comments', data.xauthtoken_comments, { expires: 9999, path: '/' });
+			}
+
+			$('.usefull a[msg_id="'+ msg_id +'"]').text('Полезно (' + data.cnt + ')');
+		});
+		return false;
+	});
+*/
+
+})(jQuery);
 
 
 

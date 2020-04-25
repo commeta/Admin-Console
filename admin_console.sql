@@ -377,6 +377,33 @@ INSERT INTO `md_shop_img` VALUES (1,1,'','ПодписьПодпись изоб�
 UNLOCK TABLES;
 
 --
+-- Table structure for table `md_shop_like`
+--
+
+DROP TABLE IF EXISTS `md_shop_like`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `md_shop_like` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `xauthtoken` varchar(128) NOT NULL,
+  `like_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `xauthtoken` (`xauthtoken`),
+  KEY `parent_id` (`like_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `md_shop_like`
+--
+
+LOCK TABLES `md_shop_like` WRITE;
+/*!40000 ALTER TABLE `md_shop_like` DISABLE KEYS */;
+INSERT INTO `md_shop_like` VALUES (8,'4842c99956da0b86f060f2b867beaf0afe96ac8868424872219cc94cc33efbc1',5),(6,'4842c99956da0b86f060f2b867beaf0afe96ac8868424872219cc94cc33efbc1',6),(10,'4842c99956da0b86f060f2b867beaf0afe96ac8868424872219cc94cc33efbc1',4);
+/*!40000 ALTER TABLE `md_shop_like` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `md_users`
 --
 
@@ -451,4 +478,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-04-25 10:04:28
+-- Dump completed on 2020-04-25 11:36:11
