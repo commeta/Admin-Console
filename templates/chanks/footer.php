@@ -31,11 +31,13 @@
 // массив с путями до js файлов
 $js_array = array(
 	'js/jquery.min.js',
+	'js/jquery-migrate.min.js',
 	'js/popper.min.js',
 	'js/holder.min.js',
 	'js/bootstrap.min.js',
 	'js/jquery.fancybox.min.js',
 	'js/isotope.pkgd.min.js',
+	'js/jquery.flexslider-min.js',
 	'js/init.js'
 );
 // вызываем функцию сжатия

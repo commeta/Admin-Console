@@ -235,7 +235,7 @@ CREATE TABLE `md_portfolio_img` (
   KEY `parent_id` (`parent_id`),
   KEY `img_type` (`img_type`),
   KEY `img_order` (`img_order`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -244,7 +244,7 @@ CREATE TABLE `md_portfolio_img` (
 
 LOCK TABLES `md_portfolio_img` WRITE;
 /*!40000 ALTER TABLE `md_portfolio_img` DISABLE KEYS */;
-INSERT INTO `md_portfolio_img` VALUES (1,1,'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==','Нет звука приятнее, чем старческий скрип Амстердама','gallery',1),(3,3,'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==','Глубокий уровень погружения определил дальнейшее развитие','gallery',2),(4,4,'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==','Доблесть наших правозащитников разочаровала','gallery',3),(2,2,'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==','Может показаться странным, но объемы выросли','gallery',4);
+INSERT INTO `md_portfolio_img` VALUES (1,1,'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==','Нет звука приятнее, чем старческий скрип Амстердама','gallery',1),(3,3,'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==','Глубокий уровень погружения определил дальнейшее развитие','gallery',1),(4,4,'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==','Доблесть наших правозащитников разочаровала','gallery',1),(2,2,'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==','Может показаться странным, но объемы выросли','gallery',1),(5,4,'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==','Частотность поисковых запросов одухотворила всех причастных','gallery',2),(6,4,'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==','Финансовый мир очнулся: высококачественный прототип будущего проекта бодрит!','gallery',3),(7,4,'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==','Свободу слова не задушить, пусть даже в провинциях ещё есть чем поживиться','gallery',4),(8,4,'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==','Неподкупность государственных СМИ расставила все точки над i','gallery',5),(9,4,'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==','Сложно сказать, почему кровь стынет в жилах','gallery',6),(10,4,'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==','Близость к государственным границам ни к чему нас не обязывает','gallery',7),(11,4,'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==','Мелочь, а приятно: героям были возданы соответствующие почести','gallery',8),(12,4,'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==','Только сознание наших соотечественников не замутнено пропагандой','gallery',9),(13,4,'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==','И по сей день в центральных регионах звучит перекатами старческий скрип Амстердама','',10);
 /*!40000 ALTER TABLE `md_portfolio_img` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -399,7 +399,7 @@ CREATE TABLE `md_shop_img` (
 
 LOCK TABLES `md_shop_img` WRITE;
 /*!40000 ALTER TABLE `md_shop_img` DISABLE KEYS */;
-INSERT INTO `md_shop_img` VALUES (1,1,'','ПодписьПодпись изображения товара','gallery',1),(3,3,'','Подпись изображения товара','gallery',1),(4,4,'','Подпись изображения товара','gallery',1),(7,7,'','Подпись изображения товара','gallery',1),(2,2,'','Подпись изображения товара','gallery',1),(5,5,'','Подпись изображения товара','gallery',1),(6,6,'','Подпись изображения товара','gallery',1);
+INSERT INTO `md_shop_img` VALUES (1,1,'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==','ПодписьПодпись изображения товара','gallery',1),(3,3,'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==','Подпись изображения товара','gallery',1),(4,4,'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==','Подпись изображения товара','gallery',1),(7,7,'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==','Подпись изображения товара','gallery',1),(2,2,'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==','Подпись изображения товара','gallery',1),(5,5,'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==','Подпись изображения товара','gallery',1),(6,6,'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==','Подпись изображения товара','gallery',1);
 /*!40000 ALTER TABLE `md_shop_img` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -483,7 +483,7 @@ CREATE TABLE `md_users_login` (
   KEY `user_id` (`user_id`),
   KEY `key` (`key`),
   KEY `xauthtoken` (`xauthtoken`)
-) ENGINE=MyISAM AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -492,7 +492,7 @@ CREATE TABLE `md_users_login` (
 
 LOCK TABLES `md_users_login` WRITE;
 /*!40000 ALTER TABLE `md_users_login` DISABLE KEYS */;
-INSERT INTO `md_users_login` VALUES (24,1,'','127.0.0.1','2020-04-24 11:07:00','52466b40bc74a309a37ae5f96ed07c010302b3b2ca839d61233f40341dc20dfc'),(25,1,'','127.0.0.1','2020-04-24 11:07:55','ab0f77193e8d36ebde673a57de0ed9a292e05bacd6b9cfbbd9cb6cb4759a1027'),(26,1,'','127.0.0.1','2020-04-24 22:06:39','283b02c4dd305470fe8229a3717339e2e285e141aaa04ef2fe1708cae7cc5da7');
+INSERT INTO `md_users_login` VALUES (27,1,'','127.0.0.1','2020-04-26 00:36:26','317a7ba0fa69d2c61ce05af24adb1601e479e69dda76a6f33b442bcfc7a47a19');
 /*!40000 ALTER TABLE `md_users_login` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -505,4 +505,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-04-25 13:06:49
+-- Dump completed on 2020-04-27  5:49:37

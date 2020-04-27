@@ -38,7 +38,7 @@ if($request_url['path'] == '/portfolio/') { // Если это раздел
 	foreach($md_portfolio as $v){
 		if( !in_array($v['category'],$category) ) $category[]= $v['category'];
 	}
-		
+	
 	require_once(pages_dir.'chanks/header.php');
 	require_once(pages_dir.'chanks/portfolio.php');
 } else {
@@ -63,11 +63,11 @@ if($request_url['path'] == '/portfolio/') { // Если это раздел
 		$md_portfolio_img= $db->get('md_portfolio_img');
 		if($db->count < 1) goto die404;
 		
-		$screenshot = array_filter($md_portfolio_img, fn($k) => $k['img_type'] == 'screenshot'); // Изображения для слайдера
+		$gallery = array_filter($md_portfolio_img, fn($k) => $k['img_type'] == 'gallery'); // Изображения для слайдера
 
 		// Навигация Влево - Вправо
 		$db->orderBy("public_time","Desc");
-		$portfolio= $db->get('md_portfolio', null, ['id','friendly_url','meta_h1']);
+		$portfolio= $db->get('md_portfolio', null, ['id','friendly_url','meta_h1', 'category', 'public_time', 'meta_title']);
 
 		$current= array_search($md_portfolio['id'], array_column($portfolio, 'id'));
 		$count_portfolio= count($portfolio);
@@ -100,5 +100,11 @@ die404:
 
 require_once(pages_dir.'chanks/footer.php');
 set_cached_page($urlMd5); // Сохраним страницу в кэше
+
+
+
+#######################################################################
+// Библиотека функций
+
 
 ?>

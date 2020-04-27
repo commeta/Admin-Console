@@ -67,11 +67,11 @@ if($request_url['path'] == '/shop/') { // Если это раздел
 		$md_shop_img= $db->get('md_shop_img');
 		if($db->count < 1) goto die404;
 		
-		$screenshot = array_filter($md_shop_img, fn($k) => $k['img_type'] == 'screenshot'); // Изображения для слайдера
+		$gallery = array_filter($md_shop_img, fn($k) => $k['img_type'] == 'gallery'); // Изображения для слайдера
 
 		// Навигация Влево - Вправо
 		$db->orderBy("public_time","Desc");
-		$shop= $db->get('md_shop', null, ['id','friendly_url','meta_h1']);
+		$shop= $db->get('md_shop', null, ['id','friendly_url','meta_h1','category']);
 
 		$current= array_search($md_shop['id'], array_column($shop, 'id'));
 		$count_shop= count($shop);

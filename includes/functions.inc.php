@@ -94,5 +94,39 @@ function print_server_stat($id,$time_start,$memory){ // Вывод статис�
 
 
 
+function print_post_category_menu($posts, $request_url){ // Вывод меню категорий в сайдбаре
+	// Категории
+	$category= [];
+	foreach($posts as $v){
+		if( !in_array($v['category'],$category) ) $category[]= $v['category'];
+	}
+	
+	foreach($category as $cat){ // Вывод ссылок постов блога, по категориям
+		$sub_cat= '';
+		$current= false;
+		
+		foreach($posts as $post){
+			if($post['category'] == $cat){
+				if($request_url['path'] == $post['friendly_url']){
+					$current= true;
+					$sub_cat .= sprintf('<li class="current-menu"><a href="%s">%s</a></li>',$post['friendly_url'],$post['meta_h1']);
+				} else {
+					$sub_cat .= sprintf('<li><a href="%s">%s</a></li>',$post['friendly_url'],$post['meta_h1']);
+				}
+			}
+		}
+		
+		if( $sub_cat != '' ){
+			if($current)
+				printf('<li class="children"><a href="#">%s</a><ul class="sub-menu">%s</ul></li>',
+					$cat,$sub_cat
+				);
+			else
+				printf('<li class="children"><a href="#">%s</a><ul class="sub-menu">%s</ul></li>',
+					$cat,$sub_cat
+				);
+		}
+	}
+}
 
 ?>

@@ -79,8 +79,4 @@ if(isset($_POST['oper']) && $_POST['oper'] == 'load_cart'):
 	die(json_encode(['cart'=> 0]));
 endif;
 
-
-
-
-
 ?>

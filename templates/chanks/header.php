@@ -18,6 +18,8 @@ $css_array = [
     'css/blog.css',
     'css/jquery.fancybox.min.css',
     'css/isotope.css',
+    'css/flexslider.css',
+    'css/flexslider-rtl-min.css',
     'css/style.css',
 ];
 // вызываем функцию сжатия
