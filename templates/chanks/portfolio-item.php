@@ -79,7 +79,7 @@ print_post_category_menu($portfolio, $request_url);
 					<div class="card-body d-flex flex-column align-items-start">
 						<strong class="d-inline-block mb-2 text-primary"><?=$portfolio[$prev]['category']?></strong>
 						<h3 class="mb-0"><a class="text-dark" href="<?=$portfolio[$prev]['friendly_url']?>"><?=$portfolio[$prev]['meta_h1']?></a></h3>
-						<div class="mb-1 text-muted"><?=strftime('%B %Y',strtotime($portfolio[$prev]['public_time']))?></div>
+						<div class="mb-1 text-muted"><?=strftime_rus('%e %B2 %Y',strtotime($portfolio[$prev]['public_time']))?></div>
 						<p class="card-text mb-auto"><?=$portfolio[$prev]['meta_title']?></p>
 						<a href="<?=$portfolio[$prev]['friendly_url']?>">Продолжить чтение</a>
 					</div>
@@ -91,7 +91,7 @@ print_post_category_menu($portfolio, $request_url);
 					<div class="card-body d-flex flex-column align-items-start">
 						<strong class="d-inline-block mb-2 text-success"><?=$portfolio[$next]['category']?></strong>
 						<h3 class="mb-0"><a class="text-dark" href="<?=$portfolio[$next]['friendly_url']?>"><?=$portfolio[$next]['meta_h1']?></a></h3>
-						<div class="mb-1 text-muted"><?=strftime('%B %Y',strtotime($portfolio[$next]['public_time']))?></div>
+						<div class="mb-1 text-muted"><?=strftime_rus('%e %B2 %Y',strtotime($portfolio[$next]['public_time']))?></div>
 						<p class="card-text mb-auto"><?=$portfolio[$next]['meta_title']?></p>
 						<a href="<?=$portfolio[$next]['friendly_url']?>">Продолжить чтение</a>
 					</div>
