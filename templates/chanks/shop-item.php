@@ -12,7 +12,7 @@
 			<div class="col-md-8 blog-main">
 				<h3 class="pb-3 mb-4 font-italic border-bottom"><?=$md_shop['meta_h1']?></h3>
 
-				<!-- Place somewhere in the <body> of your page -->
+				<!-- Place somewhere in the <slider> of your page -->
 				<div class="flexslider" id="f1" style="direction:rtl">
 					<ul class="slides">
 
@@ -49,15 +49,51 @@ SHOP;
 
 					</ul>
 				</div>
-			</div><!-- /.blog-main -->
+			</div><!-- /.shop-main -->
 
 			<aside class="col-md-4 blog-sidebar">
+				
 				<div class="p-3 mb-3 bg-light rounded">
 					<h4 class="font-italic">Описание</h4>
 					<p class="mb-0"><em>И нет сомнений,</em> что предприниматели в сети интернет объединены в целые кластеры себе подобных.</p>
 				</div>
+			
+				<div class="p-3 mb-3 bg-light rounded">
+					<h4 class="d-flex justify-content-between align-items-center mb-3">
+						<span class="text-muted">Характеристики товара</span>
+						<span class="badge badge-secondary badge-pill">3</span>
+					</h4>
+					<ul class="list-group mb-3">
+						<li class="list-group-item d-flex justify-content-between lh-condensed">
+							<div>
+								<h6 class="my-0">Высота</h6>
+								<small class="text-muted">в сантиметрах</small>
+							</div>
+							<span class="text-muted"><?=$md_shop_extended_product['product_heidht']?></span>
+						</li>
+						<li class="list-group-item d-flex justify-content-between lh-condensed">
+							<div>
+								<h6 class="my-0">Ширина</h6>
+								<small class="text-muted">в сантиметрах</small>
+							</div>
+							<span class="text-muted"><?=$md_shop_extended_product['product_width']?></span>
+						</li>
+						<li class="list-group-item d-flex justify-content-between lh-condensed">
+							<div>
+								<h6 class="my-0">Вес</h6>
+								<small class="text-muted">в граммах</small>
+							</div>
+							<span class="text-muted"><?=$md_shop_extended_product['product_weight']?></span>
+						</li>
+						<li class="list-group-item d-flex justify-content-between">
+							<span>Итого (РУБЛИ)</span>
+							<strong>20</strong>
+						</li>
+					</ul>
+				</div>
+								
 
-				<div class="p-3">
+				<div class="p-3 mb-3 bg-light rounded">
 					<h4 class="font-italic">Категории</h4>
 					<ol class="list-unstyled mb-0">
 

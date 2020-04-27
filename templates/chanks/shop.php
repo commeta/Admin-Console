@@ -32,11 +32,11 @@ foreach($md_shop as $v){ // Вывод карточек
 					<div class="card mb-4 shadow-sm">
 						<img class="card-img-top" data-src="{$img_gallery[$v['id']]['img_src']}" alt="{$img_gallery[$v['id']]['img_alt']}" width="348" height="225">
 						<div class="card-body">
-							<p class="card-text">{$v['short']}</p>
+							<p class="card-text">{$v['meta_h1']}</p>
 							<div class="d-flex justify-content-between align-items-center">
 								<div class="btn-group">
 									<a class="btn btn-sm btn-outline-secondary" href="{$v['friendly_url']}">Просмотр</a>
-									<a class="btn btn-sm btn-outline-secondary add_to_cart" href="#" product-url="{$v['friendly_url']}" product-id="{$v['id']}" product-category="{$v['category']}" product-name="{$v['short']}" >В корзину</a>
+									<a class="btn btn-sm btn-outline-secondary add_to_cart" href="#" product-url="{$v['friendly_url']}" product-id="{$v['id']}" product-short="{$v['short']}" product-name="{$v['meta_h1']}" >В корзину</a>
 								</div>
 								<small class="text-muted like" like-id="{$v['id']}"><span>0</span> <a href="#">Лайк</a></small>
 							</div>

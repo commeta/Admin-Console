@@ -276,7 +276,7 @@ var ajax_url_path= '/ajax.php';
 		
 		cart_order[id]= { 
 			id: id, 
-			category: $(el).attr('product-category'),
+			short: $(el).attr('product-short'),
 			name: $(el).attr('product-name'),
 			count: 1,
 			cost: extended_product[id].cost,
@@ -299,7 +299,7 @@ var ajax_url_path= '/ajax.php';
 						<li class="list-group-item d-flex justify-content-between lh-condensed">
 							<div>
 								<h6 class="my-0">${cart_order[order].name}</h6>
-								<small class="text-muted">${cart_order[order].category}</small>
+								<small class="text-muted">${cart_order[order].short}</small>
 							</div>
 							<span class="text-muted">${cart_order[order].count}</span>
 						</li>
@@ -359,7 +359,7 @@ var ajax_url_path= '/ajax.php';
 			products +=`
 				<tr prod-id="${cart_order[order].id}">
 					<td>${count}</td>
-					<td><a href="${cart_order[order].url}" target="_BLANC">${cart_order[order].name}</a> (<i>${cart_order[order].category}</i>)</td>
+					<td><a href="${cart_order[order].url}" target="_BLANC">${cart_order[order].name}</a> (<i>${cart_order[order].short}</i>)</td>
 					<td>${float2str(+cart_order[order].cost)}</td>
 					<td><input class="form-control order-count" type="number" value="${cart_order[order].count}"></td>
 					<td>${float2str(+result)}</td>

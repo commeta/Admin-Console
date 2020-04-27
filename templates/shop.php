@@ -28,10 +28,10 @@ if($request_url['path'] == '/shop/') { // Если это раздел
 	
 	// Создание массива изображений, с id родителя в качестве ключа
 	$img_gallery= []; 
-	$img_preview= [];
+	//$img_preview= [];
 	foreach($images as $v){
 		if($v['img_type'] == 'gallery') $img_gallery[$v['parent_id']]= $v;
-		if($v['img_type'] == 'slider') $img_preview[$v['parent_id']]= $v;
+		//if($v['img_type'] == 'slider') $img_preview[$v['parent_id']]= $v;
 	}
 
 	// Создание массива категорий
@@ -46,7 +46,7 @@ if($request_url['path'] == '/shop/') { // Если это раздел
 	require_once(pages_dir.'chanks/header.php');
 	require_once(pages_dir.'chanks/shop.php');
 } else {
-	if($page){ // Если это страница
+	if($page){ // Если это страница товара
 		$db->where('friendly_url', '/shop/' );
 		$md_meta= $db->getOne('md_meta');
 		if($db->count < 1) goto die404;
@@ -61,7 +61,7 @@ if($request_url['path'] == '/shop/') { // Если это раздел
 		$meta_keywords		= $md_shop['meta_keywords'];
 		$canonical			= siteUrl.$md_shop['friendly_url'];
 		$robots				= "index, follow";
-		
+				
 		// Изображения
 		$db->where('parent_id', $md_shop['id'] );
 		$md_shop_img= $db->get('md_shop_img');
@@ -90,7 +90,10 @@ if($request_url['path'] == '/shop/') { // Если это раздел
 		$next_img= array_search($shop[$next]['id'], array_column($md_shop_img, 'parent_id'));
 
 		// Дата
-		$public_time= strftime('%B, %Y',strtotime($md_shop['public_time']));		
+		//$public_time= strftime('%B, %Y',strtotime($md_shop['public_time']));	
+		
+		$db->where('parent_id', $md_shop['id'] ); // Доп параметры товара
+		$md_shop_extended_product= $db->getOne('md_shop_extended_product');
 		
 		require_once(pages_dir.'chanks/header.php');
 		require_once(pages_dir.'chanks/shop-item.php');
