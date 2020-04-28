@@ -117,8 +117,6 @@ function num2str(n, text_forms) {  // Склонение числовых зна
 
 
 
-
-
 // Example starter JavaScript for disabling form submissions if there are invalid fields
 (function($) {
 	'use strict';

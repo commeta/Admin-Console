@@ -225,6 +225,7 @@ html[xmlns] .flexslider .slides {
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
   border-radius: 20px;
+  font-size: 0;
 }
 .flex-control-paging li a:hover {
   background: #333;
