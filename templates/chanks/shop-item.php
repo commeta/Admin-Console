@@ -58,10 +58,9 @@ SHOP;
 					<p class="mb-0"><em>И нет сомнений,</em> что предприниматели в сети интернет объединены в целые кластеры себе подобных.</p>
 				</div>
 			
-				<div class="p-3 mb-3 bg-light rounded">
+				<div class="p-3 mb-3 bg-light rounded cart-property">
 					<h4 class="d-flex justify-content-between align-items-center mb-3">
 						<span class="text-muted">Характеристики товара</span>
-						<span class="badge badge-secondary badge-pill">3</span>
 					</h4>
 					<ul class="list-group mb-3">
 						<li class="list-group-item d-flex justify-content-between lh-condensed">
@@ -85,9 +84,19 @@ SHOP;
 							</div>
 							<span class="text-muted"><?=$md_shop_extended_product['product_weight']?></span>
 						</li>
+						<li class="list-group-item d-flex justify-content-between lh-condensed">
+							<div>
+								<h6 class="my-0">Количество</h6>
+								<small class="text-muted">штук</small>
+							</div>
+							<input class="form-control order-count" type="number" value="0">
+						</li>
+						<li class="list-group-item d-flex justify-content-between total-cost">
+							<span><b>Итого:</b></span>
+							<strong >00-00 &#8381 </strong>
+						</li>
 						<li class="list-group-item d-flex justify-content-between">
-							<span>Итого (РУБЛИ)</span>
-							<strong>20</strong>
+							<a class="btn btn-primary btn-lg btn-block" href="/chekout.html">Оформить заказ</a>
 						</li>
 					</ul>
 				</div>
@@ -118,5 +127,9 @@ SHOP;
 			</aside><!-- /.blog-sidebar -->
 		</div><!-- /.row -->		
 	</div>
-
 </main>
+
+<script>
+var ext_product= JSON.parse(`<?=json_encode($md_shop_extended_product)?>`);
+var product= JSON.parse(`<?=json_encode($md_shop)?>`);
+</script>
