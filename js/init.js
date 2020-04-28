@@ -265,7 +265,8 @@ window.isset = function(v_var) {
 		if( +float - Math.floor(+float) === 0 ){
 			result= +float + "-00 &#8381";
 		} else {
-			result= +float.toFixed(2) + " &#8381";
+			if( +float.toFixed(2).toString().split('.')[1][1] == '0' ) result= +float.toFixed(2) + "0 &#8381";
+			else result= +float.toFixed(2) + " &#8381";
 		}
 		return result.replace('.','-');
 	}
@@ -358,7 +359,7 @@ window.isset = function(v_var) {
 				let count= +$(this).val();
 				let id= ext_product['parent_id'];
 				let cost= +ext_product['cost'];
-				
+
 				if( !isset(cart_order[id]) ) {
 					cart_order[id]= { 
 						id: id, 
@@ -372,11 +373,16 @@ window.isset = function(v_var) {
 					}
 				}
 
+				let available= +cart_order[id].balance - +cart_order[id].reserved;
 				if(count <= 0) {
 					$(this).val(0);
 					delete cart_order[id];
 					count= 0;
 				} else {
+					if(available < count) {
+						count= available;
+						$(this).val(available);
+					}
 					cart_order[id].count= count;
 				}
 				
@@ -485,8 +491,9 @@ window.isset = function(v_var) {
 				return;
 			}
 			
-			if(+cart_order[id].balance - +cart_order[id].reserved < count) {
-				$(this).val(cart_order[id].balance);
+			let available= +cart_order[id].balance - +cart_order[id].reserved;
+			if(available < count) {
+				$(this).val(available);
 				return;
 			}
 			
