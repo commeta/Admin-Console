@@ -3,6 +3,7 @@
 // Чанк списка постов с пагинацией - /templates/chanks/blog.php
 // Чанк поста - /templates/chanks/blog-item.php
 
+
 $pageLimit = 2; // Постов на странице раздела, для пагинации
 
 $o_g=<<<OPEN_GRAPH
@@ -24,6 +25,12 @@ if($cached_page = get_cached_page( $urlMd5 )){
 	die($cached_page);
 }
 
+
+if($templates){ // Инициализация модуля алиасов url, для категорий: /category/[*.html]
+	$request_url['path']= str_ireplace($templates['alias'], $templates['template'], $request_url['path']);
+	$page= 1;
+}
+
 ############################
 if($request_url['path'] == '/blog/' || ctype_digit($page) ) { // Если это раздел блога
 	// Запрос страниц
@@ -33,6 +40,7 @@ if($request_url['path'] == '/blog/' || ctype_digit($page) ) { // Если это
 		$db->where('friendly_url', '/blog/' );
 		$md_meta= $db->getOne('md_meta');
 		if($db->count < 1) goto die404;
+		
 		
 		// Установка мета тегов
 		$meta_title			= $md_meta['meta_title'];
@@ -59,14 +67,13 @@ if($request_url['path'] == '/blog/' || ctype_digit($page) ) { // Если это
 		
 		$countItems = $db->getValue("md_blog", "count(*)");
 		$totalPages = ceil($countItems / $pageLimit);
-		
 		$page= 1;
 	}
 	
 	$db->orderBy("public_time","Desc"); // Список постов для меню в сайдбаре
 	$blog_posts= $db->get('md_blog', null, ['friendly_url','meta_h1','category']);
 	if($db->count < 1) goto die404;
-	
+
 	require_once(pages_dir.'chanks/header.php');
 	require_once(pages_dir.'chanks/blog.php');
 } else {

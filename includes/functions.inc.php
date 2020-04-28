@@ -57,6 +57,58 @@ $_SESSION['xauthtoken']= $xauthtoken;
 ########################################################################
 // Функции шаблонов
 
+function alias(){ // Алиасы, бета
+	global $request_url, $mod, $templates, $md_meta;
+
+	$db = MysqliDb::getInstance();
+	$request_url['path']= $db->escape($request_url['path']);
+	
+	$path_parts = pathinfo($request_url['path']);
+
+	if( $path_parts['dirname'] == '/' ) {
+		$alias= str_replace('/','',$path_parts['basename']);
+	}
+	else {
+		$alias= str_replace('/','',$path_parts['dirname']);
+	}
+
+	$db->where('alias', $alias ); 
+	$templates= $db->getOne('md_templates');
+	if($db->count < 1){
+		die("templates error");
+	}
+	
+	if( !isset($md_meta) ) {// Алиасы: взять из БД по псевдониму url
+		$db->where('friendly_url', "/".$templates['template']."/" );
+		$md_meta= $db->getOne('md_meta');
+		
+		if($db->count < 1){
+			die("templates error");
+		}
+		
+		$meta_title			= $md_meta['meta_title'];
+		$meta_h1			= $md_meta['meta_h1'];
+		$meta_description	= $md_meta['meta_description'];
+		$meta_keywords		= $md_meta['meta_keywords'];
+		
+		if($mod == 'index') $canonical= siteUrl.'/';
+		else $canonical= siteUrl.$md_meta['friendly_url'];
+		
+		$robots				= "index, follow";
+		$friendly			= true;
+	}
+	
+	$mod= str_replace('/','',$templates['template']);
+	
+	if( file_exists( root_path.pages_dir."$mod".".php" ) ){
+		return $mod;
+	}
+	
+	return false;
+}
+
+
+
 function print_server_stat($id,$time_start,$memory){ // Вывод статистки сервера
 	// БД
 	$db = MysqliDb::getInstance();

@@ -49,7 +49,7 @@ function float2str( $float ){ // Форматирует дробь в строк
 		$result= $float."-00 &#8381";
 	} else {
 		$check= explode('.', round($float, 2));
-		if( isset($check[1]) && $check[1] < 10 && strlen($check[1]) == 1  ) $result= round($float, 2)."0 &#8381";
+		if( isset($check[1]) && strlen($check[1]) == 1  ) $result= round($float, 2)."0 &#8381";
 		else $result= round($float, 2)." &#8381";
 	}
 	

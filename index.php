@@ -22,8 +22,12 @@ if(file_exists(pages_dir.$mod.".php")){
 	if( $friendly ){
 		require_once(pages_dir."friendly.php");
 	} else {
-		header("HTTP/1.0 404 Not Found");
-		require_once(pages_dir."404.php");	
+		if($mod= alias()){// По таблице алиасов, - для категорий: /category/[*.html]
+			require_once(root_path.pages_dir."$mod".".php");
+		} else {
+			header("HTTP/1.0 404 Not Found");
+			require_once(pages_dir."404.php");
+		}
 	}
 }
 
