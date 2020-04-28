@@ -1,5 +1,18 @@
 var ajax_url_path= '/ajax.php';
 
+window.isset = function(v_var) { // Проверка существования
+	if(typeof(v_var) == 'number'){ 
+		if(isNaN(v_var)){
+			return false;
+		}
+	}
+	if(typeof(v_var) == 'undefined' || v_var === null){
+		return false;
+	}
+	return true;
+};
+
+
 
 // Пример отлова ошибок, log файл: /temp/front-error.log
 (function($) { 
@@ -193,11 +206,6 @@ var ajax_url_path= '/ajax.php';
 
 
 
-window.isset = function(v_var) {
-  if(typeof(v_var) == 'number'){ if(isNaN(v_var)){return false;}}
-	if(typeof(v_var) == 'undefined' || v_var === null){return false;}
-	return true;
-};
 
 
 (function($) {	// Работа с корзиной, beta - набросок
@@ -374,12 +382,12 @@ window.isset = function(v_var) {
 				}
 
 				let available= +cart_order[id].balance - +cart_order[id].reserved;
-				if(count <= 0) {
+				if(count <= 0) {// Проверка на нуль
 					$(this).val(0);
 					delete cart_order[id];
 					count= 0;
 				} else {
-					if(available < count) {
+					if(available < count) {// Проверка остатков на складе с учетом резерва
 						count= available;
 						$(this).val(available);
 					}
@@ -486,13 +494,13 @@ window.isset = function(v_var) {
 			let id= $(this).closest('tr').attr("prod-id");
 			let cost= +cart_order[id].cost;
 
-			if(count < 1) {
+			if(count < 1) { // Проверка на нуль
 				$(this).val(1);
 				return;
 			}
 			
 			let available= +cart_order[id].balance - +cart_order[id].reserved;
-			if(available < count) {
+			if(available < count) { // Проверка остатков на складе с учетом резерва
 				$(this).val(available);
 				return;
 			}
