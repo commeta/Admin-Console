@@ -27,7 +27,6 @@ if($cached_page = get_cached_page( $urlMd5 )){
 
 if($templates){ // Инициализация модуля алиасов url, для категорий: /category/[*.html]
 	$request_url['path']= str_ireplace($templates['alias'], $templates['template'], $request_url['path']);
-	$page= 1;
 }
 
 // Выборка псевдонимов (Алиасы)
@@ -55,6 +54,7 @@ if($request_url['path'] == '/blog/' || ctype_digit($page) ) { // Если это
 		// set page limit to count results per page. 20 by default
 		$db->pageLimit = $pageLimit;
 		$db->orderBy("public_time","Desc");
+		
 		$blog = $db->arraybuilder()->paginate("md_blog", $page, ['id','friendly_url','meta_title','meta_h1','image','public_time','category','meta_text']);
 		if($db->count < 1) goto die404;
 		
@@ -77,8 +77,19 @@ if($request_url['path'] == '/blog/' || ctype_digit($page) ) { // Если это
 
 
 	if($templates){ // Инициализация модуля алиасов url, для категорий: /category/[*.html]
+		$meta_title			= $md_meta['meta_title'];
+		$meta_h1			= $md_meta['meta_h1'];
+		$meta_description	= $md_meta['meta_description'];
+		$meta_keywords		= $md_meta['meta_keywords'];
+		$friendly			= false;
+		
 		$canonical			= siteUrl."/".$templates['alias']."/";
 		$robots				= "index, follow";
+	} else {
+		if( isset($md_templates[$mod]) ){
+			$canonical			= siteUrl."/".$md_templates[$mod]['alias']."/";
+			$robots				= "noindex, follow";
+		}
 	}
 
 	require_once(pages_dir.'chanks/header.php');
@@ -99,13 +110,19 @@ if($request_url['path'] == '/blog/' || ctype_digit($page) ) { // Если это
 		$meta_h1			= $md_blog['meta_h1'];
 		$meta_description	= $md_blog['meta_description'];
 		$meta_keywords		= $md_blog['meta_keywords'];
-		$canonical			= siteUrl.$md_blog['friendly_url'];
-		$robots				= "index, follow";
+		
+		if( isset($md_templates[$mod]) ){
+			$canonical			= siteUrl."/".$md_templates[$mod]['alias']."/".$page.".html";
+			$robots				= "noindex, follow";
+		} else {
+			$canonical			= siteUrl.$md_blog['friendly_url'];
+			$robots				= "index, follow";
+		}
 		
 		if($md_blog['open_graph'] != ''){ // Если есть изображение подключаем Open Graph
 			$open_graph= sprintf($o_g, $md_blog['meta_title'], $md_blog['meta_description'], siteUrl.$md_blog['friendly_url'], siteUrl.$md_blog['open_graph'] );
 		}
-				
+
 		// Список постов для меню в сайдбаре
 		$db->orderBy("public_time","Desc");
 		$blog_posts= $db->get('md_blog', null, ['id','friendly_url','meta_h1','category']);
@@ -134,7 +151,7 @@ if($request_url['path'] == '/blog/' || ctype_digit($page) ) { // Если это
 			$meta_description	= $md_meta['meta_description'];
 			$meta_keywords		= $md_meta['meta_keywords'];
 			
-			$canonical			= siteUrl."/".$templates['alias']."/";
+			$canonical			= siteUrl."/".$templates['alias']."/$page.html";
 			$robots				= "index, follow";
 		}
 		

@@ -55,7 +55,7 @@
 					<ol class="list-unstyled mb-0">
 <?php
 // Вывод ссылок постов блога, по категориям
-print_post_category_menu($blog_posts, $request_url);
+print_post_category_menu($blog_posts, $request_url, $md_templates);
 ?>
 
 					</ol>

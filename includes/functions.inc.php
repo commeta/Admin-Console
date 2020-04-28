@@ -135,7 +135,7 @@ function print_server_stat($id,$time_start,$memory){ // Вывод статис�
 
 
 
-function print_post_category_menu($posts, $request_url){ // Вывод меню категорий в сайдбаре
+function print_post_category_menu($posts, $request_url, $md_templates= false){ // Вывод меню категорий в сайдбаре
 	// Категории
 	$category= [];
 	foreach($posts as $v){
@@ -158,14 +158,28 @@ function print_post_category_menu($posts, $request_url){ // Вывод меню 
 		}
 		
 		if( $sub_cat != '' ){
-			if($current)
+			/*
+			if($current){
+				printf('<li class="children">%s<ul class="sub-menu">%s</ul></li>',
+					$cat,$sub_cat
+				);
+			}
+			*/
+			if($md_templates){
+				$template = array_filter($md_templates, fn($k) => $k['category'] == $cat);
+				
+				if(isset($template['blog'])) $url= "/".$template['blog']['alias']."/";
+				else $url= "#";
+				
+				printf('<li class="children"><a href="%s">%s</a><ul class="sub-menu">%s</ul></li>',
+					$url,$cat,$sub_cat
+				);
+			}
+			else{
 				printf('<li class="children"><a href="#">%s</a><ul class="sub-menu">%s</ul></li>',
 					$cat,$sub_cat
 				);
-			else
-				printf('<li class="children"><a href="#">%s</a><ul class="sub-menu">%s</ul></li>',
-					$cat,$sub_cat
-				);
+			}
 		}
 	}
 }
