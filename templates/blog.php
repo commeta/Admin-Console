@@ -74,6 +74,12 @@ if($request_url['path'] == '/blog/' || ctype_digit($page) ) { // Если это
 	$blog_posts= $db->get('md_blog', null, ['friendly_url','meta_h1','category']);
 	if($db->count < 1) goto die404;
 
+
+	if($templates){ // Инициализация модуля алиасов url, для категорий: /category/[*.html]
+		$canonical			= siteUrl."/".$templates['alias']."/";
+		$robots				= "index, follow";
+	}
+
 	require_once(pages_dir.'chanks/header.php');
 	require_once(pages_dir.'chanks/blog.php');
 } else {
@@ -120,6 +126,16 @@ if($request_url['path'] == '/blog/' || ctype_digit($page) ) { // Если это
 
 		$prev= 0;
 		$next= 1;
+		
+		if($templates){ // Инициализация модуля алиасов url, для категорий: /category/[*.html]
+			$meta_title			= $md_meta['meta_title'];
+			$meta_h1			= $md_meta['meta_h1'];
+			$meta_description	= $md_meta['meta_description'];
+			$meta_keywords		= $md_meta['meta_keywords'];
+			
+			$canonical			= siteUrl."/".$templates['alias']."/";
+			$robots				= "index, follow";
+		}
 		
 		require_once(pages_dir.'chanks/header.php');
 		require_once(pages_dir.'chanks/blog-item.php');

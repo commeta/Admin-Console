@@ -85,17 +85,6 @@ function alias(){ // Алиасы, бета
 		if($db->count < 1){
 			die("templates error");
 		}
-		
-		$meta_title			= $md_meta['meta_title'];
-		$meta_h1			= $md_meta['meta_h1'];
-		$meta_description	= $md_meta['meta_description'];
-		$meta_keywords		= $md_meta['meta_keywords'];
-		
-		if($mod == 'index') $canonical= siteUrl.'/';
-		else $canonical= siteUrl.$md_meta['friendly_url'];
-		
-		$robots				= "index, follow";
-		$friendly			= true;
 	}
 	
 	$mod= str_replace('/','',$templates['template']);
