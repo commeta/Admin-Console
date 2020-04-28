@@ -25,11 +25,13 @@ if($cached_page = get_cached_page( $urlMd5 )){
 	die($cached_page);
 }
 
-
 if($templates){ // Инициализация модуля алиасов url, для категорий: /category/[*.html]
 	$request_url['path']= str_ireplace($templates['alias'], $templates['template'], $request_url['path']);
 	$page= 1;
 }
+
+// Выборка псевдонимов (Алиасы)
+$md_templates= $db->map('template')->ArrayBuilder()->get('md_templates', null, ['alias','template','category']);
 
 ############################
 if($request_url['path'] == '/blog/' || ctype_digit($page) ) { // Если это раздел блога
@@ -40,7 +42,6 @@ if($request_url['path'] == '/blog/' || ctype_digit($page) ) { // Если это
 		$db->where('friendly_url', '/blog/' );
 		$md_meta= $db->getOne('md_meta');
 		if($db->count < 1) goto die404;
-		
 		
 		// Установка мета тегов
 		$meta_title			= $md_meta['meta_title'];
