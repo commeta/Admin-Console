@@ -61,6 +61,15 @@ foreach($md_meta as $v){
 	);
 }
 
+$md_meta = $db->getValue("md_shop","friendly_url", null); // Магазин URL
+foreach($md_meta as $v){
+	if($v == '') continue;
+	
+	$smp.= sitemap_url_gen(
+		sprintf("%s%s",siteUrl,$v)
+	);
+}
+
 
 $smp.= "\n</urlset>";
 header('Content-type: text/xml');

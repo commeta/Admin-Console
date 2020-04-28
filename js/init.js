@@ -13,6 +13,18 @@ window.isset = function(v_var) { // Проверка существования
 };
 
 
+function num2str(n, text_forms) {  // Склонение числовых значений
+	//  num2str(1, ['минута', 'минуты', 'минут']);
+	n = Math.abs(n) % 100; var n1 = n % 10;
+	if (n > 10 && n < 20) { return text_forms[2]; }
+	if (n1 > 1 && n1 < 5) { return text_forms[1]; }
+	if (n1 == 1) { return text_forms[0]; }
+	return text_forms[2];
+}
+
+
+
+
 
 // Пример отлова ошибок, log файл: /temp/front-error.log
 (function($) { 
@@ -79,27 +91,31 @@ window.isset = function(v_var) { // Проверка существования
 	'use strict';
 
 	$(document).ready(function() {
-			$('.works').isotope({ // /portfolio/
-				itemSelector: '.work'	
+		$('.works').isotope({ // /portfolio/
+			itemSelector: '.work'
+		});
+		
+		$('#filter a').click(function() {
+			$('#filter a').removeClass('current');
+			$(this).addClass('current');
+			
+			var selector = $(this).attr('data-filter');
+			
+			$('.works').isotope({
+				filter: selector,
+				animationOptions: {
+					duration: 1000,
+					easing: 'easeOutQuart',
+					queue: false
+				}
 			});
 			
-			$('#filter a').click(function(){
-				$('#filter a').removeClass('current');
-				$(this).addClass('current');
-				var selector = $(this).attr('data-filter');
-	 
-				$('.works').isotope({
-					filter: selector,
-					animationOptions: {
-						duration: 1000,
-						easing: 'easeOutQuart',
-						queue: false
-					}
-				});
-				return false;
-			});
+			return false;
+		});
 	});
 })(jQuery);
+
+
 
 
 
@@ -273,7 +289,7 @@ window.isset = function(v_var) { // Проверка существования
 		if( +float - Math.floor(+float) === 0 ){
 			result= +float + "-00 &#8381";
 		} else {
-			if( +float.toFixed(2).toString().split('.')[1][1] == '0' ) result= +float.toFixed(2) + "0 &#8381";
+			if( +float.toFixed(2).split('.')[1][1] == '0' ) result= +float.toFixed(2) + "0 &#8381";
 			else result= +float.toFixed(2) + " &#8381";
 		}
 		return result.replace('.','-');
@@ -634,47 +650,38 @@ window.isset = function(v_var) { // Проверка существования
 
 
 
-(function($) {	// 
+(function($) {	// Слайдер для внутренних страниц
 	'use strict';
 
 	// Can also be used with $(document).ready()
-	$(window).load(function(){
-	  $('#f1').flexslider({
-		animation: "slide",
-		rtl: true,
-		//start: function(slider){
-		  //$('body').removeClass('loading');
-		//}
-	  });
-	 $('#f2').flexslider({
-		animation: "slide",
-		animationLoop: false,
-		itemWidth: 210,
-		itemMargin: 5,
-		pausePlay: true,
-		mousewheel: true,
-		rtl: true,
-		asNavFor:'.flexslider'
-	  });
+	$(window).load(function() {
+		$('#f1').flexslider({
+			animation: "slide",
+			rtl: true,
+			controlNav: false
+			//start: function(slider){
+			//$('body').removeClass('loading');
+			//}
+		});
+		$('#f2').flexslider({
+			animation: "slide",
+			animationLoop: false,
+			itemWidth: 210,
+			itemMargin: 5,
+			pausePlay: true,
+			mousewheel: true,
+			rtl: true,
+			asNavFor: '.flexslider'
+		});
 	});
-
 
 })(jQuery);
 
 
 
+
+
 /*
-function num2str(n, text_forms) {  // Склонение числовых значений
-	//  num2str(1, ['минута', 'минуты', 'минут']);
-	n = Math.abs(n) % 100; var n1 = n % 10;
-	if (n > 10 && n < 20) { return text_forms[2]; }
-	if (n1 > 1 && n1 < 5) { return text_forms[1]; }
-	if (n1 == 1) { return text_forms[0]; }
-	return text_forms[2];
-}
-
-
-
 (function($) {
 	'use strict';
 	
