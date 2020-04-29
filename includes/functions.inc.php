@@ -67,8 +67,7 @@ function alias(){ // Алиасы, бета
 
 	if( $path_parts['dirname'] == '/' ) {
 		$alias= str_replace('/','',$path_parts['basename']);
-	}
-	else {
+	} else {
 		$alias= str_replace('/','',$path_parts['dirname']);
 	}
 
@@ -77,6 +76,7 @@ function alias(){ // Алиасы, бета
 	if($db->count < 1){
 		die("templates error");
 	}
+	
 	
 	if( !isset($md_meta) ) {// Алиасы: взять из БД по псевдониму url
 		$db->where('friendly_url', "/".$templates['template']."/" );
@@ -168,8 +168,12 @@ function print_post_category_menu($posts, $request_url, $md_templates= false){ /
 			if($md_templates){
 				$template = array_filter($md_templates, fn($k) => $k['category'] == $cat);
 				
-				if(isset($template['blog'])) $url= "/".$template['blog']['alias']."/";
-				else $url= "#";
+				if(is_array($template)) {
+					$t= array_pop($template);
+					$url= "/".$t['alias']."/";
+				} else {
+					$url= "#";
+				}
 				
 				printf('<li class="children"><a href="%s">%s</a><ul class="sub-menu">%s</ul></li>',
 					$url,$cat,$sub_cat

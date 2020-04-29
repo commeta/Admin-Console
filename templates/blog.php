@@ -25,17 +25,21 @@ if($cached_page = get_cached_page( $urlMd5 )){
 	die($cached_page);
 }
 
+
 if($templates){ // Инициализация модуля алиасов url, для категорий: /category/[*.html]
+	if("/".$templates['alias']."/" != $request_url['path']) goto die404;  // Выход если страница
+	
 	$request_url['path']= str_ireplace($templates['alias'], $templates['template'], $request_url['path']);
 }
 
+
 // Выборка псевдонимов (Алиасы)
-$md_templates= $db->map('template')->ArrayBuilder()->get('md_templates', null, ['alias','template','category']);
+$md_templates= $db->map('alias')->ArrayBuilder()->get('md_templates', null, ['alias','template','category']);
 
 ############################
-if($request_url['path'] == '/blog/' || ctype_digit($page) ) { // Если это раздел блога
+if($request_url['path'] == '/blog/' || ctype_digit($page) ) { // Если это раздел блога	
 	// Запрос страниц
-	if( ctype_digit($page) && $page !== false ) { // С пагинацией
+	if( ctype_digit($page) ) { // С пагинацией
 		if($page < 1) goto die404;
 
 		$db->where('friendly_url', '/blog/' );
@@ -48,12 +52,16 @@ if($request_url['path'] == '/blog/' || ctype_digit($page) ) { // Если это
 		$meta_description	= $md_meta['meta_description'];
 		$meta_keywords		= $md_meta['meta_keywords'];
 		$canonical			= siteUrl."/blog/";
-		$robots				= "noindex, follow";
+		$robots				= "index, follow";
 		$friendly			= false;
 
 		// set page limit to count results per page. 20 by default
 		$db->pageLimit = $pageLimit;
 		$db->orderBy("public_time","Desc");
+		
+		if($templates) {// Инициализация модуля алиасов url
+			$db->where('category', $templates['category'] );
+		}
 		
 		$blog = $db->arraybuilder()->paginate("md_blog", $page, ['id','friendly_url','meta_title','meta_h1','image','public_time','category','meta_text']);
 		if($db->count < 1) goto die404;
@@ -63,6 +71,11 @@ if($request_url['path'] == '/blog/' || ctype_digit($page) ) { // Если это
 		
 	} else { // Без пагинации
 		$db->orderBy("public_time","Desc");
+		
+		if($templates) {// Инициализация модуля алиасов url
+			$db->where('category', $templates['category'] );
+		}
+		
 		$blog= $db->get('md_blog', $pageLimit, ['id','friendly_url','meta_title','meta_h1','image','public_time','category','meta_text']);
 		if($db->count < 1) goto die404;
 		
@@ -83,14 +96,15 @@ if($request_url['path'] == '/blog/' || ctype_digit($page) ) { // Если это
 		$meta_keywords		= $md_meta['meta_keywords'];
 		$friendly			= false;
 		
-		$canonical			= siteUrl."/".$templates['alias']."/";
-		$robots				= "index, follow";
-	} else {
+		$canonical			= siteUrl."/".$templates['template']."/";
+		$robots				= "noindex, follow";
+	} /*else {
 		if( isset($md_templates[$mod]) ){
 			$canonical			= siteUrl."/".$md_templates[$mod]['alias']."/";
 			$robots				= "noindex, follow";
 		}
-	}
+	}*/
+
 
 	require_once(pages_dir.'chanks/header.php');
 	require_once(pages_dir.'chanks/blog.php');
@@ -111,13 +125,14 @@ if($request_url['path'] == '/blog/' || ctype_digit($page) ) { // Если это
 		$meta_description	= $md_blog['meta_description'];
 		$meta_keywords		= $md_blog['meta_keywords'];
 		
-		if( isset($md_templates[$mod]) ){
-			$canonical			= siteUrl."/".$md_templates[$mod]['alias']."/".$page.".html";
-			$robots				= "noindex, follow";
-		} else {
+		//if( isset($md_templates[$mod]) ){// Инициализация модуля алиасов
+			//$canonical			= siteUrl."/".$md_templates[$mod]['alias']."/".$page.".html";
+			//$robots				= "noindex, follow";
+		//} else {
 			$canonical			= siteUrl.$md_blog['friendly_url'];
 			$robots				= "index, follow";
-		}
+		//}
+		
 		
 		if($md_blog['open_graph'] != ''){ // Если есть изображение подключаем Open Graph
 			$open_graph= sprintf($o_g, $md_blog['meta_title'], $md_blog['meta_description'], siteUrl.$md_blog['friendly_url'], siteUrl.$md_blog['open_graph'] );
@@ -145,7 +160,8 @@ if($request_url['path'] == '/blog/' || ctype_digit($page) ) { // Если это
 		$prev= 0;
 		$next= 1;
 		
-		if($templates){ // Инициализация модуля алиасов url, для категорий: /category/[*.html]
+		/*
+		if($templates){ // Инициализация модуля алиасов url, для страниц категорий: /category/[*.html]
 			$meta_title			= $md_meta['meta_title'];
 			$meta_h1			= $md_meta['meta_h1'];
 			$meta_description	= $md_meta['meta_description'];
@@ -154,6 +170,7 @@ if($request_url['path'] == '/blog/' || ctype_digit($page) ) { // Если это
 			$canonical			= siteUrl."/".$templates['alias']."/$page.html";
 			$robots				= "index, follow";
 		}
+		*/
 		
 		require_once(pages_dir.'chanks/header.php');
 		require_once(pages_dir.'chanks/blog-item.php');

@@ -445,7 +445,7 @@ CREATE TABLE `md_templates` (
   PRIMARY KEY (`id`),
   KEY `alias` (`alias`),
   KEY `category` (`category`(250))
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -454,7 +454,7 @@ CREATE TABLE `md_templates` (
 
 LOCK TABLES `md_templates` WRITE;
 /*!40000 ALTER TABLE `md_templates` DISABLE KEYS */;
-INSERT INTO `md_templates` VALUES (1,'php','blog','PHP 7.0');
+INSERT INTO `md_templates` VALUES (1,'php','blog','PHP 7.0'),(2,'css','blog','CSS 3.0'),(3,'js','blog','Java Script v8');
 /*!40000 ALTER TABLE `md_templates` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -533,4 +533,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-04-29  0:05:02
+-- Dump completed on 2020-04-29 11:11:59
