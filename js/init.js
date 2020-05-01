@@ -318,8 +318,8 @@ function num2str(n, text_forms) {  // Склонение числовых зна
 
 	function cartChekoutRender(){ // Корзина с формой отправки на странице заполнения платежных данных
 		if( $(".cart-chekout ul").length ){
-			$(this).html('');
-			let ul= this;
+			let ul= $(".cart-chekout ul");
+			$(ul).html('');
 			
 			for (var order in cart_order) {
 				$(ul).append(`
@@ -355,7 +355,7 @@ function num2str(n, text_forms) {  // Склонение числовых зна
 	
 	function cartPropertyRender(){ // Форма с характеристиками товара, на странице товара
 		if( $(".cart-property ul").length ){
-			let ul= this;
+			let ul= $(".cart-property ul");
 			let id= ext_product['parent_id'];
 			let count= 0;
 			
