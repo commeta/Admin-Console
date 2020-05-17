@@ -97,7 +97,7 @@ function num2str(n, text_forms) {  // Склонение числовых зна
 	
 	// Логин\пароль для входа в админку
 	$('input[name="login"]').val("dcs-spb@ya.ru");
-	$('input[name="password"]').val("12345");
+	$('input[name="password"]').val("password");
 	
 })(jQuery);
 

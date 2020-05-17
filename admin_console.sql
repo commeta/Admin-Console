@@ -498,7 +498,7 @@ CREATE TABLE `md_users` (
 
 LOCK TABLES `md_users` WRITE;
 /*!40000 ALTER TABLE `md_users` DISABLE KEYS */;
-INSERT INTO `md_users` VALUES (21,1,'dcs-spb@ya.ru','$2y$10$SmXwh3wCiEHuldAcc576SudOF3v.O4RnaQDmGI.UvnQZzkmK9pF1m','2020-05-17 03:43:13','Евгений','Морозов','Михайлович',1,'1981-11-09','79117046981','data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',1,1,'a64cbd72a6b4121ae3fba9dcb57cf5220eb659073eb5573b7d563a53fdd5ad87-1589687983');
+INSERT INTO `md_users` VALUES (21,1,'dcs-spb@ya.ru','$2y$10$2zQJ5n9dqUypXLeXxQ.SmuF12iftfzPY7SiSpKhZF4Hz9Za.Sxtry','2020-05-17 03:43:13','Евгений','Морозов','Михайлович',1,'1981-11-09','79117046981','data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',1,1,'0');
 /*!40000 ALTER TABLE `md_users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -529,7 +529,7 @@ CREATE TABLE `md_users_login` (
 
 LOCK TABLES `md_users_login` WRITE;
 /*!40000 ALTER TABLE `md_users_login` DISABLE KEYS */;
-INSERT INTO `md_users_login` VALUES (35,21,'authorized','127.0.0.1','2020-05-17 14:48:45','4842c99956da0b86f060f2b867beaf0afe96ac8868424872219cc94cc33efbc1');
+INSERT INTO `md_users_login` VALUES (35,21,'authorized','127.0.0.1','2020-05-17 15:03:18','4842c99956da0b86f060f2b867beaf0afe96ac8868424872219cc94cc33efbc1');
 /*!40000 ALTER TABLE `md_users_login` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -548,7 +548,7 @@ CREATE TABLE `md_users_security` (
   `retry` smallint(1) NOT NULL DEFAULT '5',
   `recidive` smallint(1) NOT NULL DEFAULT '5',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4;
+) ENGINE=MyISAM AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -569,4 +569,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-17 18:00:48
+-- Dump completed on 2020-05-17 18:04:01
