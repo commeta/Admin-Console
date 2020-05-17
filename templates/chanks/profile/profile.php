@@ -50,6 +50,7 @@
 <?php
 if($page === false) $page= 'dashboard';
 
+
 require_once(pages_dir."chanks/profile/$page.php");
 ?>
 		</main>

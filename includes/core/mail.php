@@ -101,20 +101,16 @@ function check_email($email){ // Проверка MX записи почтово
 
 	// Validate e-mail
 	if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-		return $email;
-		//echo("$email is a valid email address");
+		$domain = substr(strrchr($email, "@"), 1); 
+		$res = getmxrr($domain, $mx_records, $mx_weight);
+		
+		if(false == $res || 0 == count($mx_records) || (1 == count($mx_records) && ($mx_records[0] == null || $mx_records[0] == "0.0.0.0"))){
+			return false;
+		} else {
+			return $email;
+		}
 	} else {
-		//echo("$email is not a valid email address");
 		return false;
-	}
-
-	$domain = substr(strrchr($email, "@"), 1); 
-	$res = getmxrr($domain, $mx_records, $mx_weight);
-	
-	if(false == $res || 0 == count($mx_records) || (1 == count($mx_records) && ($mx_records[0] == null || $mx_records[0] == "0.0.0.0"))){
-		return false;
-	}else{
-		return $email;
 	}
 }
 

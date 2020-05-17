@@ -18,6 +18,7 @@ if( isset($_POST['logout']) && $_POST['logout'] == 'logout') {
 
 
 
+
 if( login_check() ){ // Для залогиненных
 	$db->where("login_ip", $db->escape($_SERVER['REMOTE_ADDR'])); // Сброс попыток ввода пароля
 	$db->delete('md_users_security');
