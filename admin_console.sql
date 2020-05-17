@@ -489,7 +489,7 @@ CREATE TABLE `md_users` (
   `email_confirmed` smallint(1) NOT NULL DEFAULT '0',
   `confirm_token` varchar(255) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4;
+) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -498,7 +498,7 @@ CREATE TABLE `md_users` (
 
 LOCK TABLES `md_users` WRITE;
 /*!40000 ALTER TABLE `md_users` DISABLE KEYS */;
-INSERT INTO `md_users` VALUES (20,1,'dcs-spb@ya.ru','$argon2id$v=19$m=65536,t=4,p=1$TXRqSDFMdlZ6eUZQODVCMA$WJJcHHzbgsk2Dbb31+4xOTzf2vvuVkvWlGArY2GFh0A','2020-05-15 03:10:12','Евгений','Морозов','Михайлович',1,'1981-01-09','79117046981','',1,1,'0');
+INSERT INTO `md_users` VALUES (21,1,'dcs-spb@ya.ru','$2y$10$SmXwh3wCiEHuldAcc576SudOF3v.O4RnaQDmGI.UvnQZzkmK9pF1m','2020-05-17 03:43:13','Евгений','Морозов','Михайлович',1,'1981-11-09','79117046981','data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',1,1,'0');
 /*!40000 ALTER TABLE `md_users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -529,7 +529,7 @@ CREATE TABLE `md_users_login` (
 
 LOCK TABLES `md_users_login` WRITE;
 /*!40000 ALTER TABLE `md_users_login` DISABLE KEYS */;
-INSERT INTO `md_users_login` VALUES (35,20,'registered','127.0.0.1','2020-05-17 03:05:41','4842c99956da0b86f060f2b867beaf0afe96ac8868424872219cc94cc33efbc1');
+INSERT INTO `md_users_login` VALUES (35,21,'registered','127.0.0.1','2020-05-17 03:43:13','4842c99956da0b86f060f2b867beaf0afe96ac8868424872219cc94cc33efbc1');
 /*!40000 ALTER TABLE `md_users_login` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -568,4 +568,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-17  6:14:16
+-- Dump completed on 2020-05-17  6:44:25

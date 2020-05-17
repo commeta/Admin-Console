@@ -215,7 +215,7 @@ function forgot_password_change($submod, $subpage, $new_password){ // Смена
 			if(pepper) $new_password= hash_hmac("sha256", $new_password, pepper);
 			else $new_password= md5(md5($new_password));
 			
-			$password_hashed= password_hash($new_password, PASSWORD_ARGON2ID);
+			$password_hashed= password_hash($new_password, PASSWORD_DEFAULT);
 			
 			$db->where('confirm_token', $confirm_token);
 			$db->update('md_users', [
@@ -313,7 +313,7 @@ function register_user($login, $password, $name, $surname, $patronymic, $gender,
 		if(pepper) $password= hash_hmac("sha256", $password, pepper);
 		else $password= md5(md5($password));
 		
-		$password_hashed= password_hash($password,  PASSWORD_ARGON2ID);
+		$password_hashed= password_hash($password,  PASSWORD_DEFAULT);
 		
 		$db->where("id", $user_id);
 		$db->update('md_users', [
