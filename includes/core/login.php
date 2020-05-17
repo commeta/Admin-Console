@@ -423,7 +423,12 @@ function login_bruteforce_check( $login ){ // Возвращает количе�
 	// Проверка брута с разных ip, например через tor
 	$db->where("login", $login );
 	$attempts= $db->getValue('md_users_security', "count(*)");
-	if($db->count < 1) $attempts= 0;
+	if($db->count < 1) {
+		$db->where("login_ip", $login_ip);
+		$attempts= $db->getValue('md_users_security', "count(*)");
+		if($db->count < 1) $attempts= 0;
+	}
+
 
 	$db->where("login_ip", $login_ip);
 	$md_users_security= $db->getOne('md_users_security');
@@ -448,7 +453,10 @@ function login_bruteforce_check( $login ){ // Возвращает количе�
 			$retry--;
 		}
 		
-		if($attempts > 4) $retry= 0;
+		if($attempts > 4) {
+			$retry= 0;
+			$recidive= 0;
+		}
 
 		$db->where("id", (int)$md_users_security['id'] );
 		$db->update('md_users_security', [
