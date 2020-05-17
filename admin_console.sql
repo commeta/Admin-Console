@@ -68,7 +68,7 @@ CREATE TABLE `md_cart` (
   PRIMARY KEY (`id`),
   KEY `xauthtoken` (`user_id`),
   KEY `event_time` (`event_time`)
-) ENGINE=MyISAM AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4;
+) ENGINE=MyISAM AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -77,7 +77,6 @@ CREATE TABLE `md_cart` (
 
 LOCK TABLES `md_cart` WRITE;
 /*!40000 ALTER TABLE `md_cart` DISABLE KEYS */;
-INSERT INTO `md_cart` VALUES (25,20,'2020-05-16 00:18:51','a:0:{}');
 /*!40000 ALTER TABLE `md_cart` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -130,7 +129,7 @@ CREATE TABLE `md_likes` (
   KEY `user_id` (`user_id`),
   KEY `parent_id` (`like_id`),
   KEY `template` (`template`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -139,7 +138,7 @@ CREATE TABLE `md_likes` (
 
 LOCK TABLES `md_likes` WRITE;
 /*!40000 ALTER TABLE `md_likes` DISABLE KEYS */;
-INSERT INTO `md_likes` VALUES (1,7,6,'shop'),(2,7,2,'portfolio');
+INSERT INTO `md_likes` VALUES (3,21,4,'portfolio'),(7,21,2,'portfolio'),(8,21,3,'portfolio');
 /*!40000 ALTER TABLE `md_likes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -529,7 +528,7 @@ CREATE TABLE `md_users_login` (
 
 LOCK TABLES `md_users_login` WRITE;
 /*!40000 ALTER TABLE `md_users_login` DISABLE KEYS */;
-INSERT INTO `md_users_login` VALUES (35,21,'authorized','127.0.0.1','2020-05-17 15:03:18','4842c99956da0b86f060f2b867beaf0afe96ac8868424872219cc94cc33efbc1');
+INSERT INTO `md_users_login` VALUES (35,21,'authorized','127.0.0.1','2020-05-17 22:44:02','4842c99956da0b86f060f2b867beaf0afe96ac8868424872219cc94cc33efbc1');
 /*!40000 ALTER TABLE `md_users_login` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -547,8 +546,11 @@ CREATE TABLE `md_users_security` (
   `login_datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `retry` smallint(1) NOT NULL DEFAULT '5',
   `recidive` smallint(1) NOT NULL DEFAULT '5',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4;
+  PRIMARY KEY (`id`),
+  KEY `login` (`login`(250)),
+  KEY `login_ip` (`login_ip`),
+  KEY `login_datetime` (`login_datetime`)
+) ENGINE=MyISAM AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -569,4 +571,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-17 18:04:01
+-- Dump completed on 2020-05-18  1:44:21

@@ -75,9 +75,8 @@ function merge_users($deleted_user_id, $authorized_user_id){ // Объедине
 	$db->where('id', $deleted_user_id);
 	$db->delete('md_users');
 	
-	
-	
-	
+	merge_users_like($deleted_user_id, $authorized_user_id);
+	merge_users_cart($deleted_user_id, $authorized_user_id);
 }
 
 
@@ -419,6 +418,7 @@ function login_bruteforce_check( $login ){ // Возвращает количе�
 		
 	$login_ip= $db->escape( $_SERVER['REMOTE_ADDR'] );
 	$login= $db->escape( $login );
+
 	
 	// Проверка брута с разных ip, например через tor
 	$db->where("login", $login );
