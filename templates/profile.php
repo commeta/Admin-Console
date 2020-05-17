@@ -52,7 +52,7 @@ if( login_check() ){ // Для залогиненных
 
 
 if($request_url['path'] == '/profile/') { // Если это раздел
-	if( isset($_POST['login']) ) $login_bruteforce_check= login_bruteforce_check();
+	if( isset($_POST['login']) ) $login_bruteforce_check= login_bruteforce_check($_POST['login']);
 	else $login_bruteforce_check= 5;
 
 	if( isset($_POST['password']) &&

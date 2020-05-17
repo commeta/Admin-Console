@@ -409,7 +409,7 @@ function get_confirm_user_email_url(){  // Возвращает строку п�
 }
 
 
-function login_bruteforce_check(){ // Возвращает количество оставшихся попыток
+function login_bruteforce_check( $login ){ // Возвращает количество оставшихся попыток
 	// Если счетчик нулевой, блокируем на 10 минут
 	// После 5 блокировок, если попытки продолжаются то блокировка на сутки
 	$db = MysqliDb::getInstance();
@@ -418,6 +418,12 @@ function login_bruteforce_check(){ // Возвращает количество 
 	$db->delete('md_users_security');
 		
 	$login_ip= $db->escape( $_SERVER['REMOTE_ADDR'] );
+	$login= $db->escape( $login );
+	
+	// Проверка брута с разных ip, например через tor
+	$db->where("login", $login );
+	$attempts= $db->getValue('md_users_security', "count(*)");
+	if($db->count < 1) $attempts= 0;
 
 	$db->where("login_ip", $login_ip);
 	$md_users_security= $db->getOne('md_users_security');
@@ -441,6 +447,8 @@ function login_bruteforce_check(){ // Возвращает количество 
 		} else {
 			$retry--;
 		}
+		
+		if($attempts > 4) $retry= 0;
 
 		$db->where("id", (int)$md_users_security['id'] );
 		$db->update('md_users_security', [
@@ -450,9 +458,13 @@ function login_bruteforce_check(){ // Возвращает количество 
 		
 		return $retry;
 	} else {
+		if($attempts > 4) $retry= 0;
+		else $retry= 4;
+		
 		$db->insert('md_users_security', [
+			'login'	=> $login,
 			'login_ip' => $_SERVER['REMOTE_ADDR'],
-			'retry' => 4,
+			'retry' => $retry,
 			'recidive' => 5
 		]);
 		return 4;

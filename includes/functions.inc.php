@@ -46,9 +46,6 @@ session_start();
 $xauthtoken= get_xauthtoken();
 $_SESSION['xauthtoken']= $xauthtoken;
 
-//$_SESSION['auth']= 'anonymous';
-
-//if(isset($_SESSION['cart'])) unset($_SESSION['cart']);
 
 ########################################################################
 // Функции шаблонов

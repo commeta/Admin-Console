@@ -529,7 +529,7 @@ CREATE TABLE `md_users_login` (
 
 LOCK TABLES `md_users_login` WRITE;
 /*!40000 ALTER TABLE `md_users_login` DISABLE KEYS */;
-INSERT INTO `md_users_login` VALUES (35,21,'registered','127.0.0.1','2020-05-17 03:59:37','4842c99956da0b86f060f2b867beaf0afe96ac8868424872219cc94cc33efbc1');
+INSERT INTO `md_users_login` VALUES (35,21,'authorized','127.0.0.1','2020-05-17 14:48:45','4842c99956da0b86f060f2b867beaf0afe96ac8868424872219cc94cc33efbc1');
 /*!40000 ALTER TABLE `md_users_login` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -542,12 +542,13 @@ DROP TABLE IF EXISTS `md_users_security`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `md_users_security` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `login` varchar(255) NOT NULL,
   `login_ip` varchar(128) NOT NULL,
   `login_datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `retry` smallint(1) NOT NULL DEFAULT '5',
   `recidive` smallint(1) NOT NULL DEFAULT '5',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4;
+) ENGINE=MyISAM AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -568,4 +569,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-17  7:00:26
+-- Dump completed on 2020-05-17 17:48:50
