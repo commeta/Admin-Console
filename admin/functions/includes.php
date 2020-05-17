@@ -19,8 +19,10 @@ foreach (glob("../core/*.php") as $filename){
 
 #######################################################################
 session_start(); // Проверка авторизации
-if(isset($_SESSION['xauthtoken'])){
-	$user_id= xauthtokenCheck($_SESSION['xauthtoken']);
+$xauthtoken= get_xauthtoken();
+
+if(login_check() && isset($_SESSION['md_users']['role']) && $_SESSION['md_users']['role'] == 1){
+	$user_id= $_SESSION['md_users']['id'];
 } else {
 	header ("location: /admin/login.php");
 	exit;			

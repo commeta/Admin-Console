@@ -46,6 +46,22 @@ function num2str(n, text_forms) {  // Склонение числовых зна
 
 
 
+(function($) { // https://github.com/xdan/datetimepicker/blob/master/build/jquery.datetimepicker.full.js
+	'use strict';
+	
+	$.datetimepicker.setLocale('ru');
+	$('#datetimepicker').datetimepicker({
+		timepicker:false,
+		format:'d.m.Y'
+	});	
+	
+	$("input[name=phone], #phone").mask('9 (999) 999-99-99');
+	
+})(jQuery);
+
+
+
+
 
 (function($) {	// Загрузка шрифта
 	'use strict';
@@ -80,8 +96,8 @@ function num2str(n, text_forms) {  // Склонение числовых зна
 	}
 	
 	// Логин\пароль для входа в админку
-	$('input[name="username"]').val("admin");
-	$('input[name="password"]').val("password");
+	$('input[name="login"]').val("dcs-spb@ya.ru");
+	$('input[name="password"]').val("12345");
 	
 })(jQuery);
 
@@ -184,7 +200,7 @@ function num2str(n, text_forms) {  // Склонение числовых зна
 				
 				if( validity ) {
 					var $data = {};
-					$(form).find ('input[type=text], input[type=hidden], textearea, select').each(function() {
+					$(form).find ('input[type=text], input[type=hidden], input[type=password], textearea, select').each(function() {
 						let id= $(this).attr('id');
 						$data[id] = $(this).val();
 					});
@@ -197,25 +213,71 @@ function num2str(n, text_forms) {  // Склонение числовых зна
 					
 					$data['oper']= $(form).attr('id');
 					
-					$.ajax({ // Обработчик: /includes/ajax/send-message.php
+					$.ajax({
 						url: ajax_url_path,
 						data: $data,
 						type:'post',
 						success:function(data){
-							console.log(data);
-							alert( `
-								Запрос отправлен.
-								JS обработчик: /js/init.js
-								PHP обработчик: /includes/ajax/send-message.php
-								Данные форм:
-								` + JSON.stringify(data) 
-							);
+							if( $(form).attr('id') == 'register') register_form(data);
+							if( $(form).attr('id') == 'send_message') send_message_form(data);
+							if( $(form).attr('id') == 'checkout') checkout_form(data);
+							if( $(form).attr('id') == 'forgot') forgot_form(data);
+							if( $(form).attr('id') == 'change_password') change_password_form(data);
 						}
 					});
 				}
 			}, false);
 		});
 	});
+	
+	function register_form(data){ // /profile/register.html
+		if( data.status == 'error' ){
+			alert( data.response );
+		} else {
+			$('#register').parent().html(data.response);
+		}
+	}
+	
+	function forgot_form(data){ // /profile/forgot.html
+		if( data.status == 'error' ){
+			alert( data.response );
+		} else {
+			$('#forgot').parent().html(data.response);
+		}
+	}
+	
+	function change_password_form(data){ // /profile/forgot.html
+		if( data.status == 'error' ){
+			alert( data.response );
+		} else {
+			$('#change_password').parent().html(data.response);
+		}
+	}
+	
+	function send_message_form(data){ // /chekout.html
+			console.log(data);
+			alert( `
+				Запрос отправлен.
+				JS обработчик: /js/init.js
+				PHP обработчик: /includes/ajax/send-message.php
+				Данные форм:
+			` + JSON.stringify(data) 
+			);
+	}
+	
+	function checkout_form(data){ // /chekout.html
+			console.log(data);
+			alert( `
+				Запрос отправлен.
+				JS обработчик: /js/init.js
+				PHP обработчик: /includes/ajax/send-message.php
+				Данные форм:
+			` + JSON.stringify(data) 
+			);
+	}
+	
+	
+	
 })(jQuery);
 
 

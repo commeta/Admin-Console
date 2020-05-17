@@ -15,7 +15,7 @@
 
 // Production
 error_reporting(E_ALL & ~E_DEPRECATED & ~E_STRICT);
-ini_set('display_errors', 1);
+ini_set('display_errors', 0);
 
 // Development
 // error_reporting(E_ALL);
@@ -23,42 +23,31 @@ ini_set('display_errors', 1);
 
 /*============================ General Settings =======================================*/
 // https://ckeditor.com/docs/ckfinder/ckfinder3-php/configuration.html
-$root_path	= preg_match('/\/$/',$_SERVER['DOCUMENT_ROOT']) ? $_SERVER['DOCUMENT_ROOT'] : $_SERVER['DOCUMENT_ROOT'].'/';
+$root_path= preg_match('/\/$/',$_SERVER['DOCUMENT_ROOT']) ? $_SERVER['DOCUMENT_ROOT'] : $_SERVER['DOCUMENT_ROOT'].'/';
 $config = array();
 
 /*============================ Enable PHP Connector HERE ==============================*/
 // https://ckeditor.com/docs/ckfinder/ckfinder3-php/configuration.html#configuration_options_authentication
 
-$config['authentication'] = function () {
-	$root_path	= preg_match('/\/$/',$_SERVER['DOCUMENT_ROOT']) ? $_SERVER['DOCUMENT_ROOT'] : $_SERVER['DOCUMENT_ROOT'].'/';
-
+$config['authentication']= function () {
+	$root_path= preg_match('/\/$/',$_SERVER['DOCUMENT_ROOT']) ? $_SERVER['DOCUMENT_ROOT'] : $_SERVER['DOCUMENT_ROOT'].'/';
 
 	require_once($root_path.'includes/config.inc.php');
 	set_time_limit(100);
 
-// Подключение библиотеки функций ядра
-foreach (glob($root_path."includes/core/*.php") as $filename){
-    include $filename;
-} 
-
-
-
-
-	// Подключение библиотеки функций ядра админки
-	foreach (glob($root_path."admin/core/*.php") as $filename){
+	// Подключение библиотеки функций ядра
+	foreach (glob($root_path."includes/core/*.php") as $filename){
 		include $filename;
 	} 
-		
-	$db = MysqliDb::getInstance();
-	
+
 	session_start(); // Проверка авторизации
-	if(isset($_SESSION['xauthtoken'])){
-		$user_id= xauthtokenCheck($_SESSION['xauthtoken']);
+	if(login_check() && isset($_SESSION['md_users']['role']) && $_SESSION['md_users']['role'] == 1){
+		$user_id= $_SESSION['md_users']['id'];
 	} else {
 		header ("location: /admin/login.php");
 		exit;			
 	}
-	
+
     return true;
 };
 

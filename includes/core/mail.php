@@ -1,13 +1,4 @@
 <?php
-/**
- * Validate international link.
- *
- * @param string $link Link to validate.
- *
- * @return array
- */
-
-
 function sanitize($str){
 	if ($str){
 		$output = strip_tags($str);
@@ -18,6 +9,7 @@ function sanitize($str){
 		return '';
 	}
 }
+
 
 function _mime_content_type($filename) { $result = new finfo(); if (is_resource($result) === true) { return $result->file($filename, FILEINFO_MIME_TYPE); } return false; } 
 
@@ -101,5 +93,29 @@ function send_mail($email, $subject, $message, $from, $files,$path) {
 	return false;
 }
 
+
+
+function check_email($email){ // Проверка MX записи почтового домена, отсечет некорректные почтовые адреса прошедшие проверку regexp валидатором.
+	// Remove all illegal characters from email
+	$email= filter_var($email, FILTER_SANITIZE_EMAIL);
+
+	// Validate e-mail
+	if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+		return $email;
+		//echo("$email is a valid email address");
+	} else {
+		//echo("$email is not a valid email address");
+		return false;
+	}
+
+	$domain = substr(strrchr($email, "@"), 1); 
+	$res = getmxrr($domain, $mx_records, $mx_weight);
+	
+	if(false == $res || 0 == count($mx_records) || (1 == count($mx_records) && ($mx_records[0] == null || $mx_records[0] == "0.0.0.0"))){
+		return false;
+	}else{
+		return $email;
+	}
+}
 
 ?>

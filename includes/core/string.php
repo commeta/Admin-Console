@@ -57,5 +57,8 @@ function float2str( $float ){ // Форматирует дробь в строк
 }
 
 
+function declension_words($n,$words){ // склонение слов в зависимости от числа
+    return ($words[($n=($n=$n%100)>19?($n%10):$n)==1?0 : (($n>1&&$n<=4)?1:2)]);
+}
 
 ?>

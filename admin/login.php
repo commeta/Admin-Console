@@ -13,56 +13,37 @@ foreach (glob("core/*.php") as $filename){
 } 
 
 ########################################################################
-$db = MysqliDb::getInstance();
+$db= MysqliDb::getInstance();
+$xauthtoken= get_xauthtoken();
+$_SESSION['xauthtoken']= $xauthtoken;
 
-#######################################################################
 
-if(isset($_POST['username']) && isset($_POST['password'])) {
-	$count= bruteforceCheck();
-}
+if( isset($_POST['login']) ) $login_bruteforce_check= login_bruteforce_check();
+else $login_bruteforce_check= 5;
 
-#######################################################################
-
-if(isset($_POST['username']) && isset($_POST['password']) && $count > 0){
-	$db->where('login_datetime < (NOW() - INTERVAL 1 DAY)');
-	$db->delete('md_users_login');
-	
-	$username = $db->escape($_POST['username']);
-	$password = md5($db->escape($_POST['password']));
+if( isset($_POST['password']) &&
+	isset($_POST['login']) &&
+	$_POST['login'] != '' &&
+	$_POST['password'] != '' &&
+	$login_bruteforce_check > 0 &&
+	$md_users= login_password($_POST['login'], $_POST['password'])
+){
+	if($md_users['role'] == 1){
+		$_SESSION['auth']= 'authorized';
+		$_SESSION['md_users']= $md_users;
 		
-	$db->where('login',$username);
-	$db->where('password', $password );
-	$user_id = $db->getOne('md_users','user_id');
-
-	if($db->count > 0){
-		$xauthtoken= strval(bin2hex(openssl_random_pseudo_bytes(32)));
-		
-		$data = Array (
-			"user_id"		=> array_shift($user_id),
-			"xauthtoken"	=> $xauthtoken,
-			"login_ip"		=> $_SERVER['REMOTE_ADDR']
-		);
-		$user_login_id= $db->insert('md_users_login', $data);	
-		
-		if(isset($user_login_id)){
-			$_SESSION['xauthtoken'] = $xauthtoken;
-			header ("location: /admin/");
-			exit;
-		}
-	}
-}
-
-if(isset($_SESSION['xauthtoken'])){
-	$xauthtoken = $db->escape($_SESSION['xauthtoken']);
-
-	$db->where('xauthtoken', $xauthtoken );
-	$user_id = $db->getOne('md_users_login','user_login_id');
-	if($db->count > 0){
+		$db->where("login_ip", $db->escape($_SERVER['REMOTE_ADDR'])); // Сброс попыток ввода пароля
+		$db->delete('md_users_security');
+			
 		header ("location: /admin/");
 		exit;
 	}
+} else {
+	$_SESSION['auth']= 'anonymous';
+	if(isset($_SESSION['md_users'])) unset($_SESSION['user']);
 }
 
+#######################################################################
 
 
 
@@ -105,7 +86,7 @@ if(isset($_SESSION['xauthtoken'])){
 						</div>
 						<div class="form-group">
 							<label class="control-label">Имя пользователя</label>
-							<input type="text" class="form-control" name="username" />
+							<input type="text" class="form-control" name="login" />
 						</div>
 						<div class="form-group">
 							<label class="control-label">Пароль</label>
@@ -117,10 +98,16 @@ if(isset($_SESSION['xauthtoken'])){
 						
 						<div class="text-center">
 <?php
-if(isset($count)){
-	if($count < 5) echo "Неверный логин или пароль!<br />Осталось попыток ввода: ",$count,"<br />";
-	if($count == 0)  echo "Вы исчерпали количество ошибок ввода!<br /> Cможете повторить не ранее чем через минуту.";
-}
+	if($login_bruteforce_check < 5){
+		if($login_bruteforce_check < 1) {
+			printf("<p>Вы исчерпали попытки ввода пароля!<br />Повтор возможен через: %s</p>", get_login_block_time() );
+		}
+		else {
+			$arWords = array('попытка','попытки','попыток');
+			$answer= declension_words($login_bruteforce_check, $arWords);
+			echo "<p>Неверный логин или пароль!<br />Осталось: <code>$login_bruteforce_check</code> $answer</p>";
+		}
+	}
 ?>
 						</div>
 						

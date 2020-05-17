@@ -20,6 +20,7 @@ $css_array = [
     'css/isotope.css',
     'css/flexslider.css',
     //'css/flexslider-rtl-min.css',
+    'css/jquery.datetimepicker.css',
     'css/style.css',
 ];
 // вызываем функцию сжатия
@@ -69,12 +70,32 @@ foreach($menu as $v){
 						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
 						<span id="cart">0</span>
 					</a>					
-					
-					<form class="form-inline mt-2 mt-md-0" action="/admin/login.php" method="post" >
-						<input class="form-control mr-sm-2" type="text" name="username" value="" >
-						<input class="form-control mr-sm-2" type="text" name="password" value="" >
+
+
+<?php
+
+if( login_check() ){ // Для залогиненных
+	$login_form=<<<LOGIN_FORM
+					<form class="form-inline mt-2 mt-md-0" action="/profile/" method="post" >
+						<input type="hidden" name="logout" value="logout" >
+						<a class="nav-link" href="/profile/">{$_SESSION['md_users']['name']}</a>
+						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">выйти</button>
+					</form>
+LOGIN_FORM;
+} else {
+	$login_form=<<<LOGIN_FORM
+					<form class="form-inline mt-2 mt-md-0" action="/profile/" method="post" >
+						<input class="form-control mr-sm-2" type="text" name="login" value="" >
+						<input class="form-control mr-sm-2" type="password" name="password" value="" >
 						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">войти</button>
 					</form>
+LOGIN_FORM;
+}
+
+echo $login_form;
+?>
+
+
 				</div>
 			</nav>
 		</header>

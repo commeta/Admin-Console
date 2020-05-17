@@ -36,8 +36,9 @@ if(isset($_POST['oper']) && $_POST['oper'] == 'send_message'):
 
 	session_start();
 	if(isset($_SESSION['xauthtoken'])){
+		$user_id= login_xauthtoken($_SESSION['xauthtoken'], true);
 		$id = $db->insert('md_send', [
-			'xauthtoken'	=> $db->escape($_SESSION['xauthtoken']), 
+			'user_id'		=> $db->escape($user_id), 
 			'event_name'	=> $db->escape($theme),
 			'ip'			=> $_SERVER['REMOTE_ADDR']
 		]);
@@ -69,9 +70,11 @@ endif;
 
 ########################################################################
 if(isset($_POST['oper']) && $_POST['oper'] == 'send_files'):
-	// Загрузка файлов для отправки по почте
+	// Загрузка файлов для отправки по почте, сделать каталог по user_id
 	session_start();
-	if( !isset($_SESSION['xauthtoken']) ) $_SESSION['xauthtoken']= strval(bin2hex(openssl_random_pseudo_bytes(32)));
+	$xauthtoken= get_xauthtoken();
+	$_SESSION['xauthtoken']= $xauthtoken;
+	$user_id= login_xauthtoken($xauthtoken, true);
 	
 	$path= root_path.'temp/'.$_SESSION['xauthtoken'];
 		
@@ -110,18 +113,6 @@ endif;
 
 
 
-
-########################################################################
-if(isset($_POST['oper']) && $_POST['oper'] == 'checkout'):
-	// Пример обработчика корзины, заглушка!
-	session_start(); // Работа с сессиями
-	if( !isset($_SESSION['xauthtoken']) ) { // Уникальный xauthtoken
-		$_SESSION['xauthtoken'] = strval(bin2hex(openssl_random_pseudo_bytes(32)));
-	}
-	
-
-	die(json_encode($_POST));
-endif;
 
 
 ?>

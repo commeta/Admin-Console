@@ -8,35 +8,27 @@
 ########################################################################
 if(isset($_POST['oper']) && $_POST['oper'] == 'save_cart'):
 	// Пример обработчика корзины, заглушка!
-	if( !isset($_COOKIE['xauthtoken']) ) { // Уникальный xauthtoken
-		$xauthtoken= strval(bin2hex(openssl_random_pseudo_bytes(32)));
-
-		$domain = ($_SERVER['HTTP_HOST'] != 'localhost') ? $_SERVER['HTTP_HOST'] : false;
-		setcookie('xauthtoken', $xauthtoken, time()+60*60*24*365, '/', $domain, false);
-	} else {
-		$xauthtoken= $db->escape($_COOKIE['xauthtoken']);
-	}
+	$xauthtoken= get_xauthtoken();
 
 	$cart= json_decode($_POST['cart'], true);
 	foreach($cart as &$c) foreach($c as &$p) $p= $db->escape($p);
 	
 	$cart= serialize($cart);
+	$user_id= login_xauthtoken($xauthtoken, true);
 
-	$db->where("xauthtoken", $xauthtoken);
+	$db->where("user_id", $user_id);
 	$md_cart = $db->getOne('md_cart');
 	
 	if($db->count < 1) {
 		$id = $db->insert('md_cart', [
-			'xauthtoken'	=> $xauthtoken, 
-			'storage'		=> $cart,
-			'ip'			=> $_SERVER['REMOTE_ADDR']
+			'user_id'		=> $user_id, 
+			'storage'		=> $cart
 		]);
 	} else {
-		$db->where("xauthtoken", $xauthtoken);
+		$db->where("user_id", $user_id);
 		$db->update('md_cart', [
-			'xauthtoken'	=> $xauthtoken, 
-			'storage'		=> $cart,
-			'ip'			=> $_SERVER['REMOTE_ADDR']	
+			'user_id'		=> $user_id, 
+			'storage'		=> $cart
 		]);
 	}
 
@@ -46,17 +38,12 @@ endif;
 
 ########################################################################
 if(isset($_POST['oper']) && $_POST['oper'] == 'load_cart'):
-	// Пример обработчика корзины, заглушка!
-	if( !isset($_COOKIE['xauthtoken']) ) { // Уникальный xauthtoken
-		$xauthtoken= strval(bin2hex(openssl_random_pseudo_bytes(32)));
-		
-		$domain = ($_SERVER['HTTP_HOST'] != 'localhost') ? $_SERVER['HTTP_HOST'] : false;
-		setcookie('xauthtoken', $xauthtoken, time()+60*60*24*365, '/', $domain, false);
-	} else {
-		$xauthtoken= $db->escape($_COOKIE['xauthtoken']);
-	}
-
-	$db->where("xauthtoken", $xauthtoken); 
+	// Пример обработчика корзины
+	$xauthtoken= get_xauthtoken();
+	$user_id= login_xauthtoken($xauthtoken);
+	if(!$user_id) die(json_encode(['cart'=> 0]));
+	
+	$db->where("user_id", $user_id); 
 	$md_cart= $db->getOne('md_cart');
 
 	if($db->count > 0) {
@@ -78,5 +65,21 @@ if(isset($_POST['oper']) && $_POST['oper'] == 'load_cart'):
 
 	die(json_encode(['cart'=> 0]));
 endif;
+
+
+
+########################################################################
+if(isset($_POST['oper']) && $_POST['oper'] == 'checkout'):
+	// Пример обработчика корзины, заглушка!
+	session_start(); // Работа с сессиями
+	if( !isset($_SESSION['xauthtoken']) ) { // Уникальный xauthtoken
+		$_SESSION['xauthtoken']= get_xauthtoken();
+
+	}
+	
+
+	die(json_encode($_POST));
+endif;
+
 
 ?>

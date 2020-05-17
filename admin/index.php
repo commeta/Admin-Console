@@ -1,8 +1,6 @@
 <?php
 require_once('includes.php');
-	
-$db->where('user_id',$user_id);
-$profile = $db->getOne('md_users');
+$profile= $_SESSION['md_users'];
 
 
 #######################################################################
@@ -177,6 +175,7 @@ $profile = $db->getOne('md_users');
 					<ul class="dropdown-menu">
 						<li><a class="ajax-link" href="functions/friendly.php">Главные разделы</a></li>
 						<li><a class="ajax-link" href="functions/images-editor.php">Редактор изображений</a></li>
+						<li><a class="ajax-link" href="functions/messages-commander.php">Модерация сообщений</a></li>
 						
 						
 						<!--

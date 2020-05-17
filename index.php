@@ -15,6 +15,7 @@ foreach (glob("includes/core/*.php") as $filename){
 require_once('includes/functions.inc.php');
 
 
+	
 // Подключение шаблона, рендер страницы
 if(file_exists(pages_dir.$mod.".php")){
 	require_once(pages_dir.$mod.".php");

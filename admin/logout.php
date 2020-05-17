@@ -12,15 +12,8 @@ foreach (glob("core/*.php") as $filename){
     include $filename;
 } 
 
-if (isset($_SESSION['xauthtoken'])) {
-	$db = MysqliDb::getInstance();
-	$xauthtoken = $db->escape($_SESSION['xauthtoken']);
-	
-	$db->where('xauthtoken',$xauthtoken );
-	$db->delete('md_users_login');
-	
-	unset($_SESSION['xauthtoken']);
-}
-
+$db= MysqliDb::getInstance();
+logout_user();
 header ("location: /admin/login.php");
+
 ?>

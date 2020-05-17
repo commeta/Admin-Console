@@ -38,7 +38,9 @@ $js_array = array(
 	'js/jquery.fancybox.min.js',
 	'js/isotope.pkgd.min.js',
 	'js/jquery.flexslider-min.js',
-	'js/init.js'
+	'js/jquery.datetimepicker.js',
+	'js/jquery.mask.min.js',
+	'js/init.js',
 );
 // вызываем функцию сжатия
 compression_js_files($js_array, "js/dyn/dynamic-footer.js", true);
