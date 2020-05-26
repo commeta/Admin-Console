@@ -13,8 +13,8 @@ Admin Console содержит только базовый набор модул
 [https://webdevops.ru/admin-console.html](https://webdevops.ru/admin-console.html)
 
 ### Демо версия Admin Console CMS 5.10.1:
-+ [https://admin.seo-marketing.spb.ru/](https://admin.seo-marketing.spb.ru/) - Демо сайт
-+ [https://admin.seo-marketing.spb.ru/admin/](https://admin.seo-marketing.spb.ru/admin/) - Админка, логин:admin пароль:password
++ [https://admin.seo-marketing.spb.ru/](https://admin.dcs-spb.ru/) - Демо сайт
++ [https://admin.seo-marketing.spb.ru/admin/](https://admin.dcs-spb.ru/admin/) - Админка, логин:admin пароль:password
 + В качестве Web UI интерфейса - использован форк: open-source bootstrap 3 theme [Devops v1.0](https://github.com/devoopsme/devoops)
 + Шаблоны для демо версии сайта: [Bootstrap v4.4.1 Examples](https://getbootstrap.com/docs/4.1/examples/)
 
@@ -48,7 +48,7 @@ Admin Console содержит только базовый набор модул
 
 Нагрузочное тестирование, 10 потоков, 60 секунд:
 ```bash
-$ ab -kc 10 -t 60 https://admin.seo-marketing.spb.ru/
+$ ab -kc 10 -t 60 https://admin.dcs-spb.ru/
 ```
 
 ```
@@ -56,11 +56,11 @@ This is ApacheBench, Version 2.3 <$Revision: 1430300 $>
 Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
 Licensed to The Apache Software Foundation, http://www.apache.org/
 
-Benchmarking admin.seo-marketing.spb.ru (be patient)
+Benchmarking admin.dcs-spb.ru (be patient)
 
 Finished 3253 requests
 Server Software:        nginx/1.16.1
-Server Hostname:        admin.seo-marketing.spb.ru
+Server Hostname:        admin.dcs-spb.ru
 Server Port:            443
 SSL/TLS Protocol:       TLSv1.2,ECDHE-RSA-AES128-GCM-SHA256,2048,128
 
