@@ -471,7 +471,7 @@ function login_bruteforce_check( $login ){ // Возвращает количе�
 		
 		$db->insert('md_users_security', [
 			'login'	=> $login,
-			'login_ip' => $_SERVER['REMOTE_ADDR'],
+			'login_ip' => $db->escape( $_SERVER['REMOTE_ADDR'] ),
 			'retry' => $retry,
 			'recidive' => 5
 		]);
