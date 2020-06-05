@@ -101,7 +101,7 @@ Percentage of the requests served within a certain time (ms)
 
 ____
 This is free open-source CMS based on bootstrap 3 theme for you.
-Licensed under GPL v3 or MIT.
+Licensed under GPL v3.
 
 webdevops (info@webdevops.ru)
 
