@@ -14,7 +14,7 @@ Admin Console содержит только базовый набор модул
 
 ### Демо версия Admin Console CMS 5.10.1:
 + [https://admin.dcs-spb.ru/](https://admin.dcs-spb.ru/) - Демо сайт
-+ [https://admin.dcs-spb.ru/admin/](https://admin.dcs-spb.ru/admin/) - Админка, логин:admin пароль:password
++ [https://admin.dcs-spb.ru/admin/](https://admin.dcs-spb.ru/admin/) - Админка, логин:dcs-spb@ya.ru пароль:password
 + В качестве Web UI интерфейса - использован форк: open-source bootstrap 3 theme [Devops v1.0](https://github.com/devoopsme/devoops)
 + Шаблоны для демо версии сайта: [Bootstrap v4.4.1 Examples](https://getbootstrap.com/docs/4.1/examples/)
 
